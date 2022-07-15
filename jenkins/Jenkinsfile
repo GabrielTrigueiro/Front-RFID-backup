@@ -27,9 +27,8 @@ pipeline {
         stage('none'){
             agent none
             steps {
-                {
+
                     sh 'ls /var/lib/jenkins/workspace/'
-                }
             }
         }
     }
