@@ -24,6 +24,12 @@ pipeline {
                 sh './jenkins/kill.sh'
                 
             }
+        stage('none'){
+            agent none
+            {
+                sh 'ls /var/lib/jenkins/workspace/'
+            }
+        }
         }
     }
 }
