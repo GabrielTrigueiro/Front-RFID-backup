@@ -20,8 +20,9 @@ pipeline {
                 sh "chmod +x -R ${env.WORKSPACE}"
                 sh './jenkins/deliver.sh'
                 input message: 'Finished using the web site? (Click "Proceed" to continue)'
+                sh  'cp ${env.WORKSPACE}/build /home/bitbee/'
                 sh './jenkins/kill.sh'
-                sh  'cp /var/lib/jenkins/workspace/pipeline-teste-node/build /home/bitbee/'
+                
             }
         }
     }
