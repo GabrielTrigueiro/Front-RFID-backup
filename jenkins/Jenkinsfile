@@ -12,22 +12,14 @@ pipeline {
     stages {
         stage('Build'){
             steps{
-                sh 'npm install'
+                sh 'yarn install'
+                sh "chmod +x -R ${env.WORKSPACE}"
+                sh 'yarn build'
             }
         }
         stage('Deliver') {
+           agent none
             steps {
-                sh "chmod +x -R ${env.WORKSPACE}"
-                sh './jenkins/deliver.sh'
-                input message: 'Finished using the web site? (Click "Proceed" to continue)'
-                sh './jenkins/kill.sh'
-                
-            }
-        }
-        stage('none'){
-            agent none
-            steps {
-
                     sh 'ls /var/lib/jenkins/workspace/'
             }
         }
