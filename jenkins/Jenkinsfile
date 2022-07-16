@@ -19,10 +19,11 @@ pipeline {
         }
         stage('Deliver') {
            agent none
-            steps {
-                    sh 'stfp root@45.90.223.164'
-                    sh 'pwd'
+            steps {    
+                    sshagent(credentials:['server-key']){
+                    sh 'ssh  -o StrictHostKeyChecking=no  root@45.90.223.164    
             }
+             echo "success lgoin"
         }
     }
 }
