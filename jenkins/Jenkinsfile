@@ -26,4 +26,5 @@ pipeline {
              echo "success lgoin"
         }
     }
+    }
 }
