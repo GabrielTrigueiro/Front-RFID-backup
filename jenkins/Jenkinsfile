@@ -18,12 +18,13 @@ pipeline {
             }
         }
         stage('Deliver') {
-           agent none
-            steps {    
-                    sshagent(credentials:['server-key']){
-                    sh 'ssh  -o StrictHostKeyChecking=no  root@45.90.223.164    
+            agent none
+                steps {    
+                        sshagent(credentials:['server-key']){
+                        sh 'ssh  -o StrictHostKeyChecking=no  root@45.90.223.164 'whoami''    
+                }
+                echo "success lgoin"
             }
-             echo "success lgoin"
         }
     }
 }
