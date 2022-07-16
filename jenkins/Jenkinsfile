@@ -17,22 +17,13 @@ pipeline {
                 sh 'yarn build'
             }
         }
-        stage('Deliver') {
-<<<<<<< HEAD
-            agent none
+            stage('Deliver') {
+                agent any
                 steps {    
                         sshagent(credentials:['server-key']){
-                        sh 'ssh  -o StrictHostKeyChecking=no  root@45.90.223.164 'whoami''    
+                        sh 'ssh  -o StrictHostKeyChecking=no  root@45.90.223.164 "whoami"'    
                 }
-                echo "success lgoin"
-=======
-           agent none
-            steps {    
-                    sshagent(credentials:['server-key']){
-                    sh 'ssh  -o StrictHostKeyChecking=no  root@45.90.223.164'    
->>>>>>> f0e7970a191207bb241573f0cb5f4b45b9e8c035
             }
         }
-    }
     }
 }
