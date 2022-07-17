@@ -28,7 +28,9 @@ pipeline {
                         configName: "sever-vps",
                         verbose: true,
                         transfers: [
-                            sshTransfer(execCommand: "/bin/rm -rf /home/lbs.bitbeelabs.tech/teste"),
+                            sshTransfer(execCommand: "/bin/rm -rf /home/lbs.bitbeelabs.tech/public_html"),
+                            sshTransfer(execCommand: "mkdir /home/lbs.bitbeelabs.tech/public_html"),
+                            sshTransfer(sourceFiles: "/var/lib/jenkins/workspace/pipeline-teste-node"),
                             ]
                         )
                     ]
