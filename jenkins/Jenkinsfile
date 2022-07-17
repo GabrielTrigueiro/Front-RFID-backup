@@ -29,7 +29,8 @@ pipeline {
                             transfers: [
                                  sshTransfer(execCommand: "/bin/rm -rf /home/lbs.bitbeelabs.tech/teste"),
                             verbose: true
-                            )
+                                )
+                            ]
                         ]
                     )
                 }
