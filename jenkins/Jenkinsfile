@@ -17,24 +17,24 @@ pipeline {
                 sh 'yarn build'
             }
         }
-            stage('Deliver') {
-                agent none
-                steps {    
-                    sshPublisher(
-                        continueOnError: false, 
-                        failOnError: true,
-                        publishers: [
-                            sshPublisherDesc(
-                            configName: "sever-vps",
-                            transfers: [
-                                 sshTransfer(execCommand: "/bin/rm -rf /home/lbs.bitbeelabs.tech/teste"),
+        stage('Deliver') {
+            agent none
+            steps {    
+                sshPublisher(
+                    continueOnError: false, 
+                    failOnError: true,
+                    publishers: [
+                        sshPublisherDesc(
+                        configName: "sever-vps",
+                        transfers: [
+                            sshTransfer(execCommand: "/bin/rm -rf /home/lbs.bitbeelabs.tech/teste"),
                             verbose: true
-                                )
-                            ]
+                            )
                         ]
-                    )
-                }
+                    ]
+                )
             }
+            
         }
     }
 }
