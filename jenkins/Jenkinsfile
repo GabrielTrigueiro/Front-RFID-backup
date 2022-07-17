@@ -20,8 +20,7 @@ pipeline {
         stage('Deliver') {
             agent none
             steps {    
-                sh "cd /var/lib/jenkins/workspace/"
-                sh "ls "
+                sh "ls build"
                 sshPublisher(
                     continueOnError: false, 
                     failOnError: true,
