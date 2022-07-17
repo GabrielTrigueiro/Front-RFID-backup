@@ -18,10 +18,20 @@ pipeline {
             }
         }
             stage('Deliver') {
-                agent any
+                agent none
                 steps {    
-                        sshagent(credentials:['server-key']){
-                        sh 'ssh  -o StrictHostKeyChecking=no  root@45.90.223.164 "whoami"'    
+                    sshPublisher(
+                        continueOnError: false, 
+                        failOnError: true,
+                        publishers: [
+                            sshPublisherDesc(
+                            configName: "sever-vps",
+                            transfers: [
+                                 sshTransfer(execCommand: "/bin/rm -rf /home/lbs.bitbeelabs.tech/teste"),
+                            verbose: true
+                            )
+                        ]
+                    )
                 }
             }
         }
