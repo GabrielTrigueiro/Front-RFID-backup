@@ -29,8 +29,7 @@ pipeline {
                         verbose: true,
                         transfers: [
                             sshTransfer(execCommand: "/bin/rm -rf /home/lbs.bitbeelabs.tech/public_html"),
-                            sshTransfer(execCommand: "mkdir /home/lbs.bitbeelabs.tech/public_html"),
-                            sshTransfer(sourceFiles: "/var/lib/jenkins/workspace/pipeline-teste-node"),
+                            sshTransfer(remoteDirectory:"/home/lbs.bitbeelabs.tech/public_html", sourceFiles: "/var/lib/jenkins/workspace/pipeline-teste-node"),
                             ]
                         )
                     ]
