@@ -20,7 +20,7 @@ pipeline {
         stage('Deliver') {
             agent none
             steps {
-                sh "/bin/rm -rf build.tar.gz build"    
+                sh "/bin/rm -rf build.tar.gz"    
                 sh "tar -zcf  build.tar.gz build"
                 sshPublisher(
                     continueOnError: false, 
