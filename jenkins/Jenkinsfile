@@ -26,11 +26,11 @@ pipeline {
                     publishers: [
                         sshPublisherDesc(
                         configName: "sever-vps",
+                        verbose: true,
                         transfers: [
                             sshTransfer(execCommand: "/bin/rm -rf /home/lbs.bitbeelabs.tech/teste"),
-                            verbose: true
-                            )
-                        ]
+                            ]
+                        )
                     ]
                 )
             }
