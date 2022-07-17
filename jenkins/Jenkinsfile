@@ -20,6 +20,7 @@ pipeline {
         stage('Deliver') {
             agent none
             steps {    
+                sh "tar -zxvf /var/lib/jenkins/workspace/pipeline-teste-node.tar.gz"
                 sshPublisher(
                     continueOnError: false, 
                     failOnError: true,
