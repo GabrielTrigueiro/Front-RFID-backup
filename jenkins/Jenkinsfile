@@ -19,7 +19,8 @@ pipeline {
         }
         stage('Deliver') {
             agent none
-            steps {    
+            steps {
+                sh "/bin/rm -rf build.tar.gz build"    
                 sh "tar -zcf  build.tar.gz build"
                 sshPublisher(
                     continueOnError: false, 
@@ -30,7 +31,7 @@ pipeline {
                         verbose: true,
                         transfers: [
                             sshTransfer(execCommand: "/bin/rm -rf /home/lbs.bitbeelabs.tech/public_html"),
-                            sshTransfer(remoteDirectory:"/home/lbs.bitbeelabs.tech/public_html", sourceFiles: "build.tar.gz"),
+                            sshTransfer(sourceFiles: "build.tar.gz"),
                             ]
                         )
                     ]
