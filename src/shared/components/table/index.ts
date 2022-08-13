@@ -1,1 +1,2 @@
-export * from "./AlertTable"
+export * from "./alert-table"
+export * from "./must-buy"

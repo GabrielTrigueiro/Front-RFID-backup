@@ -4,7 +4,8 @@ import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import Tabs from '@mui/material/Tabs';
 import { Typography } from "@mui/material";
-import { AlertTable } from "../../shared/components";
+import { AlertTable, MustBuyTable } from "../../shared/components";
+
 
 interface TabProps {
   children?: React.ReactNode;
@@ -53,15 +54,15 @@ export const Dashboard = () => {
             onChange={handleChange}
             aria-label="basic tabs example"
           >
-            <Tab label="Item One" {...a11yProps(0)} />
-            <Tab label="Item Two" {...a11yProps(1)} />
+            <Tab label="Alertas" {...a11yProps(0)} />
+            <Tab label="Produtos mais vendidos" {...a11yProps(1)} />
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
           <AlertTable/>
         </TabPanel>
         <TabPanel value={value} index={1}>
-          Item Two
+          <MustBuyTable/>
         </TabPanel>
       </Box>
     </ContentLayout>

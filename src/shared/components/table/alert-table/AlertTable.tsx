@@ -32,18 +32,18 @@ const rows = [
   createData("Gingerbread", 356, 16.0, 49, 3.9),
 ];
 
-const TableStyled = styled(Table)({
+export const TableStyled = styled(Table)({
   borderSpacing: "0px 8px",
   borderCollapse: "separate",
   thead: {
     borderSpacing: 0,
   },
 });
-const TableRowStyled = styled(TableRow)({
+export const TableRowStyled = styled(TableRow)({
   backgroundColor: "#fff",
   borderEndEndRadius: "10px",
 });
-const TableCellStyled = styled(TableCell)({
+export const TableCellStyled = styled(TableCell)({
   height:"40px",
   borderColor: "transparent",
 });
@@ -52,15 +52,6 @@ export const AlertTable: React.FC<props> = () => {
   return (
     <TableContainer className="table-container">
       <TableStyled sx={{ minWidth: 700 }}>
-        <TableHead>
-          <TableRow>
-            <TableCellStyled>Dessert (100g serving)</TableCellStyled>
-            <TableCellStyled align="right">Calories</TableCellStyled>
-            <TableCellStyled align="right">Fat&nbsp;(g)</TableCellStyled>
-            <TableCellStyled align="right">Carbs&nbsp;(g)</TableCellStyled>
-            <TableCellStyled align="right">Protein&nbsp;(g)</TableCellStyled>
-          </TableRow>
-        </TableHead>
         <TableBody>
           {rows.map((row) => (
             <TableRowStyled
