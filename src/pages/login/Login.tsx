@@ -82,13 +82,18 @@ export const Login: React.FC = () => {
       <Box
         bgcolor={"#fff"}
         sx={{
-          height:'600px',
-          width:'400px',
+          height:{
+            xs:'100%',
+          },
+          width:{
+            xs:'100%',
+            sm:300,
+          },
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           flexDirection: "column",
-          borderRadius:'10px'
+          borderRadius:'5px'
         }}
       >
         <Typography fontSize={40} fontWeight={500}>

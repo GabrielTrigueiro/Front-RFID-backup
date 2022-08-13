@@ -8,6 +8,7 @@ import {
     TableBody,
     Avatar,
     Box,
+    Typography,
   } from "@mui/material";
   import { styled } from "@mui/styles";
 import { TableCellStyled, TableRowStyled, TableStyled } from "../alert-table";
@@ -37,15 +38,6 @@ import { TableCellStyled, TableRowStyled, TableStyled } from "../alert-table";
     return (
       <TableContainer className="table-container">
         <TableStyled sx={{ minWidth: 700 }}>
-          <TableHead>
-            <TableRow>
-              <TableCellStyled>Dessert (100g serving)</TableCellStyled>
-              <TableCellStyled align="right">Calories</TableCellStyled>
-              <TableCellStyled align="right">Fat&nbsp;(g)</TableCellStyled>
-              <TableCellStyled align="right">Carbs&nbsp;(g)</TableCellStyled>
-              <TableCellStyled align="right">Protein&nbsp;(g)</TableCellStyled>
-            </TableRow>
-          </TableHead>
           <TableBody>
             {rows.map((row) => (
               <TableRowStyled
@@ -53,14 +45,12 @@ import { TableCellStyled, TableRowStyled, TableStyled } from "../alert-table";
                 sx={{ boxShadow: "inherit" }}
                 className="MuiTableRow-root"
               >
-                <TableCellStyled>
-                  {row.name}
-                </TableCellStyled>
-                <TableCellStyled align="right">{row.calories}</TableCellStyled>
-                <TableCellStyled align="right">{row.fat}</TableCellStyled>
-                <TableCellStyled align="right">{row.carbs}</TableCellStyled>
-                <TableCellStyled align="right">{row.protein}</TableCellStyled>
-              </TableRowStyled>
+                <TableCellStyled><Typography>{row.name}</Typography></TableCellStyled>
+                <TableCellStyled align="right"><Typography>{row.calories}</Typography></TableCellStyled>
+                <TableCellStyled align="right"><Typography>{row.fat}</Typography></TableCellStyled>
+                <TableCellStyled align="right"><Typography>{row.carbs}</Typography></TableCellStyled>
+                <TableCellStyled align="right"><Typography>{row.protein}</Typography></TableCellStyled>
+                </TableRowStyled>
             ))}
           </TableBody>
         </TableStyled>

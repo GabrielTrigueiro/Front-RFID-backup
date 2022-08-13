@@ -8,6 +8,7 @@ import {
   TableBody,
   Avatar,
   Box,
+  Typography,
 } from "@mui/material";
 import { styled } from "@mui/styles";
 import "./styles.css";
@@ -59,13 +60,11 @@ export const AlertTable: React.FC<props> = () => {
               sx={{ boxShadow: "inherit" }}
               className="MuiTableRow-root"
             >
-              <TableCellStyled>
-                {row.name}
-              </TableCellStyled>
-              <TableCellStyled align="right">{row.calories}</TableCellStyled>
-              <TableCellStyled align="right">{row.fat}</TableCellStyled>
-              <TableCellStyled align="right">{row.carbs}</TableCellStyled>
-              <TableCellStyled align="right">{row.protein}</TableCellStyled>
+              <TableCellStyled><Typography>{row.name}</Typography></TableCellStyled>
+              <TableCellStyled align="right"><Typography>{row.calories}</Typography></TableCellStyled>
+              <TableCellStyled align="right"><Typography>{row.fat}</Typography></TableCellStyled>
+              <TableCellStyled align="right"><Typography>{row.carbs}</Typography></TableCellStyled>
+              <TableCellStyled align="right"><Typography>{row.protein}</Typography></TableCellStyled>
             </TableRowStyled>
           ))}
         </TableBody>
