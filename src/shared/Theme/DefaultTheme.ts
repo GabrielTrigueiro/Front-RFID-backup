@@ -12,5 +12,8 @@ export const DefaultTheme = createTheme({
             paper: '#23A0C9',
             default: '#F0F5F8'
         },
-    }
+        primary:{
+            main:'#23A0C9'
+        }
+    },
 })

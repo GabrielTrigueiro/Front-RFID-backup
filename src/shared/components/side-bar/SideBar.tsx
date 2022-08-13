@@ -76,7 +76,7 @@ const ListItemLink: React.FC<IListItemLinkProps> = ({
         <Icon
         sx={{
           fontSize: "2rem",
-          color: match ? "#23A0C9" : "#fff",
+          color: match ? "#23A0C9" : "#ffffff",
         }}
         >
           {icon}
