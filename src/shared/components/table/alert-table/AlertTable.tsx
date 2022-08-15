@@ -62,7 +62,7 @@ export const AlertTable: React.FC<props> = () => {
         overflow:'scroll',
         "::-webkit-scrollbar":{
           display: 'none'
-        }
+        },
       }}
     >
       <TableContainer className="table-container">
