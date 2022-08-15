@@ -19,7 +19,7 @@ export const ContentLayout: React.FC<props> = ({ children, tittle }) => {
         <Typography>{tittle}</Typography>
         <TopMenu />
       </Box>
-      <Box height={'90%'} pt={1} pl={4} pr={4}>
+      <Box pt={1} pl={4} pr={4}>
         {children}
       </Box>
     </Box>

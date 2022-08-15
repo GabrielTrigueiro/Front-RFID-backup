@@ -84,6 +84,7 @@ export const Login: React.FC = () => {
         sx={{
           height:{
             xs:'100%',
+            sm:450,
           },
           width:{
             xs:'100%',
