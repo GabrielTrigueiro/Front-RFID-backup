@@ -30,11 +30,11 @@ pipeline {
                         configName: "sever-vps",
                         verbose: true,
                         transfers: [
-                            sshTransfer(execCommand: "/bin/rm -rf /home/lbs.bitbeelabs.tech/public_html"),
+                            sshTransfer(execCommand: "/bin/rm -rf /home/rfid.bitbeelabs.tech/public_html"),
                             sshTransfer(sourceFiles: "build.tar.gz"),
-                            sshTransfer(execCommand: "mkdir /home/lbs.bitbeelabs.tech/public_html"),
-                            sshTransfer(execCommand: "mv build.tar.gz /home/lbs.bitbeelabs.tech/public_html"),
-                            sshTransfer(execCommand: "tar -zxvf /home/lbs.bitbeelabs.tech/public_html/build.tar.gz -C /home/lbs.bitbeelabs.tech/public_html"),
+                            sshTransfer(execCommand: "mkdir /home/rfid.bitbeelabs.tech/public_html"),
+                            sshTransfer(execCommand: "mv build.tar.gz /home/rfid.bitbeelabs.tech/public_html"),
+                            sshTransfer(execCommand: "tar -zxvf /home/rfid.bitbeelabs.tech/public_html/build.tar.gz -C /home/rfid.bitbeelabs.tech/public_html"),
                             ]
                         )
                     ]
