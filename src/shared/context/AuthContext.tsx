@@ -1,3 +1,3 @@
 export const placeholderAuth = {
-    auth:true
+    auth:false
 }

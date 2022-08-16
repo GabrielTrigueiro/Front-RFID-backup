@@ -13,7 +13,10 @@ export const DefaultTheme = createTheme({
             default: '#F0F5F8'
         },
         primary:{
-            main:'#23A0C9'
+            main:'#23A0C9',
+        },
+        secondary:{
+            main:'#fff'
         }
     },
 })

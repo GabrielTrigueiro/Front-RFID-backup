@@ -1,4 +1,11 @@
-import { Badge, createTheme, IconButton, Menu, MenuItem, Typography } from "@mui/material";
+import {
+  Badge,
+  createTheme,
+  IconButton,
+  Menu,
+  MenuItem,
+  Typography,
+} from "@mui/material";
 import { Box } from "@mui/system";
 import { SearchInput } from "../search";
 import NotificationsIcon from "@mui/icons-material/Notifications";
@@ -17,43 +24,40 @@ export const TopMenu = () => {
   };
 
   const renderMenu = (
-      <Menu
-        anchorEl={anchorEl}
-        anchorOrigin={{
-          vertical: "top",
-          horizontal: "right",
-        }}
-        id={menuId}
-        keepMounted
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "right",
-        }}
-        open={isMenuOpen}
-        onClose={handleMenuClose}
-      >
-        <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-        <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-      </Menu>
+    <Menu
+      anchorEl={anchorEl}
+      anchorOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      id={menuId}
+      keepMounted
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+    >
+      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+    </Menu>
   );
 
   return (
-    <Box
-      display={"flex"}
-      alignItems={"center"}
-    >
-      <IconButton sx={{mr:1}} size="small" color="inherit">
+    <Box display={"flex"} alignItems={"center"}>
+      <IconButton sx={{ mr: 1 }} size="small" color="inherit">
         <Badge badgeContent={1} color="error">
           <NotificationsIcon />
         </Badge>
       </IconButton>
       <SearchInput />
       <IconButton
-      sx={{
-        "&:hover":{
-            background: 'transparent',
-        },
-      }}
+        sx={{
+          "&:hover": {
+            background: "transparent",
+          },
+        }}
         size="large"
         aria-label="account of current user"
         aria-controls={menuId}
