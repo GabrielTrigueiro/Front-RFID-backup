@@ -2,7 +2,7 @@ import { VisibilityOff, Visibility } from "@mui/icons-material";
 import { Box } from "@mui/system";
 import { FormHandles } from "@unform/core";
 import { Form } from "@unform/web";
-import React, { useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LockIcon from "@mui/icons-material/Lock";
 import { FormLoginInput } from "../../shared/components";
@@ -23,24 +23,31 @@ import {
   FormControlLabel,
   Checkbox,
 } from "@mui/material";
-import { placeholderAuth } from "../../shared/context/AuthContext";
+import { useAuthContext } from "../../shared/context/AuthContext";
+import * as Yup from "yup";
+import { SnackbarContext, Snack } from "../../shared/context/AlertCardContext";
 
-interface data {
+//dados pro login
+interface State {
   password: string;
-  user: string;
+  usuario: string;
 }
 
+//pagina de login
 export const Login: React.FC = () => {
+  const { isAuthenticated, login } = useAuthContext()
+  const {setSnack} = useContext(SnackbarContext);
   const timer = useRef<number>();
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
   const formRef = useRef<FormHandles>(null);
   const [values, setValues] = useState({
     password: "",
-    user: "",
+    usuario: "",
     showPassword: false,
-  });
+  })
 
+  //on/off mostrar senha
   const handleClickShowPassword = () => {
     setValues({
       ...values,
@@ -55,10 +62,11 @@ export const Login: React.FC = () => {
   };
 
   const handleChange =
-    (prop: keyof data) => (event: React.ChangeEvent<HTMLInputElement>) => {
+    (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
       setValues({ ...values, [prop]: event.target.value });
     };
 
+  //loading ao clicar no botã-o de logar
   const handleButtonClick = () => {
     if (!loading) {
       setSuccess(false);
@@ -70,7 +78,52 @@ export const Login: React.FC = () => {
     }
   };
 
-  if (placeholderAuth.auth) return <Navigate replace to="/home/dashboard" />;
+  //atualizar loading
+  useEffect(() => {
+    return () => {
+      clearTimeout(timer.current)
+    }
+  }, [])
+
+  //yup
+  const schema: Yup.SchemaOf<State> = Yup.object().shape({
+    usuario: 
+    Yup.string()
+    .required('Campo obrigatório')
+    .min(6,'Mínimo 6 digitos'),
+    password: 
+    Yup.string()
+    .required('Campo obrigatório')
+    .min(4,'Mínimo 4 digitos')
+  })
+
+  //login
+  const HandleLogin = (dados: State) => {
+    schema
+    .validate(dados, { abortEarly: false })
+    .then((dadosValidados) => {
+      login(dados.usuario, dados.password)
+      handleButtonClick()
+    })
+    .catch((erros: Yup.ValidationError) => {
+      setSnack(new Snack({
+        message: 'Quantidade mínima de digitos não respeitada',
+        color:'error',
+        open: true}))
+
+      const validandoErros: { [key: string]: string } = {};
+
+      erros.inner.forEach((erros) => {
+        if (!erros.path) return;
+        validandoErros[erros.path] = erros.message;
+      });
+
+      formRef.current?.setErrors(validandoErros);
+    });
+  }
+
+  //auth? redirecionado, caso não continua na tela
+  if (isAuthenticated) return <Navigate replace to="/home/dashboard" />;
   return (
     <Box
       height={"100vh"}
@@ -103,7 +156,7 @@ export const Login: React.FC = () => {
 
         <Form
           ref={formRef}
-          onSubmit={(dados) => console.log(dados)}
+          onSubmit={(dados) => HandleLogin(dados)}
           className="form-login"
         >
           <FormControl
@@ -115,8 +168,8 @@ export const Login: React.FC = () => {
               autoComplete="off"
               type={"text"}
               label="Usuário"
-              value={values.user}
-              onChange={handleChange("user")}
+              value={values.usuario}
+              onChange={handleChange("usuario")}
               endAdornment={
                 <InputAdornment position="end">
                   <PersonOutlineOutlinedIcon />
@@ -177,7 +230,7 @@ export const Login: React.FC = () => {
               <CircularProgress
                 size={24}
                 sx={{
-                  color: "#E4DB00",
+                  color: "#23A0C9",
                 }}
               />
             )}

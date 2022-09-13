@@ -1,10 +1,11 @@
 import { Box } from "@mui/system";
 import { Navigate, Outlet } from "react-router-dom";
 import { SideBar } from "../components/side-bar";
-import { placeholderAuth } from "../context/AuthContext";
+import { useAuthContext } from "../context/AuthContext";
 
 export const Layout = () => {
-  if (!placeholderAuth.auth) return <Navigate replace to="/login" />;
+  const { isAuthenticated } = useAuthContext()
+  if (!isAuthenticated) return <Navigate replace to="/login" />;
   return (
     <Box width="100vw" height="100vh">
       <SideBar>
