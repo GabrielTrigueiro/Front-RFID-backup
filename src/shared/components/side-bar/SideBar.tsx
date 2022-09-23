@@ -16,6 +16,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 
+//link icon da sidebar
 interface IListItemLinkProps {
   to: string;
   icon: string;
@@ -23,8 +24,10 @@ interface IListItemLinkProps {
   onClick: (() => void) | undefined;
 }
 
+//sidebar width
 const drawerWidth = 200;
 
+//open sidebar
 const openedMixin = (theme: Theme): CSSObject => ({
   width: drawerWidth,
   transition: theme.transitions.create("width", {
@@ -34,6 +37,7 @@ const openedMixin = (theme: Theme): CSSObject => ({
   overflowX: "hidden",
 });
 
+//close sidebar
 const closedMixin = (theme: Theme): CSSObject => ({
   transition: theme.transitions.create("width", {
     easing: theme.transitions.easing.sharp,

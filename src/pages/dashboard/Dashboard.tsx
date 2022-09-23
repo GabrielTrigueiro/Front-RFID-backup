@@ -6,13 +6,14 @@ import Tabs from '@mui/material/Tabs';
 import { Typography } from "@mui/material";
 import { AlertTable, MustBuyTable } from "../../shared/components";
 
-
+//prop da tabela do dashboard
 interface TabProps {
   children?: React.ReactNode;
   index: number;
   value: number;
 }
 
+//tabela
 function TabPanel(props: TabProps) {
   const { children, value, index, ...other } = props;
 
