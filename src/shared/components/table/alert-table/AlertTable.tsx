@@ -57,12 +57,31 @@ export const TableCellStyled = styled(TableCell)({
 export const AlertTable: React.FC<props> = () => {
   return (
     <Box 
-      height={450}
       sx={{
-        overflow:'scroll',
-        "::-webkit-scrollbar":{
-          display: 'none'
+        height: {
+          xs: '100%',
+          sm: 450,
         },
+        width: {
+          xs: '100%',
+          sm: '100%',
+        },
+        overflowY: "scroll",
+            '::-webkit-scrollbar': {
+                width: '20px'
+            },
+            '::-webkit-scrollbar-track': {
+                backgroundColor: 'transparent'
+            },
+            '::-webkit-scrollbar-thumb': {
+                backgroundColor: '#d6dee1',
+                borderRadius: '20px',
+                border: '6px solid transparent',
+                backgroundClip: 'content-box',
+            },
+            '::-webkit-scrollbar-thumb:hover': {
+                backgroundColor: '#a8bbbf'
+            }
       }}
     >
       <TableContainer className="table-container">

@@ -49,7 +49,7 @@ export const Dashboard = () => {
   return (
     <ContentLayout tittle={"Dashboard"}>
       <Box height={"100%"}>
-        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+        <Box sx={{borderBottom: 1, borderColor: "divider"}}>
           <Tabs
             value={value}
             onChange={handleChange}
