@@ -70,7 +70,7 @@ const ListItemLink: React.FC<IListItemLinkProps> = ({
       margin:0.5,
       "&.Mui-selected":{
         background:'#fff',
-        '&:hover': {
+        "&:hover": {
           background: "#fff",
         },
       }
@@ -151,6 +151,11 @@ export const SideBar: React.FC = ({ children }) => {
           <Button
             onClick={handleDrawerOpenOrClose}
             sx={{
+              bgcolor:'#23A0C9',
+              "&:hover":{
+                bgcolor:'#23A0C9',
+              },
+              borderRadius:'0',
               padding: 2,
               width: "100%",
               minHeight: 48,

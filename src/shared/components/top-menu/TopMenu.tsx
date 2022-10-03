@@ -11,8 +11,10 @@ import { SearchInput } from "../search";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import { useState } from "react";
+import { useAuthContext } from "../../context/AuthContext";
 
 export const TopMenu = () => {
+  const {logout} = useAuthContext()
   const menuId = "primary-search-account-menu";
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const isMenuOpen = Boolean(anchorEl);
@@ -41,6 +43,7 @@ export const TopMenu = () => {
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={logout}>Log out</MenuItem>
     </Menu>
   );
 

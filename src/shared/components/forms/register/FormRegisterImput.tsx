@@ -1,15 +1,14 @@
 import { TextField, OutlinedInputProps, OutlinedInput } from "@mui/material";
 import { useField } from "@unform/core";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 
-type TLoginOutlinedInput = OutlinedInputProps & {
+type TRegisterOutlinedInput = OutlinedInputProps & {
     name: string
 }
 
-export const FormLoginInput: React.FC<TLoginOutlinedInput> = ({name, ...rest}) => {
+export const FormRegisterImput: React.FC<TRegisterOutlinedInput> = ({name, ...rest}) => {
 
     const {clearError, defaultValue, error, fieldName, registerField} = useField(name)
-
     const [value, setValue] = useState<string>(defaultValue || '')
 
     useEffect(() => {
@@ -32,5 +31,5 @@ export const FormLoginInput: React.FC<TLoginOutlinedInput> = ({name, ...rest}) =
             value={value}
             onChange={e => setValue(e.target.value)}
         />
-  )
-};
+    )
+}

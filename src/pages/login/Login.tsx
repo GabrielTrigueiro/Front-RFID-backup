@@ -1,7 +1,7 @@
 import { FormHandles } from "@unform/core";
 import { Form } from "@unform/web";
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { FormLoginInput } from "../../shared/components";
+import { FormInput } from "../../shared/components";
 import "./style.css"
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -48,8 +48,8 @@ export const Login: React.FC = () => {
       showPassword: !values.showPassword,
     });
   };
-  const handleChange =
-    (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
+
+  const handleChange = (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
       setValues({ ...values, [prop]: event.target.value });
     };
 
@@ -122,8 +122,10 @@ export const Login: React.FC = () => {
         <FormControl
           className="form-item"
         >
-          <InputLabel htmlFor="outlined-adornment-user">Usuario</InputLabel>
-          <FormLoginInput
+          <InputLabel htmlFor="outlined-adornment-user">
+            Usuário
+          </InputLabel>
+          <FormInput
             name="usuario"
             autoComplete="off"
             type={"text"}
@@ -143,9 +145,9 @@ export const Login: React.FC = () => {
           className="form-item"
         >
           <InputLabel htmlFor="outlined-adornment-password">
-            Password
+            Senha
           </InputLabel>
-          <FormLoginInput
+          <FormInput
             name="password"
             autoComplete="off"
             id="outlined-adornment-password"
@@ -157,7 +159,7 @@ export const Login: React.FC = () => {
                 <LockOutlinedIcon />
               </InputAdornment>
             }
-            label="Password"
+            label="senha"
           />
         </FormControl>
 

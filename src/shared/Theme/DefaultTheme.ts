@@ -9,7 +9,7 @@ export const DefaultTheme = createTheme({
     },
     palette:{
         background:{
-            paper: '#23A0C9',
+            paper: '#F0F5F8',
             default: '#F0F5F8'
         },
         primary:{
