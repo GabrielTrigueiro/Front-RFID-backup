@@ -29,8 +29,8 @@ export const UserTable = () => {
   return (
     <Box>
         <Box className={'boxContainer'}
-        height={520}
         sx={{ 
+            height:510,
             overflowY: "scroll",
             '::-webkit-scrollbar': {
                 width: '20px'
