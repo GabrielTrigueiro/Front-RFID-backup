@@ -1,15 +1,16 @@
 import { Modal, Box } from "@mui/material";
 import { useState } from "react";
 
-
-export const BaseModal: React.FC = ({children}) =>{
-    const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+interface props{
+    outState: boolean
+    closeModal: ()=>void
+}
+//todo componente que usar o modal terá que enviar uma func de close e uma var do estado
+export const BaseModal: React.FC<props> = ({children, outState, closeModal}) =>{
     return(
         <Modal
-        open={open}
-        onClose={handleClose}
+        open={outState}
+        onClose={closeModal}
         >
           <Box
           sx={{

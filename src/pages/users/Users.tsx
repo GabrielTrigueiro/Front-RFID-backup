@@ -2,7 +2,7 @@ import { Box, Button, CircularProgress, FormControl, InputAdornment, InputLabel,
 import { FormHandles } from "@unform/core";
 import { Form } from "@unform/web";
 import { useRef, useState } from "react";
-import { FormInput, UserTable } from "../../shared/components"
+import { BaseModal, FormInput, UserTable } from "../../shared/components"
 import { FormSelect } from "../../shared/components/forms/input/FormSelect";
 import { ContentLayout } from "../../shared/layout"
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
@@ -16,11 +16,13 @@ interface newUser_data {
 }
 
 export const Users = () => {
-    const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
-    const [loading, setLoading] = useState(false);
-    const formRef = useRef<FormHandles>(null);
+  
+    const [open, setOpen] = useState(false)
+    const handleOpen = () => setOpen(true)
+    const handleClose = () => setOpen(false)
+
+    const [loading, setLoading] = useState(false)
+    const formRef = useRef<FormHandles>(null)
     const [values, setValues] = useState({
       password: "",
       usuario: "",
@@ -29,7 +31,7 @@ export const Users = () => {
 
     //func duplicada de login, inxutar isso depois
     const handleChange = (prop: keyof newUser_data) => (event: React.ChangeEvent<HTMLInputElement>) => {
-      setValues({ ...values, [prop]: event.target.value });
+      setValues({ ...values, [prop]: event.target.value })
     };
 
     return (
@@ -40,29 +42,7 @@ export const Users = () => {
         <Box>
           <UserTable/>
         </Box>
-
-        <Modal
-        open={open}
-        onClose={handleClose}
-        >
-          <Box
-          sx={{
-            display:'flex',
-            alignItems:'center',
-
-            position:'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-
-            width: 300,
-            height:450,
-
-            bgcolor:"#F0F5F8",
-            borderRadius:4,
-            p: 2
-          }}
-          >
+        <BaseModal outState={open} closeModal={handleClose}>
             <Form 
                 ref={formRef}
                 onSubmit={(dados) => console.log(dados)}
@@ -162,8 +142,7 @@ export const Users = () => {
                     )}
                 </Button>
             </Form>
-          </Box>
-        </Modal>
+        </BaseModal>
       </ContentLayout>
     )
   }
