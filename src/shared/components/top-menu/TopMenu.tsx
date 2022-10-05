@@ -7,7 +7,6 @@ import {
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import { SearchInput } from "../search";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import { useState } from "react";
@@ -49,12 +48,11 @@ export const TopMenu = () => {
 
   return (
     <Box display={"flex"} alignItems={"center"}>
-      <IconButton sx={{ mr: 1 }} size="small" color="inherit">
+      <IconButton size="small" color="inherit">
         <Badge badgeContent={1} color="error">
           <NotificationsIcon />
         </Badge>
       </IconButton>
-      <SearchInput />
       <IconButton
         sx={{
           "&:hover": {
@@ -68,8 +66,8 @@ export const TopMenu = () => {
         onClick={handleProfileMenuOpen}
         color="inherit"
       >
-        <AccountCircle />
-        <Typography>Usuario</Typography>
+        <Typography>Olá, matheus</Typography>
+        <AccountCircle sx={{pl:1}} fontSize="large"/>
       </IconButton>
       {renderMenu}
     </Box>

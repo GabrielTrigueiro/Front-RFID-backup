@@ -7,7 +7,7 @@ import { FormSelect } from "../../shared/components/forms/input/FormSelect";
 import { ContentLayout } from "../../shared/layout"
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-
+import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 //dados novo usario
 interface newUser_data {
   username: string
@@ -36,9 +36,15 @@ export const Users = () => {
 
     return (
       <ContentLayout tittle={'Usuários'}>
-        <Button variant="text" onClick={handleOpen}>
-          + Usuário
-        </Button>
+        
+        <Box sx={{mb:'20px', width:'100%', display:'flex', justifyContent:'space-between'}}>
+            <Box>
+                
+            </Box>
+            <Button variant="contained" onClick={handleOpen}>
+                <PersonAddAltIcon sx={{pr:1}}/> Cadastrar Usuário
+            </Button>
+        </Box>
         <Box>
           <UserTable/>
         </Box>

@@ -43,10 +43,7 @@ import { TableCellStyled, TableRowStyled, TableStyled } from "../alert-table";
     return (
       <Box
       sx={{
-        height: {
-          xs: '100%',
-          sm: 450,
-        },
+        height:450,
         overflowY: "scroll",
             '::-webkit-scrollbar': {
                 width: '20px'

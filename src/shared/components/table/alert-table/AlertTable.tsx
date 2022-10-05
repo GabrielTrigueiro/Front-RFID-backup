@@ -58,10 +58,7 @@ export const AlertTable: React.FC<props> = () => {
   return (
     <Box 
       sx={{
-        height: {
-          xs: '100%',
-          sm: 450,
-        },
+        height:450,
         width: {
           xs: '100%',
           sm: '100%',
