@@ -54,9 +54,10 @@ export const Users = () => {
                 onSubmit={(dados) => console.log(dados)}
                 className="form-cadastro"
             >
-              <Typography m={1} fontSize={40} fontWeight={500}>Cadastrar</Typography>
+              <Typography fontSize={40} fontWeight={500}>Cadastrar</Typography>
                 <FormControl
                     className="form-item"
+                    sx={{mt:'10px'}}
                 >
                     <InputLabel htmlFor="outlined-adornment-user">Usuário</InputLabel>
                     <FormInput
@@ -74,7 +75,7 @@ export const Users = () => {
                     />
                 </FormControl>
                 <FormControl
-                    sx={{ marginTop: '20px' }}
+                    sx={{ marginTop: '10px' }}
                     className="form-item"
                 >
                     <InputLabel htmlFor="outlined-adornment-password">
@@ -129,7 +130,7 @@ export const Users = () => {
                         fontStyle: "normal",
                         fontWeight: 500,
                         boxShadow: "none",
-                        borderRadius: 10,
+                        borderRadius: 1,
                         color: "#fff",
                         display: "flex",
                         alignItems: "center",

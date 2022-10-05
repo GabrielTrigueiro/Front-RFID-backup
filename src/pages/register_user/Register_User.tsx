@@ -56,7 +56,7 @@ export const Register_User: React.FC = () => {
                     />
                 </FormControl>
                 <FormControl
-                    sx={{ marginTop: '20px' }}
+                    sx={{ marginTop: '10px' }}
                     className="form-item"
                 >
                     <InputLabel htmlFor="outlined-adornment-password">
@@ -111,7 +111,7 @@ export const Register_User: React.FC = () => {
                         fontStyle: "normal",
                         fontWeight: 500,
                         boxShadow: "none",
-                        borderRadius: 10,
+                        borderRadius: 1,
                         color: "#fff",
                         display: "flex",
                         alignItems: "center",

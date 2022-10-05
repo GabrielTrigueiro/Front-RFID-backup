@@ -16,6 +16,7 @@ export const BaseModal: React.FC<props> = ({children, outState, closeModal}) =>{
           sx={{
             display:'flex',
             alignItems:'center',
+            justifyContent:'center',
 
             position:'absolute',
             top: '50%',
@@ -26,7 +27,7 @@ export const BaseModal: React.FC<props> = ({children, outState, closeModal}) =>{
             height:450,
 
             bgcolor:"#F0F5F8",
-            borderRadius:4,
+            borderRadius:2,
             p: 2
           }}
           >

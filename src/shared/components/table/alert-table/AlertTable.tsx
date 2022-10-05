@@ -50,7 +50,7 @@ export const TableRowStyled = styled(TableRow)({
   borderEndEndRadius: "10px",
 });
 export const TableCellStyled = styled(TableCell)({
-  height:"40px",
+  height:"20px",
   borderColor: "transparent",
 });
 
