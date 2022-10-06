@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Routes, Route, Navigate, BrowserRouter } from "react-router-dom";
-import { Dashboard, Historic, Login, NotFound, Product, Users } from '../pages';
+import { Dashboard, Historic, Login, NotFound, Product_Page, Users } from '../pages';
 import { Register_User } from "../pages/register_user/Register_User";
 import { useSideBarContext } from "../shared/context/SideBarContext";
 import { Layout } from "../shared/layout";
@@ -41,7 +41,7 @@ export const AppRoutes = () => {
           <Route path='/cadastro' element={<Register_User/>}/>
           <Route path='/home' element={<Layout/>}>
             <Route path='dashboard' element={<Dashboard/>}/>
-            <Route path='produtos' element={<Product/>}/>
+            <Route path='produtos' element={<Product_Page/>}/>
             <Route path='usuarios' element={<Users/>}/>
             <Route path='historico' element={<Historic/>}/>
           </Route>

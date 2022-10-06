@@ -51,7 +51,7 @@ export const Login: React.FC = () => {
 
   const handleChange = (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
       setValues({ ...values, [prop]: event.target.value });
-    };
+  };
 
   //loading ao clicar no botã-o de logar
   const handleButtonClick = () => {

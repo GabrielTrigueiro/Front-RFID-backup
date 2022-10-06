@@ -1,4 +1,4 @@
-import { Box, Button, CircularProgress, FormControl, InputAdornment, InputLabel, Modal, OutlinedInput, Typography } from "@mui/material"
+import { Box, Button, CircularProgress, FormControl, InputAdornment, InputLabel, OutlinedInput, Typography } from "@mui/material"
 import { FormHandles } from "@unform/core";
 import { Form } from "@unform/web";
 import { useRef, useState } from "react";
@@ -8,6 +8,7 @@ import { ContentLayout } from "../../shared/layout"
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
+
 //dados novo usario
 interface newUser_data {
   username: string
@@ -17,6 +18,7 @@ interface newUser_data {
 
 export const Users = () => {
   
+    //gerencia o modal de registro
     const [open, setOpen] = useState(false)
     const handleOpen = () => setOpen(true)
     const handleClose = () => setOpen(false)
@@ -37,10 +39,7 @@ export const Users = () => {
     return (
       <ContentLayout tittle={'Usuários'}>
         
-        <Box sx={{mb:'20px', width:'100%', display:'flex', justifyContent:'space-between'}}>
-            <Box>
-                
-            </Box>
+        <Box sx={{mb:'20px', display:'flex', justifyContent:'flex-end'}}>
             <Button variant="contained" onClick={handleOpen}>
                 <PersonAddAltIcon sx={{pr:1}}/> Cadastrar Usuário
             </Button>
