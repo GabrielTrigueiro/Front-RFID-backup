@@ -37,7 +37,7 @@ export const Product_Page = () => {
   const handleClose = () => setOpen(false)
   //gerenciar paginas
   const [pages, setPages] = useState<number>(0)
-  const [pageSize, setPageSize] = useState<number>(3)
+  const [pageSize, setPageSize] = useState<number>(20)
   const [actualpage, setActualPage] = useState<number>(0)
   const [value, setValue] = useState<string>("")
   const [selectContent, setSelectContent] = useState('')//não foi colocado esse componente ainda
@@ -75,6 +75,7 @@ export const Product_Page = () => {
     setPageSize(translate)
   };
 
+  //não mostra os erros e dá sucesso mesmo sem dar
   const handleSave = (dados: IProduct) => {
     console.log(dados)
     ProductRegisterSchema
@@ -116,7 +117,7 @@ export const Product_Page = () => {
           <AddBoxOutlinedIcon sx={{ pr: 1 }} /> Cadastrar Produto
         </Button>
       </Box>
-      <Box bgcolor={"#454"} sx={{ height: 450 }}>
+      <Box bgcolor={"#767"} sx={{ height: 420, width: '100%'}}>
         <Product_Table update={update} lista={rows} />
       </Box>
       <Box display="flex" justifyContent="flex-end" mt={1}>
