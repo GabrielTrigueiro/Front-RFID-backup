@@ -1,5 +1,6 @@
-import { Box, Typography } from "@mui/material"
+import { Box, Grid, Typography } from "@mui/material"
 import { IProduct } from "../../service/api/products"
+import  place from "../../../assets/camisa.jpg"
 
 type TInfoProduct = IProduct &{
     key: string
@@ -13,19 +14,22 @@ export const Product: React.FC<TInfoProduct> = ({
     return(
         <Box
         sx={{
-            height:'200px',
+            height:'250px',
             width:'200px',
-            bgcolor:'#453',
+            bgcolor:'#fff',
+            borderRadius:3,
             m:1,
-            color:'#fff'
         }}>
-            <Box>
-                
-            </Box> 
-            <Box>
-                <Typography>{description}</Typography>
-                <Typography>{info}</Typography>
-                <Typography>{codeRFID}</Typography>
+            <Grid height={'70%'}
+            sx={{borderRadius:2}}
+            style={{backgroundImage: `url(${place})`,   
+            backgroundSize:'cover'
+            }}>
+            </Grid> 
+            <Box p={1}>
+                <Typography fontSize={'16px'} fontWeight={700} color={'#505050'}>{description}</Typography>
+                <Typography fontSize={'10px'} color={'#989898'}>{info}</Typography>
+                <Typography fontSize={'12px'} fontWeight={500} color={'#505050'}>{codeRFID}</Typography>
             </Box>
         </Box>
     )
