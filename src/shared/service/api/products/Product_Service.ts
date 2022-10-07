@@ -93,7 +93,27 @@ const Create = async (dados: IProduct): Promise<any | Error> => {
       })
 }
 
+const Delete = async (id: string): Promise<void | Error> => {
+    const token = {
+        headers:{
+          Authorization: 
+          `Bearer ${localStorage.getItem('Acess_Token')?.replace(/"/g,'')}`
+         }
+     }
+    return await api.delete(environment.url_product_Search + `${id}`, token)
+    .then(data => {
+        if (data instanceof AxiosError){
+            return data.response?.data
+        }
+        return data.data
+      })
+      .catch(err => { 
+        console.error(err)
+      })
+}
+
 export const Product_Service = {
     getAll,
     Create,
+    Delete
 }

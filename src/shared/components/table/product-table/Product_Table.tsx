@@ -7,6 +7,7 @@ export const Product_Table: React.FC<{lista: IProduct[]; update: ()=>void}> = ({
 
         <ImageList 
         sx={{
+            gridTemplateColumns:'repeat(auto-fill, minmax(220px, 1fr))!important', //truque milenar
             width: '100%',
             height: '100%',
             overflowY: "scroll",
@@ -26,11 +27,11 @@ export const Product_Table: React.FC<{lista: IProduct[]; update: ()=>void}> = ({
                 backgroundColor: '#a8bbbf'
             }
         }}
-        cols={5}
-        gap={20}
         >
             {lista.map((row) => (
                 <Product
+                produto={row}
+                update={update}
                 key={row.codeRFID}
                 productReferenceId={row.productReferenceId}
                 codeRFID={row.codeRFID} 
