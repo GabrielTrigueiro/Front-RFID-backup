@@ -1,8 +1,10 @@
-import { Box, Grid, IconButton, Typography } from "@mui/material"
+import { Box, Grid, IconButton, Menu, MenuItem, Typography } from "@mui/material"
 import { IProduct } from "../../service/api/products"
 import  place from "../../../assets/camisa.jpg"
 import { useState } from "react"
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import MoreVertIcon from '@mui/icons-material/MoreVert'
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
+import BorderColorIcon from '@mui/icons-material/BorderColor';
 
 type TInfoProduct = IProduct &{
     key: string
@@ -13,9 +15,9 @@ export const Product: React.FC<TInfoProduct> = ({
     info,
     codeRFID
 }) => {
-
-    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
-    const open = Boolean(anchorEl);
+    const menuId = "primary-search-account-menu";
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+    const isMenuOpen = Boolean(anchorEl);
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
     }
@@ -23,8 +25,34 @@ export const Product: React.FC<TInfoProduct> = ({
         setAnchorEl(null);
     }
 
-    //falta colocar coisa no menu e adicionar as funções
+    const renderMenu = (
+        <Menu
+          anchorEl={anchorEl}
+          anchorOrigin={{
+            vertical: "top",
+            horizontal: "left",
+          }}
+          id={menuId}
+          keepMounted
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "left",
+          }}
+          open={isMenuOpen}
+          onClose={handleClose}
+        >
+          <MenuItem onClick={handleClose}>
+            <BorderColorIcon sx={{marginRight:1}} fontSize="small"/>
+            <Typography fontSize={'16px'}>Editar</Typography>
+          </MenuItem>
+          <MenuItem onClick={handleClose}>
+            <DeleteOutlineIcon sx={{marginRight:1}} fontSize="small"/>
+            <Typography fontSize={'16px'}>Excluir</Typography>
+          </MenuItem>
+        </Menu>
+      );
 
+    //adicionar func para as opçoes e os confirmar para cada ação
     return(
         <Box
         sx={{
@@ -48,13 +76,13 @@ export const Product: React.FC<TInfoProduct> = ({
                 </Box>
                 <Box>
                     <IconButton
-                    aria-controls={open ? 'long-menu' : undefined}
-                    aria-expanded={open ? 'true' : undefined}
-                    aria-haspopup="true"
                     onClick={handleClick}
+                    aria-haspopup="true"
+                    aria-controls={menuId}
                     >
                         <MoreVertIcon />
                     </IconButton>
+                    {renderMenu}
                 </Box>
             </Box>
         </Box>

@@ -7,7 +7,6 @@ export const Product_Table: React.FC<{lista: IProduct[]; update: ()=>void}> = ({
 
         <ImageList 
         sx={{
-            paddingLeft:2,
             width: '100%',
             height: '100%',
             overflowY: "scroll",
@@ -28,7 +27,7 @@ export const Product_Table: React.FC<{lista: IProduct[]; update: ()=>void}> = ({
             }
         }}
         cols={5}
-        gap={5}
+        gap={20}
         >
             {lista.map((row) => (
                 <Product

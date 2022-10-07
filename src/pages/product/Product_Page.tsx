@@ -117,7 +117,7 @@ export const Product_Page = () => {
           <AddBoxOutlinedIcon sx={{ pr: 1 }} /> Cadastrar Produto
         </Button>
       </Box>
-      <Box bgcolor={"#767"} sx={{ height: 420, width: '100%'}}>
+      <Box sx={{ height: 420, width: '100%'}}>
         <Product_Table update={update} lista={rows} />
       </Box>
       <Box display="flex" justifyContent="flex-end" mt={1}>

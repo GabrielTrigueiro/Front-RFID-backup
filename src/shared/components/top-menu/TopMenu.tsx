@@ -1,6 +1,7 @@
 import {
   Badge,
   createTheme,
+  Divider,
   IconButton,
   Menu,
   MenuItem,
@@ -11,6 +12,7 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import { useState } from "react";
 import { useAuthContext } from "../../context/AuthContext";
+import Brightness5Icon from '@mui/icons-material/Brightness5';
 
 export const TopMenu = () => {
   const {logout} = useAuthContext()
@@ -40,9 +42,18 @@ export const TopMenu = () => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-      <MenuItem onClick={logout}>Log out</MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        <AccountCircle sx={{marginRight:1}} fontSize="small"/>
+        <Typography fontSize={'12px'}>Perfil</Typography>
+      </MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        <Brightness5Icon sx={{marginRight:1}} fontSize="small"/>
+        <Typography fontSize={'12px'}>Definições</Typography>
+      </MenuItem>
+      <Divider/>
+      <MenuItem onClick={logout}>
+        <Typography fontSize={'12px'}>Terminar sessão</Typography>
+      </MenuItem>
     </Menu>
   );
 
@@ -53,6 +64,7 @@ export const TopMenu = () => {
           <NotificationsIcon />
         </Badge>
       </IconButton>
+      <Typography sx={{pl:2}}>Olá, matheus</Typography>
       <IconButton
         sx={{
           "&:hover": {
@@ -66,7 +78,6 @@ export const TopMenu = () => {
         onClick={handleProfileMenuOpen}
         color="inherit"
       >
-        <Typography>Olá, matheus</Typography>
         <AccountCircle sx={{pl:1}} fontSize="large"/>
       </IconButton>
       {renderMenu}
