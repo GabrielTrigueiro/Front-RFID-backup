@@ -100,7 +100,7 @@ const Delete = async (id: string): Promise<void | Error> => {
           `Bearer ${localStorage.getItem('Acess_Token')?.replace(/"/g,'')}`
          }
      }
-    return await api.delete(environment.url_product_Search + `${id}`, token)
+    return await api.delete(environment.url_product + `${id}`, token)
     .then(data => {
         if (data instanceof AxiosError){
             return data.response?.data
