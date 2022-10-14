@@ -64,7 +64,7 @@ export const Product: React.FC<TInfoProduct> = ({
             <Typography fontSize={'16px'}>Excluir</Typography>
           </MenuItem>
         </Menu>
-      );
+      )
 
     //adicionar func para as opçoes e os confirmar para cada ação
     return(
