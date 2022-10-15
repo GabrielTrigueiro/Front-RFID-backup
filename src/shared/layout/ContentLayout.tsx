@@ -7,11 +7,12 @@ interface props {
 
 export const ContentLayout: React.FC<props> = ({ children, tittle }) => {
   return (
-    <Box height={"100%"} bgcolor={"#F0F5F8"}>
+    <Box height={"100vh"} bgcolor={"#F0F5F8"}>
       <Box
+      height={"10%"}
         pt={1}
         pl={4}
-        pr={4}
+        pr={2}
         display={"flex"}
         justifyContent={"space-between"}
         alignItems={"center"}
@@ -19,7 +20,7 @@ export const ContentLayout: React.FC<props> = ({ children, tittle }) => {
         <Typography>{tittle}</Typography>
         <TopMenu />
       </Box>
-      <Box pt={5} pl={4} pr={4}>
+      <Box height={"65%"} p={4}>
         {children}
       </Box>
     </Box>

@@ -51,7 +51,6 @@ export const Product_Page = () => {
     sortField: "name",
     value: value,
   }
-  
 
   const update = () => {
     Product_Service.getAll(ProductPaginationConf).then((result) => {
@@ -82,14 +81,14 @@ export const Product_Page = () => {
       .validate(dados, { abortEarly: false })
       .then((dadosValidados) => {
         Product_Service.Create(dadosValidados).then((result) => {
-          if(result instanceof AxiosError){
+          if (result instanceof AxiosError) {
             console.log(result.response?.data.message,)
             setSnack(new Snack({
               message: result.response?.data.message,
               color: 'error',
               open: true
             }))
-          }else{
+          } else {
             setSnack(new Snack({
               message: "Produto cadastrado com sucesso",
               color: 'success',
@@ -122,13 +121,13 @@ export const Product_Page = () => {
         alignItems={'center'}
       >
         <Box mr={5} width={300}>
-          <SearchInput change={(value)=>{setValue(value.target.value)}}/>
+          <SearchInput change={(value) => { setValue(value.target.value) }} />
         </Box>
         <Button variant="contained" onClick={handleOpen}>
           <AddBoxOutlinedIcon sx={{ pr: 1 }} /> Cadastrar Produto
         </Button>
       </Box>
-      <Box sx={{ height: 420, width: '100%' }}>
+      <Box sx={{ height: '100%', width: '100%' }}>
         <Product_Table update={update} lista={rows} />
       </Box>
       <Box display="flex" justifyContent="flex-end" mt={1}>
@@ -145,13 +144,13 @@ export const Product_Page = () => {
 
       <Product_Modal closeModal={handleClose} outState={open}>
         <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          p:1
-        }}
-        flex={1}>
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            p: 1
+          }}
+          flex={1}>
           <Typography>Cadastrar</Typography>
         </Box>
         <Divider />
@@ -162,8 +161,8 @@ export const Product_Page = () => {
             onSubmit={(values) => handleSave(values)}
             className="product-form"
           >
-            <Box sx={{p:1, width:"100%"}}>
-              <FormControl sx={{width:"100%"}}>
+            <Box sx={{ p: 1, width: "100%" }}>
+              <FormControl sx={{ width: "100%" }}>
                 <InputLabel>Nome do Produto</InputLabel>
                 <FormInput
                   name="info"
@@ -172,17 +171,17 @@ export const Product_Page = () => {
                 />
               </FormControl>
             </Box>
-            <FormControl sx={{p:1, width:"100%"}}>
-                <InputLabel>Id de Referência</InputLabel>
-                <FormInput
-                  name="productReferenceId"
-                  type="text"
-                  label="Id de Referência"
+            <FormControl sx={{ p: 1, width: "100%" }}>
+              <InputLabel>Id de Referência</InputLabel>
+              <FormInput
+                name="productReferenceId"
+                type="text"
+                label="Id de Referência"
 
-                />
+              />
             </FormControl>
-            <Box sx={{p:1, display:"flex", justifyContent:"space-between", width:"100%"}}>
-              <FormControl sx={{width:"49%"}}>
+            <Box sx={{ p: 1, display: "flex", justifyContent: "space-between", width: "100%" }}>
+              <FormControl sx={{ width: "49%" }}>
                 <InputLabel>RFID</InputLabel>
                 <FormInput
                   name="codeRFID"
@@ -191,7 +190,7 @@ export const Product_Page = () => {
 
                 />
               </FormControl>
-              <FormControl sx={{width:"49%"}}>
+              <FormControl sx={{ width: "49%" }}>
                 <InputLabel>Preço</InputLabel>
                 <FormInput
                   name="price"
@@ -200,8 +199,8 @@ export const Product_Page = () => {
                 />
               </FormControl>
             </Box>
-            <Box sx={{p:1, display:"flex", justifyContent:"space-between", width:"100%"}}>
-              <FormControl  sx={{width:"49%"}}>
+            <Box sx={{ p: 1, display: "flex", justifyContent: "space-between", width: "100%" }}>
+              <FormControl sx={{ width: "49%" }}>
                 <InputLabel>Id da compania</InputLabel>
                 <FormInput
                   name="companyId"
@@ -209,7 +208,7 @@ export const Product_Page = () => {
                   label="Id da compania"
                 />
               </FormControl>
-              <FormControl  sx={{width:"49%"}}>
+              <FormControl sx={{ width: "49%" }}>
                 <InputLabel>Id de fornecimento</InputLabel>
                 <FormInput
                   name="supplierId"
@@ -218,16 +217,16 @@ export const Product_Page = () => {
                 />
               </FormControl>
             </Box>
-            <Box sx={{p:1, width:"100%"}}>
-              <FormControl sx={{width:"100%"}}>
+            <Box sx={{ p: 1, width: "100%" }}>
+              <FormControl sx={{ width: "100%" }}>
                 <InputLabel>Descrição</InputLabel>
                 <FormInput
                   multiline
                   maxRows={4}
                   sx={{
                     height: 130,
-                    display:"flex",
-                    alignItems:"flex-start"
+                    display: "flex",
+                    alignItems: "flex-start"
                   }}
                   name="description"
                   type="text"
@@ -235,15 +234,15 @@ export const Product_Page = () => {
                 />
               </FormControl>
             </Box>
-            <Divider flexItem/>
+            <Divider flexItem />
             <Box
-            sx={{
-              p:1,
-              width:"100%",
-              display:"flex",
-              justifyContent:"flex-end",
-              alignItems:"center"
-            }}>
+              sx={{
+                p: 1,
+                width: "100%",
+                display: "flex",
+                justifyContent: "flex-end",
+                alignItems: "center"
+              }}>
               <Button
                 type="submit"
                 sx={{

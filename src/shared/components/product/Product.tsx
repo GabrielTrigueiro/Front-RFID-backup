@@ -115,7 +115,7 @@ export const Product: React.FC<TInfoProduct> = ({
         width: '200px',
         bgcolor: '#fff',
         borderRadius: 3,
-        m: 1,
+        m:1
       }}>
       <Grid height={'70%'}
         sx={{ borderRadius: 2 }}

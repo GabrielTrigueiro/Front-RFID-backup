@@ -7,12 +7,12 @@ export const Product_Table: React.FC<{lista: IProduct[]; update: ()=>void}> = ({
 
         <ImageList 
         sx={{
-            gridTemplateColumns:'repeat(auto-fill, minmax(220px, 1fr))!important', //truque milenar
+            gridTemplateColumns:'repeat(auto-fill, minmax(0px, 19.7%))!important', //truque milenar
             width: '100%',
             height: '100%',
             overflowY: "scroll",
             '::-webkit-scrollbar': {
-                width: '20px'
+                width: '20px',
             },
             '::-webkit-scrollbar-track': {
                 backgroundColor: 'transparent'
@@ -25,7 +25,8 @@ export const Product_Table: React.FC<{lista: IProduct[]; update: ()=>void}> = ({
             },
             '::-webkit-scrollbar-thumb:hover': {
                 backgroundColor: '#a8bbbf'
-            }
+            },
+            pl:1
         }}
         >
             {lista.map((row) => (
