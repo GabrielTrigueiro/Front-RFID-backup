@@ -1,18 +1,18 @@
 import { Box } from "@mui/system"
 import { FormInput, Product_Modal, SearchInput } from "../../shared/components"
 import { ContentLayout } from "../../shared/layout"
-import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
-import { Button, FormControl, InputLabel, CircularProgress, Stack, Pagination, Divider, Typography, Stepper, Step, StepLabel } from "@mui/material";
-import { useEffect, useRef, useState, useContext } from "react";
-import { Product_Table } from "../../shared/components/table/product-table";
-import { IProduct, ISendPagination, Product_Service, TAllProducts } from "../../shared/service/api/products";
-import { FormHandles } from "@unform/core";
-import { Form } from "@unform/web";
-import * as Yup from "yup";
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined'
+import { Button, FormControl, InputLabel, CircularProgress, Stack, Pagination, Divider, Typography, Stepper, Step, StepLabel } from "@mui/material"
+import { useEffect, useRef, useState, useContext } from "react"
+import { Product_Table } from "../../shared/components/table/product-table"
+import { IProduct, ISendPagination, Product_Service, TAllProducts } from "../../shared/service/api/products"
+import { FormHandles } from "@unform/core"
+import { Form } from "@unform/web"
+import * as Yup from "yup"
+import Select, { SelectChangeEvent } from '@mui/material/Select'
 import "./style.css"
-import { Snack, SnackbarContext } from "../../shared/context/AlertCardContext";
-import { AxiosError } from "axios";
+import { Snack, SnackbarContext } from "../../shared/context/AlertCardContext"
+import { AxiosError } from "axios"
 
 export const ProductRegisterSchema: Yup.SchemaOf<IProduct> = Yup.object().shape({
   id: Yup.string(),
@@ -40,8 +40,9 @@ export const Product_Page = () => {
   const [pages, setPages] = useState<number>(0)
   const [pageSize, setPageSize] = useState<number>(20)
   const [actualpage, setActualPage] = useState<number>(0)
-  const [value, setValue] = useState<string>("")
   const [selectContent, setSelectContent] = useState('')//não foi colocado esse componente ainda
+
+  const [value, setValue] = useState<string>("");
   let ProductPaginationConf: ISendPagination = {
     page: actualpage,
     pageSize: pageSize,
@@ -50,15 +51,7 @@ export const Product_Page = () => {
     sortField: "name",
     value: value,
   }
-  //gerenciar steps
-  const steps = ['Upload da foto', 'Informações do produto']
-  const [activeStep, setActiveStep] = useState(0)
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1)
-  }
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1)
-  }
+  
 
   const update = () => {
     Product_Service.getAll(ProductPaginationConf).then((result) => {
@@ -71,20 +64,17 @@ export const Product_Page = () => {
       }
     });
   }
-
   const handleChangeArrow = (
     event: React.ChangeEvent<unknown>, value: number
   ) => {
     setActualPage(value - 1)
   }
-
   const selectChangePage = (event: SelectChangeEvent) => {
     setSelectContent(event.target.value as string);
     const translate = parseInt(event.target.value as string)
     setActualPage(0)
     setPageSize(translate)
   }
-
   //func para registrar produto
   const handleSave = (dados: IProduct) => {
     console.log(dados)
@@ -119,7 +109,6 @@ export const Product_Page = () => {
         formRef.current?.setErrors(validandoErros)
       })
   }
-
   useEffect(() => {
     update();
   }, [value, actualpage, pageSize])
@@ -133,7 +122,7 @@ export const Product_Page = () => {
         alignItems={'center'}
       >
         <Box mr={5} width={300}>
-          <SearchInput />
+          <SearchInput change={(value)=>{setValue(value.target.value)}}/>
         </Box>
         <Button variant="contained" onClick={handleOpen}>
           <AddBoxOutlinedIcon sx={{ pr: 1 }} /> Cadastrar Produto
@@ -183,7 +172,6 @@ export const Product_Page = () => {
                 />
               </FormControl>
             </Box>
-
             <FormControl sx={{p:1, width:"100%"}}>
                 <InputLabel>Id de Referência</InputLabel>
                 <FormInput
@@ -192,8 +180,7 @@ export const Product_Page = () => {
                   label="Id de Referência"
 
                 />
-              </FormControl>
-
+            </FormControl>
             <Box sx={{p:1, display:"flex", justifyContent:"space-between", width:"100%"}}>
               <FormControl sx={{width:"49%"}}>
                 <InputLabel>RFID</InputLabel>
