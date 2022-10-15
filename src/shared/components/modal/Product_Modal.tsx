@@ -26,15 +26,24 @@ export const Product_Modal: React.FC<props> = ({children, outState, closeModal})
             left: '50%',
             transform: 'translate(-50%, -50%)',
 
-            width: 600,
-            height:450,
+            width: 420,
+            height:510,
 
-            bgcolor:"#F0F5F8",
-            borderRadius:2,
+            bgcolor:"#fff",
+            borderRadius:"18px",
             p: 2
           }}
           >
-            {children}
+            <Box
+            sx={{
+            width:"100%",
+            height:"100%",
+            display:"flex",
+            flexDirection:"column"
+            }}
+            >
+              {children}
+            </Box>
           </Box>
         </Modal>
         <Confirm_Dialog

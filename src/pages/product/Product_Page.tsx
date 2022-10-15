@@ -2,7 +2,7 @@ import { Box } from "@mui/system"
 import { FormInput, Product_Modal, SearchInput } from "../../shared/components"
 import { ContentLayout } from "../../shared/layout"
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
-import { Button, FormControl, InputLabel, CircularProgress, Stack, Pagination } from "@mui/material";
+import { Button, FormControl, InputLabel, CircularProgress, Stack, Pagination, Divider, Typography, Stepper, Step, StepLabel } from "@mui/material";
 import { useEffect, useRef, useState, useContext } from "react";
 import { Product_Table } from "../../shared/components/table/product-table";
 import { IProduct, ISendPagination, Product_Service, TAllProducts } from "../../shared/service/api/products";
@@ -12,6 +12,7 @@ import * as Yup from "yup";
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import "./style.css"
 import { Snack, SnackbarContext } from "../../shared/context/AlertCardContext";
+import { AxiosError } from "axios";
 
 export const ProductRegisterSchema: Yup.SchemaOf<IProduct> = Yup.object().shape({
   id: Yup.string(),
@@ -27,10 +28,10 @@ export const ProductRegisterSchema: Yup.SchemaOf<IProduct> = Yup.object().shape(
 
 export const Product_Page = () => {
 
-  const {setSnack} = useContext(SnackbarContext); 
+  const { setSnack } = useContext(SnackbarContext)
   const formRef = useRef<FormHandles>(null)
-  const [isLoading, setIsLoading] = useState(true);
-  const [rows, setRows] = useState<IProduct[]>([]);
+  const [isLoading, setIsLoading] = useState(true)
+  const [rows, setRows] = useState<IProduct[]>([])
   //gerencia o modal de registro
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
@@ -49,6 +50,15 @@ export const Product_Page = () => {
     sortField: "name",
     value: value,
   }
+  //gerenciar steps
+  const steps = ['Upload da foto', 'Informações do produto']
+  const [activeStep, setActiveStep] = useState(0)
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1)
+  }
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1)
+  }
 
   const update = () => {
     Product_Service.getAll(ProductPaginationConf).then((result) => {
@@ -65,7 +75,7 @@ export const Product_Page = () => {
   const handleChangeArrow = (
     event: React.ChangeEvent<unknown>, value: number
   ) => {
-    setActualPage(value-1)
+    setActualPage(value - 1)
   }
 
   const selectChangePage = (event: SelectChangeEvent) => {
@@ -73,30 +83,38 @@ export const Product_Page = () => {
     const translate = parseInt(event.target.value as string)
     setActualPage(0)
     setPageSize(translate)
-  };
+  }
 
-  //não mostra os erros e dá sucesso mesmo sem dar
+  //func para registrar produto
   const handleSave = (dados: IProduct) => {
     console.log(dados)
     ProductRegisterSchema
       .validate(dados, { abortEarly: false })
       .then((dadosValidados) => {
         Product_Service.Create(dadosValidados).then((result) => {
-          setSnack(new Snack({
-            message: "Produto cadastrado com sucesso",
-            color:'success',
-            open: true
-          }))
-          // close();
-          update()
-        });
+          if(result instanceof AxiosError){
+            console.log(result.response?.data.message,)
+            setSnack(new Snack({
+              message: result.response?.data.message,
+              color: 'error',
+              open: true
+            }))
+          }else{
+            setSnack(new Snack({
+              message: "Produto cadastrado com sucesso",
+              color: 'success',
+              open: true
+            }))
+            handleClose()
+            update()
+          }
+        })
       })
-      .catch((erros: Yup.ValidationError)=>{
-        const validandoErros: {[key:string]: string} = {}
-        erros.inner.forEach(erros =>{
-          if(!erros.path)return
+      .catch((erros: Yup.ValidationError) => {
+        const validandoErros: { [key: string]: string } = {}
+        erros.inner.forEach(erros => {
+          if (!erros.path) return
           validandoErros[erros.path] = erros.message
-          console.log('deu ruim registrar')
         })
         formRef.current?.setErrors(validandoErros)
       })
@@ -108,8 +126,12 @@ export const Product_Page = () => {
 
   return (
     <ContentLayout tittle={'Produtos'}>
-
-      <Box mb={'20px'} justifyContent={'flex-end'} display={'flex'} alignItems={'center'}>
+      <Box
+        mb={'20px'}
+        justifyContent={'flex-end'}
+        display={'flex'}
+        alignItems={'center'}
+      >
         <Box mr={5} width={300}>
           <SearchInput />
         </Box>
@@ -117,7 +139,7 @@ export const Product_Page = () => {
           <AddBoxOutlinedIcon sx={{ pr: 1 }} /> Cadastrar Produto
         </Button>
       </Box>
-      <Box sx={{ height: 420, width: '100%'}}>
+      <Box sx={{ height: 420, width: '100%' }}>
         <Product_Table update={update} lista={rows} />
       </Box>
       <Box display="flex" justifyContent="flex-end" mt={1}>
@@ -133,106 +155,126 @@ export const Product_Page = () => {
       </Box>
 
       <Product_Modal closeModal={handleClose} outState={open}>
-        <Form
-          ref={formRef}
-          onSubmit={(values) => handleSave(values)}
-          className="product-form"
-        >
-          <Box className="box-form">
-            <FormControl>
-              <InputLabel>Id de Referência</InputLabel>
-              <FormInput
-                name="productReferenceId"
-                type="text"
-                label="Id de Referência"
+        <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          p:1
+        }}
+        flex={1}>
+          <Typography>Cadastrar</Typography>
+        </Box>
+        <Divider />
 
-              />
-            </FormControl>
-
-            <FormControl>
-              <InputLabel>RFid</InputLabel>
-              <FormInput
-                name="codeRFID"
-                type="text"
-                label="RFID"
-
-              />
-            </FormControl>
-          </Box>
-
-          <Box className="box-form">
-            <FormControl>
-              <InputLabel>Id da compania</InputLabel>
-              <FormInput
-                name="companyId"
-                type="text"
-                label="Id da compania"
-
-              />
-            </FormControl>
-
-            <FormControl>
-              <InputLabel>Id de fornecimento</InputLabel>
-              <FormInput
-                name="supplierId"
-                type="text"
-                label="Id de fornecimento"
-
-              />
-            </FormControl>
-
-            <FormControl>
-              <InputLabel>Preço</InputLabel>
-              <FormInput
-                name="price"
-                type="number"
-                label="Preço"
-
-              />
-            </FormControl>
-
-            <FormControl>
-              <InputLabel>Info</InputLabel>
-              <FormInput
-                name="info"
-                type="text"
-                label="info"
-
-              />
-            </FormControl>
-          </Box>
-
-          <FormControl>
-            <InputLabel>Descrição</InputLabel>
-            <FormInput
-              sx={{ width: 400, height: 200 }}
-              name="description"
-              type="text"
-              label="Descrição"
-
-            />
-          </FormControl>
-
-          <Button
-            type="submit"
-            sx={{
-              mt: 2,
-              width: '90%',
-              fontSize: "20px",
-              fontStyle: "normal",
-              fontWeight: 500,
-              boxShadow: "none",
-              borderRadius: 1,
-              color: "#fff",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-            variant="contained"
+        <Box flex={6}>
+          <Form
+            ref={formRef}
+            onSubmit={(values) => handleSave(values)}
+            className="product-form"
           >
-            Registrar
-          </Button>
-        </Form>
+            <Box sx={{p:1, width:"100%"}}>
+              <FormControl sx={{width:"100%"}}>
+                <InputLabel>Nome do Produto</InputLabel>
+                <FormInput
+                  name="info"
+                  type="text"
+                  label="Nome do Produto"
+                />
+              </FormControl>
+            </Box>
+
+            <FormControl sx={{p:1, width:"100%"}}>
+                <InputLabel>Id de Referência</InputLabel>
+                <FormInput
+                  name="productReferenceId"
+                  type="text"
+                  label="Id de Referência"
+
+                />
+              </FormControl>
+
+            <Box sx={{p:1, display:"flex", justifyContent:"space-between", width:"100%"}}>
+              <FormControl sx={{width:"49%"}}>
+                <InputLabel>RFID</InputLabel>
+                <FormInput
+                  name="codeRFID"
+                  type="text"
+                  label="RFID"
+
+                />
+              </FormControl>
+              <FormControl sx={{width:"49%"}}>
+                <InputLabel>Preço</InputLabel>
+                <FormInput
+                  name="price"
+                  type="number"
+                  label="Preço"
+                />
+              </FormControl>
+            </Box>
+            <Box sx={{p:1, display:"flex", justifyContent:"space-between", width:"100%"}}>
+              <FormControl  sx={{width:"49%"}}>
+                <InputLabel>Id da compania</InputLabel>
+                <FormInput
+                  name="companyId"
+                  type="text"
+                  label="Id da compania"
+                />
+              </FormControl>
+              <FormControl  sx={{width:"49%"}}>
+                <InputLabel>Id de fornecimento</InputLabel>
+                <FormInput
+                  name="supplierId"
+                  type="text"
+                  label="Id de fornecimento"
+                />
+              </FormControl>
+            </Box>
+            <Box sx={{p:1, width:"100%"}}>
+              <FormControl sx={{width:"100%"}}>
+                <InputLabel>Descrição</InputLabel>
+                <FormInput
+                  multiline
+                  maxRows={4}
+                  sx={{
+                    height: 130,
+                    display:"flex",
+                    alignItems:"flex-start"
+                  }}
+                  name="description"
+                  type="text"
+                  label="Descrição"
+                />
+              </FormControl>
+            </Box>
+            <Divider flexItem/>
+            <Box
+            sx={{
+              p:1,
+              width:"100%",
+              display:"flex",
+              justifyContent:"flex-end",
+              alignItems:"center"
+            }}>
+              <Button
+                type="submit"
+                sx={{
+                  width: "100px",
+                  fontSize: "12px",
+                  fontStyle: "normal",
+                  fontWeight: 500,
+                  boxShadow: "none",
+                  borderRadius: 1,
+                  color: "#fff",
+                }}
+                variant="contained"
+              >
+                Finalizar
+              </Button>
+            </Box>
+          </Form>
+        </Box>
       </Product_Modal>
     </ContentLayout>
   )

@@ -89,6 +89,7 @@ const Create = async (dados: IProduct): Promise<any | Error> => {
         return data.data
       })
       .catch(err => { 
+        return err
         console.error(err)
       })
 }
@@ -112,8 +113,29 @@ const Delete = async (id: string): Promise<void | Error> => {
       })
 }
 
+const UpdateById = async (id: string, dados: IProduct): Promise<void | Error> => {
+    const token = {
+        headers:{
+          Authorization: 
+          `Bearer ${localStorage.getItem('Acess_Token')?.replace(/"/g,'')}`
+         }
+     }
+    return  await api.put<IProduct>(environment.url_product + `${id}`, dados, token)
+    .then(data => {
+        if (data instanceof AxiosError){
+            return data.response?.data
+        }
+        return data.data
+      })
+      .catch(err => { 
+        return err
+        console.error(err)
+      })
+}
+
 export const Product_Service = {
     getAll,
     Create,
-    Delete
+    Delete,
+    UpdateById
 }

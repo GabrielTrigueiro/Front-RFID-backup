@@ -11,26 +11,31 @@ export const Confirm_Dialog: React.FC<{
 }> = ({state, funcModal, funcDialog, tittle, messageOne, messageTwo}) => {
 
     return (
-        <Dialog open={state}>
+        <Dialog PaperProps={{style:{borderRadius:"12px"}}} open={state}>
             <Box
             sx={{
+                width: 300,
+                height:150,
                 bgcolor:"#fff",
                 display:"flex",
                 justifyContent:"center",
                 alignItems:"center",
-                flexDirection:"column"
+                flexDirection:"column",
+
             }}>
-                <Typography sx={{margin:2}}>{tittle}</Typography>
+                <Typography sx={{}}>{tittle}</Typography>
                 <Box
                 sx={{
-                    margin:2,
-                    width:":100%",
+                    marginTop:3,
+                    width:"100%",
+                    borderRadius:"12px",
                     display:"flex",
-                    justifyContent:"space-bet"
+                    justifyContent:"space-evenly"
                 }}
                 >
                     <Button
                     sx={{
+                        width:100,
                         ":hover":{
                             bgcolor:"#23A0C9",
                             color:"#fff",
@@ -45,6 +50,7 @@ export const Confirm_Dialog: React.FC<{
 
                     <Button
                     sx={{
+                        width:100,
                         ":hover":{
                             bgcolor:"#23A0C9",
                             color:"#fff",
