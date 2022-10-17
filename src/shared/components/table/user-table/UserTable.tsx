@@ -43,7 +43,7 @@ export const UserTable: React.FC<{lista: IUser[]; update: ()=>void}> = ({lista, 
                     <Typography>Id: {row.id}</Typography>
                     </TableCellStyled>
                     <TableCellStyled align="right">
-                    <Typography>Cargo: {row.roles.name}</Typography>
+                    <Typography>Cargo: {row.roles.map(item => item.name)}</Typography>
                     </TableCellStyled>
                 </TableRowStyled>
                 ))}

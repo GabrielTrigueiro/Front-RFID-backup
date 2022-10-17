@@ -32,10 +32,12 @@ export const Product_Page = () => {
   const formRef = useRef<FormHandles>(null)
   const [isLoading, setIsLoading] = useState(true)
   const [rows, setRows] = useState<IProduct[]>([])
+
   //gerencia o modal de registro
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
+  
   //gerenciar paginas
   const [pages, setPages] = useState<number>(0)
   const [pageSize, setPageSize] = useState<number>(20)

@@ -1,41 +1,56 @@
 import { Box, Button, CircularProgress, FormControl, InputAdornment, InputLabel, OutlinedInput, Typography } from "@mui/material"
 import { FormHandles } from "@unform/core";
 import { Form } from "@unform/web";
-import { useRef, useState, useEffect } from "react";
-import { BaseModal, FormInput, UserTable } from "../../shared/components"
+import { useRef, useState, useEffect, useContext } from "react";
+import { BaseModal, Confirm_Dialog, FormInput, UserTable } from "../../shared/components"
 import { FormSelect } from "../../shared/components/forms/input/FormSelect";
 import { ContentLayout } from "../../shared/layout"
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
-import { ISendPagination, IUser, User_Service } from "../../shared/service/api/users";
+import { ISendUserPagination, IUser, User_Service } from "../../shared/service/api/users";
+import * as Yup from "yup"
+import { Snack, SnackbarContext } from "../../shared/context/AlertCardContext"
+import { AxiosError } from "axios";
 
 //dados novo usario
-interface newUser_data {
+export interface newUser_data {
   username: string
   password: string
   role: string
 }
 
+export const UserRegisterSchema: Yup.SchemaOf<newUser_data> = Yup.object().shape({
+    username: Yup.string().required("Campo Obrigatório"),
+    password: Yup.string().required("Campo Obrigatório"),
+    role: Yup.string().required("Campo Obrigatório"),
+  })
+
 export const Users = () => {
+    
+    const [newUser, setNewUser] = useState<newUser_data>({
+        password:"",
+        role:"",
+        username:"",
+    })
 
     const [isLoading, setIsLoading] = useState(true)
     const [rows, setRows] = useState<IUser[]>([])
+    const { setSnack } = useContext(SnackbarContext)
 
     //gerenciar paginas
     const [pages, setPages] = useState<number>(0)
     const [pageSize, setPageSize] = useState<number>(20)
     const [actualpage, setActualPage] = useState<number>(0)
-
     const [value, setValue] = useState<string>("");
-        let UserPaginationConf: ISendPagination = {
-            page: actualpage,
-            pageSize: pageSize,
-            param: "name",
-            sortDiresction: "DESC",
-            sortField: "name",
-            value: value,
-        }
+    let UserPaginationConf: ISendUserPagination = {
+        page: actualpage,
+        pageSize: pageSize,
+        param: "name",
+        sortDiresction: "DESC",
+        sortField: "name",
+        value: value,
+    }
 
     const update = () => {
         User_Service.getAll(UserPaginationConf).then((result) => {
@@ -51,12 +66,15 @@ export const Users = () => {
 
     useEffect(() => {
         update();
-      }, [value, actualpage, pageSize])
+    }, [value, actualpage, pageSize])
   
     //gerencia o modal de registro
     const [open, setOpen] = useState(false)
     const handleOpen = () => setOpen(true)
     const handleClose = () => setOpen(false)
+    const [dialog, setDialog] = useState<boolean>(false)
+    const handleDialogOpen = () => setOpen(true)
+    const handleDialogClose = () => setOpen(false)
 
     const [loading, setLoading] = useState(false)
     const formRef = useRef<FormHandles>(null)
@@ -69,7 +87,42 @@ export const Users = () => {
     //func duplicada de login, inxutar isso depois
     const handleChange = (prop: keyof newUser_data) => (event: React.ChangeEvent<HTMLInputElement>) => {
       setValues({ ...values, [prop]: event.target.value })
-    };
+    }
+
+    //func para registrar produto
+    const handleSave = (dados: newUser_data) => {
+    console.log(dados)
+    UserRegisterSchema
+      .validate(dados, { abortEarly: false })
+      .then((dadosValidados) => {
+        User_Service.Create(dadosValidados).then((result) => {
+          if (result instanceof AxiosError) {
+            console.log(result.response?.data.message,)
+            setSnack(new Snack({
+              message: result.response?.data.message,
+              color: 'error',
+              open: true
+            }))
+          } else {
+            setSnack(new Snack({
+              message: "Produto cadastrado com sucesso",
+              color: 'success',
+              open: true
+            }))
+            handleClose()
+            update()
+          }
+        })
+      })
+      .catch((erros: Yup.ValidationError) => {
+        const validandoErros: { [key: string]: string } = {}
+        erros.inner.forEach(erros => {
+          if (!erros.path) return
+          validandoErros[erros.path] = erros.message
+        })
+        formRef.current?.setErrors(validandoErros)
+      })
+    }
 
     return (
       <ContentLayout tittle={'Usuários'}>

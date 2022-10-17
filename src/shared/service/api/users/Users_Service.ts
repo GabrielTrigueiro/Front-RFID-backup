@@ -1,17 +1,16 @@
 import { AxiosError } from "axios"
 import { api } from "../axios"
 import {environment}  from "../../../environment"
+import { newUser_data } from "../../../../pages"
 
-//info de cada produto
+//info de cada usuário
 export interface IUser{
     id:string
     username:string
-    roles:{
+    roles:[{
         id: string
         name: string
-    }
-    //createdAt
-    //updatedAt
+    }]
 }
 
 //o que vai ser recebido da api
@@ -32,7 +31,7 @@ export interface IUserSearch {
 }
 
 //paginas pedindo
-export interface ISendPagination {
+export interface ISendUserPagination{
     page: number
     pageSize: number
     sortField: string
@@ -53,7 +52,7 @@ export type TAllUsers = {
     data: IUserPackage
 }
 
-const getAll = async (dados: ISendPagination): Promise<any | Error> => {
+const getAll = async (dados: ISendUserPagination): Promise<any | Error> => {
     const token = {
         headers:{
           Authorization: 
@@ -72,7 +71,7 @@ const getAll = async (dados: ISendPagination): Promise<any | Error> => {
     })
 }
 
-const Create = async (dados: IUser): Promise<any | Error> => {
+const Create = async (dados: newUser_data): Promise<any | Error> => {
     const token = {
         headers:{
           Authorization: 
