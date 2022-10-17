@@ -1,30 +1,8 @@
 import { Box, TableContainer, TableBody, Typography } from "@mui/material";
+import { IUser } from "../../../service/api/users";
 import { TableStyled, TableRowStyled, TableCellStyled } from "../alert-table";
 
-export const UserTable = () => {
-
-  function createData(
-    name: string,
-    calories: number,
-    fat: number,
-    carbs: number,
-    protein: number
-  ) {
-    return { name, calories, fat, carbs, protein };
-  }
-
-  const rows = [
-    createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-    createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-    createData("Eclair", 262, 16.0, 24, 6.0),
-    createData("Cupcake", 305, 3.7, 67, 4.3),
-    createData("Gingerbread", 356, 16.0, 49, 3.9),
-    createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-    createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-    createData("Eclair", 262, 16.0, 24, 6.0),
-    createData("Cupcake", 305, 3.7, 67, 4.3),
-    createData("Gingerbread", 356, 16.0, 49, 3.9),
-  ];
+export const UserTable: React.FC<{lista: IUser[]; update: ()=>void}> = ({lista, update}) => {
 
   return (
     <Box>
@@ -52,26 +30,20 @@ export const UserTable = () => {
         <TableContainer className="table-container">
             <TableStyled sx={{ minWidth: 700 }}>
             <TableBody>
-                {rows.map((row) => (
+                {lista.map((row) => (
                 <TableRowStyled
-                    key={row.name}
+                    key={row.id}
                     sx={{ boxShadow: "inherit" }}
                     className="MuiTableRow-root"
                 >
                     <TableCellStyled>
-                    <Typography>{row.name}</Typography>
+                    <Typography>Nome: {row.username}</Typography>
                     </TableCellStyled>
                     <TableCellStyled align="right">
-                    <Typography>{row.calories}</Typography>
+                    <Typography>Id: {row.id}</Typography>
                     </TableCellStyled>
                     <TableCellStyled align="right">
-                    <Typography>{row.fat}</Typography>
-                    </TableCellStyled>
-                    <TableCellStyled align="right">
-                    <Typography>{row.carbs}</Typography>
-                    </TableCellStyled>
-                    <TableCellStyled align="right">
-                    <Typography>{row.protein}</Typography>
+                    <Typography>Cargo: {row.roles.name}</Typography>
                     </TableCellStyled>
                 </TableRowStyled>
                 ))}

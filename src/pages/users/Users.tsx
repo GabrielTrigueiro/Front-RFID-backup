@@ -1,13 +1,14 @@
 import { Box, Button, CircularProgress, FormControl, InputAdornment, InputLabel, OutlinedInput, Typography } from "@mui/material"
 import { FormHandles } from "@unform/core";
 import { Form } from "@unform/web";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { BaseModal, FormInput, UserTable } from "../../shared/components"
 import { FormSelect } from "../../shared/components/forms/input/FormSelect";
 import { ContentLayout } from "../../shared/layout"
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
+import { ISendPagination, IUser, User_Service } from "../../shared/service/api/users";
 
 //dados novo usario
 interface newUser_data {
@@ -17,6 +18,40 @@ interface newUser_data {
 }
 
 export const Users = () => {
+
+    const [isLoading, setIsLoading] = useState(true)
+    const [rows, setRows] = useState<IUser[]>([])
+
+    //gerenciar paginas
+    const [pages, setPages] = useState<number>(0)
+    const [pageSize, setPageSize] = useState<number>(20)
+    const [actualpage, setActualPage] = useState<number>(0)
+
+    const [value, setValue] = useState<string>("");
+        let UserPaginationConf: ISendPagination = {
+            page: actualpage,
+            pageSize: pageSize,
+            param: "name",
+            sortDiresction: "DESC",
+            sortField: "name",
+            value: value,
+        }
+
+    const update = () => {
+        User_Service.getAll(UserPaginationConf).then((result) => {
+        if (result instanceof Error) {
+            alert(result.message);
+        } else {
+            setIsLoading(false);
+            setPages(result.data.numberOfPages)
+            setRows(result.data.data);
+        }
+        })
+    }
+
+    useEffect(() => {
+        update();
+      }, [value, actualpage, pageSize])
   
     //gerencia o modal de registro
     const [open, setOpen] = useState(false)
@@ -45,7 +80,7 @@ export const Users = () => {
             </Button>
         </Box>
         <Box>
-          <UserTable/>
+          <UserTable lista={rows} update={update}/>
         </Box>
         <BaseModal outState={open} closeModal={handleClose}>
             <Form 

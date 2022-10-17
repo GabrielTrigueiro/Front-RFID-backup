@@ -61,7 +61,7 @@ export const Product_Page = () => {
         setPages(result.data.numberOfPages)
         setRows(result.data.data);
       }
-    });
+    })
   }
   const handleChangeArrow = (
     event: React.ChangeEvent<unknown>, value: number
