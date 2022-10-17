@@ -133,7 +133,11 @@ export const Users = () => {
             </Button>
         </Box>
         <Box>
-          <UserTable lista={rows} update={update}/>
+          <UserTable
+            lista={rows}
+            update={update}
+            pageSize={pageSize}
+          />
         </Box>
         <BaseModal outState={open} closeModal={handleClose}>
             <Form 

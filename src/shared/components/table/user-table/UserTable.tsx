@@ -1,56 +1,37 @@
 import { Box, TableContainer, TableBody, Typography } from "@mui/material";
+import { GridColDef, DataGrid } from "@mui/x-data-grid";
 import { IUser } from "../../../service/api/users";
 import { TableStyled, TableRowStyled, TableCellStyled } from "../alert-table";
 
-export const UserTable: React.FC<{lista: IUser[]; update: ()=>void}> = ({lista, update}) => {
+interface tipos{
+    roles: "ROLE_ADMIN"
+}
 
-  return (
-    <Box>
-        <Box className={'boxContainer'}
-        sx={{ 
-            height:450,
-            overflowY: "scroll",
-            '::-webkit-scrollbar': {
-                width: '20px'
-            },
-            '::-webkit-scrollbar-track': {
-                backgroundColor: 'transparent'
-            },
-            '::-webkit-scrollbar-thumb': {
-                backgroundColor: '#d6dee1',
-                borderRadius: '20px',
-                border: '6px solid transparent',
-                backgroundClip: 'content-box',
-            },
-            '::-webkit-scrollbar-thumb:hover': {
-                backgroundColor: '#a8bbbf'
-            }
-        }}
+interface IUserTableProps {
+    lista: IUser[]
+    update: ()=>void
+    pageSize: number
+}
+
+export const UserTable: React.FC<IUserTableProps> = ({lista, update}) => {
+
+    //campos da tabela
+    const columns: GridColDef[] = [
+        {field: 'username', headerName: 'Nome', width: 120},
+        {field: 'id', headerName: 'Id', width: 210},
+        {field: 'roles', headerName: 'Cargo', width: 120}
+    ]
+
+    return (
+        <Box
+        sx={{height:400, width:'100%'}}
         >
-        <TableContainer className="table-container">
-            <TableStyled sx={{ minWidth: 700 }}>
-            <TableBody>
-                {lista.map((row) => (
-                <TableRowStyled
-                    key={row.id}
-                    sx={{ boxShadow: "inherit" }}
-                    className="MuiTableRow-root"
-                >
-                    <TableCellStyled>
-                    <Typography>Nome: {row.username}</Typography>
-                    </TableCellStyled>
-                    <TableCellStyled align="right">
-                    <Typography>Id: {row.id}</Typography>
-                    </TableCellStyled>
-                    <TableCellStyled align="right">
-                    <Typography>Cargo: {row.roles.map(item => item.name)}</Typography>
-                    </TableCellStyled>
-                </TableRowStyled>
-                ))}
-            </TableBody>
-            </TableStyled>
-        </TableContainer>
+            <DataGrid
+                rows={lista}
+                columns={columns}
+                pageSize={5}
+                checkboxSelection
+            />
         </Box>
-    </Box>
-  );
-};
+    )
+}
