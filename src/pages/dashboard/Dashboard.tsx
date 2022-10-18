@@ -45,10 +45,10 @@ export const Dashboard = () => {
   const [value, setValue] = useState(0);
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
-  };
+  }
   return (
     <ContentLayout tittle={"Dashboard"}>
-      <Box height={"100%"}>
+      {/* <Box height={"100%"}>
         <Box sx={{borderBottom: 1, borderColor: "divider"}}>
           <Tabs
             value={value}
@@ -65,7 +65,7 @@ export const Dashboard = () => {
         <TabPanel value={value} index={1}>
           <MustBuyTable/>
         </TabPanel>
-      </Box>
+      </Box> */}
     </ContentLayout>
   );
 };

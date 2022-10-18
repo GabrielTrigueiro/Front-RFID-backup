@@ -1,7 +1,7 @@
 import { AxiosError } from "axios"
 import { api } from "../axios"
 import {environment}  from "../../../environment"
-import { newUser_data } from "../../../../pages"
+import { newUser_data } from "../../../components"
 
 //info de cada usuário
 export interface IUser{
@@ -41,7 +41,7 @@ export interface ISendUserPagination{
 }
 
 //paginas recebendo
-export interface IReceivePagination{
+export interface IReceiveUserPagination{
     numberOfPages:number
     actualPage: number
     hasNext: boolean
