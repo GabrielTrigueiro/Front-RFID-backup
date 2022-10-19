@@ -7,7 +7,9 @@ interface props{
     closeModal: ()=>void
 }
 //todo componente que usar o modal terá que enviar uma func de close e uma var do estado
-export const Product_Modal: React.FC<props> = ({children, outState, closeModal}) =>{
+export const Register_User_Modal: React.FC<props> = ({
+    children, outState, closeModal
+}) =>{
 
     const [dialog, setDialog] = useState<boolean>(false)
     
@@ -38,10 +40,10 @@ export const Product_Modal: React.FC<props> = ({children, outState, closeModal})
           >
             <Box
             sx={{
-            width:"100%",
-            height:"100%",
-            display:"flex",
-            flexDirection:"column"
+                width:"100%",
+                height:"100%",
+                display:"flex",
+                flexDirection:"column"
             }}
             >
               {children}
@@ -51,7 +53,7 @@ export const Product_Modal: React.FC<props> = ({children, outState, closeModal})
         <Confirm_Dialog
         messageOne={'Não'}
         messageTwo={'Sim'}
-        tittle={'Deseja fechar?'}
+        tittle={'Cancelar registro?'}
         state={dialog}
         funcDialog={()=>setDialog(false)}
         funcModal={closeModal}

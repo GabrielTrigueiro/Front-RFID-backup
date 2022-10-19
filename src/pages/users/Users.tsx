@@ -1,6 +1,6 @@
 import { Box, Button } from "@mui/material"
 import { useState, useEffect, useContext } from "react";
-import { BaseModal, UserTable, User_Form } from "../../shared/components"
+import { BaseModal, Register_User_Modal, UserTable, User_Form } from "../../shared/components"
 import { ContentLayout } from "../../shared/layout"
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import { ISendUserPagination, IUser, User_Service } from "../../shared/service/api/users";
@@ -52,7 +52,8 @@ export const Users = () => {
       <ContentLayout tittle={'Usuários'}>
         <Box sx={{mb:'20px', display:'flex', justifyContent:'flex-end'}}>
             <Button variant="contained" onClick={handleOpen}>
-                <PersonAddAltIcon sx={{pr:1}}/> Cadastrar Usuário
+                <PersonAddAltIcon sx={{pr:1}}/>
+                Cadastrar Usuário
             </Button>
         </Box>
         <Box>
@@ -62,9 +63,10 @@ export const Users = () => {
             pageSize={pageSize}
           />
         </Box>
-        <BaseModal outState={open} closeModal={handleClose}>
+
+        <Register_User_Modal outState={open} closeModal={handleClose}>
             <User_Form update={update}/>
-        </BaseModal>
+        </Register_User_Modal>
       </ContentLayout>
     )
   }

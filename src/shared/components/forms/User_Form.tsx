@@ -13,17 +13,19 @@ import { Snack, SnackbarContext } from "../../context"
 export interface newUser_data {
     username: string
     password: string
-    role: string
+    roles: string
 }
 
 //avaliar erros de preenchimento ao criar user
 const UserRegisterSchema: Yup.SchemaOf<newUser_data> = Yup.object().shape({
     username:   Yup.string().required("Campo Obrigatório"),
     password:   Yup.string().required("Campo Obrigatório"),
-    role:       Yup.string().required("Campo Obrigatório"),
+    roles:       Yup.string().required("Campo Obrigatório"),
 })
 
-export const User_Form: React.FC<{update: () => void}> = ({update}) => {
+export const User_Form: React.FC<{
+    update: () => void
+}> = ({update}) => {
 
     //prop do form
     const formRef = useRef<FormHandles>(null)
@@ -31,7 +33,7 @@ export const User_Form: React.FC<{update: () => void}> = ({update}) => {
     //state para guardar novos usuários
     const [newUser, setNewUser] = useState<newUser_data>({
         password:"",
-        role:"",
+        roles:"",
         username:"",
     })
 
@@ -79,18 +81,13 @@ export const User_Form: React.FC<{update: () => void}> = ({update}) => {
         })
     }
 
-    //func para salvar edição ou registrar
-    const handleSubmit = (e: IUser | newUser_data) =>{
-
-    }
-
     return (
         <Form
             className="form-cadastro"
             ref={formRef}
             onSubmit={(dados) => {
                 console.log(dados); 
-    
+                handleSave(dados)
             }}
         >
             <Typography

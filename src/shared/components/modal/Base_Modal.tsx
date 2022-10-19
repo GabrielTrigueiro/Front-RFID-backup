@@ -5,7 +5,6 @@ interface props{
     outState: boolean
     closeModal: ()=>void
 }
-//todo componente que usar o modal terá que enviar uma func de close e uma var do estado
 export const BaseModal: React.FC<props> = ({children, outState, closeModal}) =>{
     return(
         <Modal
