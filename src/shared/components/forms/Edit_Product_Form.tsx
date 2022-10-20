@@ -5,37 +5,23 @@ import { useRef } from "react"
 import { FormHandles } from "@unform/core"
 import { IProduct } from "../../service/api"
 
-export const Product_Form: React.FC<{
-    productData: IProduct,
-    editProduct: (e: IProduct)=> void
-    saveProduct: (e: IProduct)=> void
+export const Edit_Product_Form: React.FC<{
+    editProduct: (e: IProduct)=> void,
+    product: IProduct
 }> = ({
-    productData,
     editProduct,
-    saveProduct
+    product
 }) => {
     //props form
     const formRef = useRef<FormHandles>(null)
-
-    //func salvar ou editar produto
-    const handleSubmit = (e: IProduct) =>{
-        if(e.id){
-            editProduct(e)
-        }else{
-            saveProduct(e)
-        }
-    }
 
     return (
         <div>
             <Form
                 ref={formRef}
-                initialData={productData}
+                initialData={product}
                 className="product-form"
-                onSubmit={(dados) => {
-                    dados.id = productData?.id
-                    handleSubmit(dados)
-                }}
+                onSubmit={(dados) => editProduct(dados)}
             >
                 <Box sx={{ p: 1, width: "100%" }}>
                     <FormControl sx={{ width: "100%" }}>

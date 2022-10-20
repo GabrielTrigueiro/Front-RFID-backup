@@ -1,17 +1,15 @@
-import { Box, Button, Divider, FormControl, Grid, IconButton, InputLabel, Menu, MenuItem, Modal, Typography } from "@mui/material"
-import { IProduct, Product_Service } from "../../service/api/products"
-import place from "../../../assets/camisa.jpg"
-import { useState, useContext, useRef } from "react"
-import MoreVertIcon from '@mui/icons-material/MoreVert'
+import BorderColorIcon from '@mui/icons-material/BorderColor'
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
-import BorderColorIcon from '@mui/icons-material/BorderColor';
-import { Confirm_Dialog } from "../dialog"
-import { Snack, SnackbarContext } from "../../context/AlertCardContext"
-import { Form } from "@unform/web"
-import { FormInput, Product_Form } from "../forms"
-import { Product_Modal } from "../modal"
-import { FormHandles } from "@unform/core"
+import MoreVertIcon from '@mui/icons-material/MoreVert'
+import { Box, Grid, IconButton, Menu, MenuItem, Typography } from "@mui/material"
 import { AxiosError } from "axios"
+import { useContext, useState } from "react"
+import place from "../../../assets/camisa.jpg"
+import { Snack, SnackbarContext } from "../../context/AlertCardContext"
+import { IProduct, Product_Service } from "../../service/api/products"
+import { Confirm_Dialog } from "../dialog"
+import { Edit_Product_Form } from "../forms"
+import { Product_Modal } from "../modal"
 
 
 type TInfoProduct = IProduct & {
@@ -153,10 +151,9 @@ export const Product: React.FC<TInfoProduct> = ({
           state={dialog}
         />
         <Product_Modal closeModal={handleEditClose} outState={editModal}>
-          <Product_Form
-            productData={produto}
-            saveProduct={saveProduct}
-            editProduct={editProduct}
+          <Edit_Product_Form
+          product={produto}
+          editProduct={editProduct}
           />
         </Product_Modal>
       </>

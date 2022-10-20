@@ -19,6 +19,8 @@ export const Product_Modal: React.FC<props> = ({children, outState, closeModal})
         >
           <Box
           sx={{
+            bgcolor:"#000",
+
             display:'flex',
             alignItems:'center',
             justifyContent:'center',
@@ -28,10 +30,17 @@ export const Product_Modal: React.FC<props> = ({children, outState, closeModal})
             left: '50%',
             transform: 'translate(-50%, -50%)',
 
-            width: 420,
-            height:510,
-
-            bgcolor:"#fff",
+            width: {
+              sm: 600,
+              md: 900,
+              xl: 900,
+            },
+            height: {
+              sm: 400,
+              md: 600,
+              xl: 600,
+            },
+            
             borderRadius:"18px",
             p: 2
           }}

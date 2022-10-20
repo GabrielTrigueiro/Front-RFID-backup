@@ -1,18 +1,17 @@
-import { Box } from "@mui/system"
-import { FormInput, Product_Modal, SearchInput } from "../../shared/components"
-import { ContentLayout } from "../../shared/layout"
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined'
-import { Button, FormControl, InputLabel, CircularProgress, Stack, Pagination, Divider, Typography, Stepper, Step, StepLabel } from "@mui/material"
-import { useEffect, useRef, useState, useContext } from "react"
-import { Product_Table } from "../../shared/components/table/product-table"
-import { IProduct, ISendPagination, Product_Service, TAllProducts } from "../../shared/service/api/products"
+import { Button } from "@mui/material"
+import { SelectChangeEvent } from '@mui/material/Select'
+import { Box } from "@mui/system"
 import { FormHandles } from "@unform/core"
-import { Form } from "@unform/web"
-import * as Yup from "yup"
-import Select, { SelectChangeEvent } from '@mui/material/Select'
-import "./style.css"
-import { Snack, SnackbarContext } from "../../shared/context/AlertCardContext"
 import { AxiosError } from "axios"
+import { useContext, useEffect, useRef, useState } from "react"
+import * as Yup from "yup"
+import { Product_Modal, Register_Product_Form, SearchInput } from "../../shared/components"
+import { Product_Table } from "../../shared/components/table/product-table"
+import { Snack, SnackbarContext } from "../../shared/context/AlertCardContext"
+import { ContentLayout } from "../../shared/layout"
+import { IProduct, ISendPagination, Product_Service } from "../../shared/service/api/products"
+import "./style.css"
 
 export const ProductRegisterSchema: Yup.SchemaOf<IProduct> = Yup.object().shape({
   id: Yup.string(),
@@ -140,124 +139,7 @@ export const Product_Page = () => {
         />
       </Box>
       <Product_Modal closeModal={handleClose} outState={open}>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            p: 1
-          }}
-          flex={1}>
-          <Typography>Cadastrar</Typography>
-        </Box>
-        <Divider />
-
-        <Box flex={6}>
-          <Form
-            ref={formRef}
-            onSubmit={(values) => handleSave(values)}
-            className="product-form"
-          >
-            <Box sx={{ p: 1, width: "100%" }}>
-              <FormControl sx={{ width: "100%" }}>
-                <InputLabel>Nome do Produto</InputLabel>
-                <FormInput
-                  name="info"
-                  type="text"
-                  label="Nome do Produto"
-                />
-              </FormControl>
-            </Box>
-            <FormControl sx={{ p: 1, width: "100%" }}>
-              <InputLabel>Id de Referência</InputLabel>
-              <FormInput
-                name="productReferenceId"
-                type="text"
-                label="Id de Referência"
-
-              />
-            </FormControl>
-            <Box sx={{ p: 1, display: "flex", justifyContent: "space-between", width: "100%" }}>
-              <FormControl sx={{ width: "49%" }}>
-                <InputLabel>RFID</InputLabel>
-                <FormInput
-                  name="codeRFID"
-                  type="text"
-                  label="RFID"
-
-                />
-              </FormControl>
-              <FormControl sx={{ width: "49%" }}>
-                <InputLabel>Preço</InputLabel>
-                <FormInput
-                  name="price"
-                  type="number"
-                  label="Preço"
-                />
-              </FormControl>
-            </Box>
-            <Box sx={{ p: 1, display: "flex", justifyContent: "space-between", width: "100%" }}>
-              <FormControl sx={{ width: "49%" }}>
-                <InputLabel>Id da compania</InputLabel>
-                <FormInput
-                  name="companyId"
-                  type="text"
-                  label="Id da compania"
-                />
-              </FormControl>
-              <FormControl sx={{ width: "49%" }}>
-                <InputLabel>Id de fornecimento</InputLabel>
-                <FormInput
-                  name="supplierId"
-                  type="text"
-                  label="Id de fornecimento"
-                />
-              </FormControl>
-            </Box>
-            <Box sx={{ p: 1, width: "100%" }}>
-              <FormControl sx={{ width: "100%" }}>
-                <InputLabel>Descrição</InputLabel>
-                <FormInput
-                  multiline
-                  maxRows={4}
-                  sx={{
-                    height: 130,
-                    display: "flex",
-                    alignItems: "flex-start"
-                  }}
-                  name="description"
-                  type="text"
-                  label="Descrição"
-                />
-              </FormControl>
-            </Box>
-            <Divider flexItem />
-            <Box
-              sx={{
-                p: 1,
-                width: "100%",
-                display: "flex",
-                justifyContent: "flex-end",
-                alignItems: "center"
-              }}>
-              <Button
-                type="submit"
-                sx={{
-                  width: "100px",
-                  fontSize: "12px",
-                  fontStyle: "normal",
-                  fontWeight: 500,
-                  boxShadow: "none",
-                  borderRadius: 1,
-                  color: "#fff",
-                }}
-                variant="contained"
-              >
-                Finalizar
-              </Button>
-            </Box>
-          </Form>
-        </Box>
+        <Register_Product_Form saveProduct={handleSave}/>
       </Product_Modal>
     </ContentLayout>
   )
