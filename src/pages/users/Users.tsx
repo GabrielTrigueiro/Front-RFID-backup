@@ -8,45 +8,47 @@ import { SnackbarContext } from "../../shared/context/AlertCardContext"
 
 export const Users = () => {
 
-    const [isLoading, setIsLoading] = useState(true)
-    const [rows, setRows] = useState<IUser[]>([])
-    const { setSnack } = useContext(SnackbarContext)
 
-    //gerenciar paginas
-    const [pages, setPages] = useState<number>(0)
-    const [pageSize, setPageSize] = useState<number>(20)
-    const [actualpage, setActualPage] = useState<number>(0)
-    const [value, setValue] = useState<string>("");
-    let UserPaginationConf: ISendUserPagination = {
-        page: actualpage,
-        pageSize: pageSize,
-        param: "name",
-        sortDiresction: "DESC",
-        sortField: "name",
-        value: value,
-    }
+  const [isLoading, setIsLoading] = useState(true)
+  const [rows, setRows] = useState<IUser[]>([])
+  const { setSnack } = useContext(SnackbarContext)
 
-    const update = () => {
-        User_Service.getAll(UserPaginationConf).then((result) => {
-        if (result instanceof Error) {
-            alert(result.message);
-        } else {
-            setIsLoading(false);
-            setPages(result.data.numberOfPages)
-            setRows(result.data.data);
-        }
-        })
-    }
+  //gerenciar páginas
+  const [pages, setPages] = useState<number>(0)
+  const [pageSize, setPageSize] = useState<number>(20)
+  const [actualpage, setActualPage] = useState<number>(0)
+  const [value, setValue] = useState<string>("")
 
-    //gerencia o modal de registro
-    const [open, setOpen] = useState(false)
-    const handleOpen = () => setOpen(true)
-    const handleClose = () => setOpen(false)
+  let UserPaginationConf: ISendUserPagination = {
+    page: actualpage,
+    pageSize: pageSize,
+    param: "name",
+    sortDiresction: "DESC",
+    sortField: "name",
+    value: value,
+  }
 
-    //atualizar a cada alteração nas seguintes vars
-    useEffect(() => {
-        update();
-    }, [value, actualpage, pageSize])
+  const update = () => {
+      User_Service.getAll(UserPaginationConf).then((result) => {
+      if (result instanceof Error) {
+          alert(result.message);
+      } else {
+          setIsLoading(false);
+          setPages(result.data.numberOfPages)
+          setRows(result.data.data);
+      }
+      })
+  }
+
+  //gerencia o modal de registro
+  const [open, setOpen] = useState(false)
+  const handleOpen = () => setOpen(true)
+  const handleClose = () => setOpen(false)
+
+  //atualizar a cada alteração nas seguintes vars
+  useEffect(() => {
+      update();
+  },[value, actualpage, pageSize])
     
     return (
       <ContentLayout tittle={'Usuários'}>
@@ -63,7 +65,6 @@ export const Users = () => {
             pageSize={pageSize}
           />
         </Box>
-
         <Register_User_Modal outState={open} closeModal={handleClose}>
             <User_Form update={update}/>
         </Register_User_Modal>

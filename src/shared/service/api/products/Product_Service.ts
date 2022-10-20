@@ -10,9 +10,9 @@ export interface IProduct{
     companyId: string
     supplierId: string
     price: number
-    //Active?: boolean
     description: string
     info: string
+    //Active?: boolean
     // createAt: date
 }
 

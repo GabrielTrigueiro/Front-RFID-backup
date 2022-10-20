@@ -8,7 +8,7 @@ import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { Confirm_Dialog } from "../dialog"
 import { Snack, SnackbarContext } from "../../context/AlertCardContext"
 import { Form } from "@unform/web"
-import { FormInput } from "../forms"
+import { FormInput, Product_Form } from "../forms"
 import { Product_Modal } from "../modal"
 import { FormHandles } from "@unform/core"
 import { AxiosError } from "axios"
@@ -18,6 +18,7 @@ type TInfoProduct = IProduct & {
   key: string,
   update: () => void,
   produto: IProduct
+  saveProduct: (e: IProduct) => void;
 }
 
 export const Product: React.FC<TInfoProduct> = ({
@@ -25,9 +26,10 @@ export const Product: React.FC<TInfoProduct> = ({
   info,
   codeRFID,
   update,
-  produto
+  produto,
+  saveProduct
 }) => {
-  const formRef = useRef<FormHandles>(null)
+  
   const { setSnack } = useContext(SnackbarContext)
   const [edit, setEdit] = useState<boolean>()
   const [dialog, setDialog] = useState<boolean>(false)
@@ -151,127 +153,11 @@ export const Product: React.FC<TInfoProduct> = ({
           state={dialog}
         />
         <Product_Modal closeModal={handleEditClose} outState={editModal}>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              p: 1
-            }}
-            flex={1}>
-            <Typography>Cadastrar</Typography>
-          </Box>
-          <Divider />
-          <Box flex={6}>
-            <Form
-              ref={formRef}
-              initialData={produto}
-              onSubmit={(dados) => {
-                dados.id = produto?.id
-                editProduct(dados)
-              }}
-              className="product-form"
-            >
-              <Box sx={{ p: 1, width: "100%" }}>
-                <FormControl sx={{ width: "100%" }}>
-                  <InputLabel>Nome do Produto</InputLabel>
-                  <FormInput
-                    name="info"
-                    type="text"
-                    label="Nome do Produto"
-                  />
-                </FormControl>
-              </Box>
-              <FormControl sx={{ p: 1, width: "100%" }}>
-                <InputLabel>Id de Referência</InputLabel>
-                <FormInput
-                  name="productReferenceId"
-                  type="text"
-                  label="Id de Referência"
-
-                />
-              </FormControl>
-              <Box sx={{ p: 1, display: "flex", justifyContent: "space-between", width: "100%" }}>
-                <FormControl sx={{ width: "49%" }}>
-                  <InputLabel>RFID</InputLabel>
-                  <FormInput
-                    name="codeRFID"
-                    type="text"
-                    label="RFID"
-
-                  />
-                </FormControl>
-                <FormControl sx={{ width: "49%" }}>
-                  <InputLabel>Preço</InputLabel>
-                  <FormInput
-                    name="price"
-                    type="number"
-                    label="Preço"
-                  />
-                </FormControl>
-              </Box>
-              <Box sx={{ p: 1, display: "flex", justifyContent: "space-between", width: "100%" }}>
-                <FormControl sx={{ width: "49%" }}>
-                  <InputLabel>Id da compania</InputLabel>
-                  <FormInput
-                    name="companyId"
-                    type="text"
-                    label="Id da compania"
-                  />
-                </FormControl>
-                <FormControl sx={{ width: "49%" }}>
-                  <InputLabel>Id de fornecimento</InputLabel>
-                  <FormInput
-                    name="supplierId"
-                    type="text"
-                    label="Id de fornecimento"
-                  />
-                </FormControl>
-              </Box>
-              <Box sx={{ p: 1, width: "100%" }}>
-                <FormControl sx={{ width: "100%" }}>
-                  <InputLabel>Descrição</InputLabel>
-                  <FormInput
-                    multiline
-                    maxRows={4}
-                    sx={{
-                      height: 130,
-                      display: "flex",
-                      alignItems: "flex-start"
-                    }}
-                    name="description"
-                    type="text"
-                    label="Descrição"
-                  />
-                </FormControl>
-              </Box>
-              <Divider flexItem />
-              <Box
-                sx={{
-                  p: 1,
-                  width: "100%",
-                  display: "flex",
-                  justifyContent: "flex-end",
-                  alignItems: "center"
-                }}>
-                <Button
-                  type="submit"
-                  sx={{
-                    width: "100px",
-                    fontSize: "12px",
-                    fontStyle: "normal",
-                    fontWeight: 500,
-                    boxShadow: "none",
-                    borderRadius: 1,
-                    color: "#fff",
-                  }}
-                  variant="contained"
-                >
-                  Finalizar
-                </Button>
-              </Box>
-            </Form>
-          </Box>
+          <Product_Form
+            productData={produto}
+            saveProduct={saveProduct}
+            editProduct={editProduct}
+          />
         </Product_Modal>
       </>
     </Box>

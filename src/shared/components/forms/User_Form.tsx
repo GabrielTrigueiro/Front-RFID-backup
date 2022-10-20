@@ -11,16 +11,16 @@ import { Snack, SnackbarContext } from "../../context"
 
 //dados novo usario
 export interface newUser_data {
-    username: string
-    password: string
-    roles: string
+    username:   string
+    password:   string
+    roles:     string
 }
 
 //avaliar erros de preenchimento ao criar user
 const UserRegisterSchema: Yup.SchemaOf<newUser_data> = Yup.object().shape({
     username:   Yup.string().required("Campo Obrigatório"),
     password:   Yup.string().required("Campo Obrigatório"),
-    roles:       Yup.string().required("Campo Obrigatório"),
+    roles:      Yup.string().required("Campo Obrigatório"),
 })
 
 export const User_Form: React.FC<{

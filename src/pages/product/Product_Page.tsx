@@ -130,20 +130,15 @@ export const Product_Page = () => {
         </Button>
       </Box>
       <Box sx={{ height: '100%', width: '100%' }}>
-        <Product_Table update={update} lista={rows} />
+        <Product_Table
+          saveProduct={handleSave}
+          update={update}
+          lista={rows}
+          actualpage={actualpage + 1}
+          handleChangeArrow={()=>handleChangeArrow}
+          pages={pages}
+        />
       </Box>
-      <Box display="flex" justifyContent="flex-end" mt={1}>
-        <Stack>
-          <Pagination
-            count={pages}
-            variant="outlined"
-            shape="circular"
-            page={actualpage + 1}
-            onChange={handleChangeArrow}
-          />
-        </Stack>
-      </Box>
-
       <Product_Modal closeModal={handleClose} outState={open}>
         <Box
           sx={{
