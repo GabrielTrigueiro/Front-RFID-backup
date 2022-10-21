@@ -1,0 +1,50 @@
+.product-form{
+    background-color: rgb(187, 218, 233);
+    display: flex;
+    border-radius: 20px;
+}
+.tittle{
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+
+    width:100%;
+
+    color:#6B6B6B;
+    background-color: #FCFCFC;
+    font-size: 16px;
+}
+.form_box{
+    flex:6;
+    display: flex;
+    
+    align-items: center;
+    justify-content: space-between;
+
+    width:100%;
+
+    background-color: #fff;
+}
+
+.foot{
+    display: flex;
+    flex: 1;
+
+    align-items: center;
+    justify-content: flex-end;
+
+    width:100%;
+
+    background-color: #FCFCFC;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.input{
+    margin: 5px;
+    background-color: #D9D9D94D;
+}
