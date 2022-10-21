@@ -1,5 +1,4 @@
 .product-form{
-    background-color: rgb(187, 218, 233);
     display: flex;
     border-radius: 20px;
 }
@@ -20,14 +19,6 @@
 }
 .form_box{
     flex:6;
-    display: flex;
-    
-    align-items: center;
-    justify-content: space-between;
-
-    width:100%;
-
-    background-color: #fff;
 }
 
 .foot{
@@ -45,6 +36,5 @@
 }
 
 .input{
-    margin: 5px;
     background-color: #D9D9D94D;
 }
