@@ -5,6 +5,7 @@ import {environment}  from "../../../environment"
 //info de cada produto
 export interface IProduct{
     id?: string
+    
     productReferenceId: string
     codeRFID: string
     companyId: string
@@ -12,6 +13,12 @@ export interface IProduct{
     price: number
     description: string
     info: string
+
+    Tipo:string
+    Genero:string
+    Cor:string
+    Tamanho:string
+    Quantidade:string
     //Active?: boolean
     // createAt: date
 }

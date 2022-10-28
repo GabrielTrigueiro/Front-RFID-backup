@@ -16,13 +16,19 @@ import "./style.css"
 export const ProductRegisterSchema: Yup.SchemaOf<IProduct> = Yup.object().shape({
   id: Yup.string(),
   productReferenceId: Yup.string().required("Campo Obrigatório"),
-  codeRFID: Yup.string().required("Campo Obrigatório"),
-  companyId: Yup.string().required("Campo Obrigatório"),
-  supplierId: Yup.string().required("Campo Obrigatório"),
-  price: Yup.number().required("Campo Obrigatório"),
-  //isActive: Yup.boolean(),
-  description: Yup.string().required("Campo Obrigatório"),
-  info: Yup.string().required("Campo Obrigatório"),
+  codeRFID:     Yup.string().required("Campo Obrigatório"),
+  companyId:    Yup.string().required("Campo Obrigatório"),
+  supplierId:   Yup.string().required("Campo Obrigatório"),
+  price:        Yup.number().required("Campo Obrigatório"),
+  description:  Yup.string().required("Campo Obrigatório"),
+  info:         Yup.string().required("Campo Obrigatório"),
+
+  Tipo:         Yup.string().required("Campo Obrigatório"),
+  Genero:       Yup.string().required("Campo Obrigatório"),
+  Cor:          Yup.string().required("Campo Obrigatório"),
+  Tamanho:      Yup.string().required("Campo Obrigatório"),
+  Quantidade:   Yup.string().required("Campo Obrigatório"),
+
 })
 
 export const Product_Page = () => {
@@ -101,6 +107,7 @@ export const Product_Page = () => {
         })
       })
       .catch((erros: Yup.ValidationError) => {
+        console.log("atumalaka")
         const validandoErros: { [key: string]: string } = {}
         erros.inner.forEach(erros => {
           if (!erros.path) return
@@ -128,7 +135,7 @@ export const Product_Page = () => {
           <AddBoxOutlinedIcon sx={{ pr: 1 }} /> Cadastrar Produto
         </Button>
       </Box>
-      <Box sx={{ height: '100%', width: '100%' }}>
+      <Box height={"100%"}>
         <Product_Table
           saveProduct={handleSave}
           update={update}

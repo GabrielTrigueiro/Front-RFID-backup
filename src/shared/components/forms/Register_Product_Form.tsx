@@ -134,7 +134,6 @@ export const Register_Product_Form: React.FC<{
                                             label="Cor"
                                         />
                                     </FormControl>
-
                                 </Box>
 
                                 <Box sx={{ display: "flex", flexDirection: "column", width:"50%"}}>
