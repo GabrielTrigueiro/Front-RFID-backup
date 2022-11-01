@@ -125,31 +125,38 @@ export const Product: React.FC<TInfoProduct> = ({
         }}>
       </Grid>
       <>
-        <Box p={1} height={'20%'} display={'flex'} alignItems={'center'} justifyContent={'space-between'}>
-          <Box>
-            <Typography fontSize={'16px'} fontWeight={700} color={'#505050'}>{info}</Typography>
-            <Typography fontSize={'10px'} color={'#989898'}>{description}</Typography>
-            <Typography fontSize={'12px'} fontWeight={500} color={'#505050'}>{codeRFID}</Typography>
+        <Box p={1} height={'20%'} display={'flex'} flexDirection={"column"}  alignItems={'center'} justifyContent={'space-between'}>
+          <Box sx={{width:"100%", display:"flex", justifyContent:"space-between"}}>
+            <Typography fontSize={'16px'} fontWeight={700} color={'#505050'}>{produto.info}</Typography>
+            <Typography fontSize={'16px'} fontWeight={700} color={'#505050'}>{produto.price}</Typography>
           </Box>
-          <Box>
-            <IconButton
-              onClick={handleClick}
-              aria-haspopup="true"
-              aria-controls={menuId}
-            >
-              <MoreVertIcon />
-            </IconButton>
-            {renderMenu}
+          <Box sx={{width:"100%", display:"flex", justifyContent:"space-between"}}>
+            <Box>
+              <Typography fontSize={'12px'} fontWeight={500} color={'#505050'}>Descrição: {produto.description}</Typography>
+              <Typography fontSize={'12px'} fontWeight={500} color={'#505050'}>{produto.Quantidade}</Typography>
+            </Box>
+            <Box>
+              <IconButton
+                onClick={handleClick}
+                aria-haspopup="true"
+                aria-controls={menuId}
+              >
+                <MoreVertIcon />
+              </IconButton>
+              {renderMenu}
+            </Box>
           </Box>
         </Box>
+
         <Confirm_Dialog
-          tittle={'Deseja excluir produto?'}
+          tittle={'Deseja excluir produto?  '}
           messageOne={'Cancelar'}
           messageTwo={'Excluir'}
           funcDialog={() => setDialog(false)}
           funcModal={() => handleDelete(produto)}
           state={dialog}
         />
+
         <Product_Modal closeModal={handleEditClose} outState={editModal}>
           <Edit_Product_Form
           product={produto}
