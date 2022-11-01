@@ -68,7 +68,6 @@ export const Register_Product_Form: React.FC<{
                             //bgcolor: "#920",
                             display: "flex",
                             justifyContent: "center",
-                            alignItems: "center"
                         }}
                     >
                         <Box className="form"
@@ -77,6 +76,7 @@ export const Register_Product_Form: React.FC<{
                                 height: "100%",
                                 display: "flex",
                                 flexDirection: "column",
+                                justifyContent:"center"
                                 //bgcolor: "#788",
                             }}
                         >
