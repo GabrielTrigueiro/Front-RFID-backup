@@ -58,7 +58,7 @@ export const Users = () => {
                 Cadastrar Usuário
             </Button>
         </Box>
-        <Box>
+        <Box bgcolor={"#fff"}>
           <UserTable
             lista={rows}
             update={update}
