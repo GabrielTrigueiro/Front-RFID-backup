@@ -1,11 +1,12 @@
 import { Box, FormControl, InputLabel, Button, Divider } from "@mui/material"
 import { Form } from "@unform/web"
 import { FormInput } from "./input"
-import { useRef } from "react"
+import { useRef, useState } from "react"
 import { FormHandles } from "@unform/core"
 import { IProduct } from "../../service/api"
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import "./register_Product.css"
+import { Register_RFID } from "../RFID"
 
 export const Register_Product_Form: React.FC<{
     saveProduct: (e: IProduct) => void
@@ -15,8 +16,18 @@ export const Register_Product_Form: React.FC<{
         //props form
         const formRef = useRef<FormHandles>(null)
 
+        //gerenciar modal RFID
+        const [RFID, setRFID] = useState<boolean>(false)
+        const handleOpenRFID = () =>{
+            setRFID(true)
+        }
+        const handleCloseRFID = () =>{
+            setRFID(false)
+        }
+
         return (
 
+        <>    
             <Form
                 ref={formRef}
                 className="product-form"
@@ -185,6 +196,7 @@ export const Register_Product_Form: React.FC<{
                                     }}
                                 >
                                     <Button
+                                    onClick={handleOpenRFID}
                                     variant={"contained"}
                                     sx={{
                                         fontSize:"11px",
@@ -231,5 +243,10 @@ export const Register_Product_Form: React.FC<{
                 </Box>
             </Form>
 
+            <Register_RFID
+                handleClose={handleCloseRFID}
+                open={RFID}   
+            />
+        </>
         )
     }
