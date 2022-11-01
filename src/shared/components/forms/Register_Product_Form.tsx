@@ -31,22 +31,22 @@ export const Register_Product_Form: React.FC<{
                         //bgcolor: "#990",
                         display: "flex",
                         alignItems: "center",
-                        justifyContent: "center",
+                        justifyContent: "space-evenly",
                         flexDirection: "row",
-                        width:"100%"
-                }}
+                        width: "100%"
+                    }}
                 >
                     <Box className="imagem"
                         sx={{
                             minWidth: {
                                 sm: 100,
-                                md: 300,
-                                xl: 300,
+                                md: 350,
+                                xl: 350,
                             },
                             height: {
                                 sm: 100,
-                                md: 300,
-                                xl: 300,
+                                md: 350,
+                                xl: 350,
                             },
                             display: "flex",
                             alignItems: "center",
@@ -64,30 +64,23 @@ export const Register_Product_Form: React.FC<{
                     </Box>
                     <Box
                         sx={{
-                            height: {
-                                sm: 100,
-                                md: 300,
-                                xl: 300,
-                            },
+                            height: "100%",
                             //bgcolor: "#920",
-                            display:"flex",
-                            justifyContent:"center"
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center"
                         }}
                     >
                         <Box className="form"
                             sx={{
                                 width: "90%",
-                                height: {
-                                    sm: 100,
-                                    md: 300,
-                                    xl: 300,
-                                },
+                                height: "100%",
                                 display: "flex",
                                 flexDirection: "column",
-                                //bgcolor: "#000",
+                                //bgcolor: "#788",
                             }}
                         >
-                            <FormControl sx={{ marginLeft: 1, marginRight: 1, marginBottom: 1, borderRadius: 1 }} size="small" className="input">
+                            <FormControl sx={{ margin: 1 }} size="small" className="input">
                                 <InputLabel>Nome do Produto</InputLabel>
                                 <FormInput
                                     name="info"
@@ -96,8 +89,8 @@ export const Register_Product_Form: React.FC<{
                                 />
                             </FormControl>
 
-                            <Box sx={{ display: "flex", justifyContent:"space-between"}}>
-                                <Box sx={{ display: "flex", flexDirection: "column", width:"50%"}}>
+                            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                                <Box sx={{ display: "flex", flexDirection: "column", width: "50%" }}>
                                     <FormControl sx={{ margin: 1, borderRadius: 1 }} size="small" className="input">
                                         <InputLabel>Quantidade</InputLabel>
                                         <FormInput
@@ -108,11 +101,11 @@ export const Register_Product_Form: React.FC<{
                                     </FormControl>
 
                                     <FormControl sx={{ margin: 1, borderRadius: 1 }} size="small" className="input">
-                                        <InputLabel>Id da compania</InputLabel>
+                                        <InputLabel>Id de referência</InputLabel>
                                         <FormInput
-                                            name="companyId"
+                                            name="productReferenceId"
                                             type="text"
-                                            label="Id da compania"
+                                            label="Id de referência"
                                         />
                                     </FormControl>
 
@@ -136,7 +129,7 @@ export const Register_Product_Form: React.FC<{
                                     </FormControl>
                                 </Box>
 
-                                <Box sx={{ display: "flex", flexDirection: "column", width:"50%"}}>
+                                <Box sx={{ display: "flex", flexDirection: "column", width: "50%" }}>
                                     <FormControl sx={{ margin: 1, borderRadius: 1 }} size="small" className="input">
                                         <InputLabel>Preço</InputLabel>
                                         <FormInput
@@ -158,7 +151,7 @@ export const Register_Product_Form: React.FC<{
                                     <FormControl sx={{ margin: 1, borderRadius: 1 }} size="small" className="input">
                                         <InputLabel>Genero</InputLabel>
                                         <FormInput
-                                            name="Genero"
+                                            name="Gênero"
                                             type="text"
                                             label="Genero"
                                         />
@@ -172,6 +165,54 @@ export const Register_Product_Form: React.FC<{
                                             label="Tipo"
                                         />
                                     </FormControl>
+                                </Box>
+                            </Box>
+
+                            <Box 
+                            sx={{
+                                display: "flex",
+                                width:"100%",
+                                justifyContent:"space-evenly",
+                                alignItems:"center",
+                                //bgcolor:"#000",
+                            }}>
+                                <Box
+                                    sx={{
+                                        height:"100%",  
+                                        display: "flex",
+                                        flexDirection:"column",
+                                        justifyContent:"space-between",
+                                    }}
+                                >
+                                    <Button
+                                    variant={"contained"}
+                                    sx={{
+                                        fontSize:"11px",
+                                        width:110,
+                                        height:40,
+                                    }}
+                                    >
+                                        Cadastrar RFID
+                                    </Button>
+
+                                    <Box
+                                    sx={{
+                                        bgcolor:"#D9D9D9",
+                                        height: "42px",
+                                        width: "62px",
+                                    }}
+                                    >
+                                        nº
+                                    </Box>
+                                </Box>
+
+                                <Box
+                                sx={{
+                                    width:"70%",
+                                    height:100,
+                                    bgcolor:"#F4F4F4",
+                                }}>
+                                    a
                                 </Box>
                             </Box>
                         </Box>

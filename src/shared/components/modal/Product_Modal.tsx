@@ -31,8 +31,8 @@ export const Product_Modal: React.FC<props> = ({ children, outState, closeModal 
 
             width: {
               sm: 600,
-              md: 900,
-              xl: 900,
+              md: 1100,
+              xl: 1100,
             },
             height: {
               sm: 400,
