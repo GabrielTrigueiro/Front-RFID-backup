@@ -19,7 +19,7 @@ export const Register_RFID: React.FC<{
     const [tempRFID, setTempRFID] = useState<string>()
 
     const handleChange = (prop: keyof RFID) => (event: React.ChangeEvent<HTMLInputElement>) => {
-        setTempRFID(event.target.value);
+        setTempRFID(event.target.value)
     }
 
     return (
@@ -85,10 +85,28 @@ export const Register_RFID: React.FC<{
                     }}
                     >
                         <TextField
-                          label=""
-                          value={tempRFID}
-                          onChange={()=>handleChange}
+                        sx={{
+                            bgcolor:"#F4F4F4", 
+                            "& fieldset": { border: 'none' },
+                            width:"100%"
+                        }}
+                        placeholder={"digite um código RFID"}
+                        size={"small"}
+                        label=""
+                        value={tempRFID}
+                        onChange={()=>handleChange}
                         />
+                        
+                        {/* lista dos códigos rfid sendo cadastrados */}
+                        <Box
+                        sx={{
+                            //bgcolor:"#049",
+                            height:"100%",
+                            padding:2
+                        }}
+                        >
+                            lista
+                        </Box>
                     </Box>
                     <Divider color={"#F1F1F1"}/>
                     <Box
