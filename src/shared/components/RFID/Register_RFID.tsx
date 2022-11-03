@@ -1,6 +1,6 @@
-import { Box, Modal, Divider, Typography, Button, TextField, Grid, ImageList } from "@mui/material"
+import { Box, Modal, Divider, Typography, Button, TextField, Grid, ImageList, Chip } from "@mui/material"
 import { equal } from "assert"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 interface RFID {
     id: string
@@ -42,6 +42,11 @@ export const Register_RFID: React.FC<{
         // console.log(RFIDLIST)
     }
 
+    //func para deletar o RFID
+    const handleDelete = (e: string) => {
+        //RFIDLIST.splice(RFIDLIST.indexOf(e),1)
+        setRFIDLIST(RFIDLIST.filter(item => item !== e))
+    }
 
     return (
         <Modal
@@ -148,7 +153,12 @@ export const Register_RFID: React.FC<{
                                 cols={4}
                             >
                                 {RFIDLIST.map((row) => (
-                                    <Box key={row} sx={{ bgcolor: "#F4F4F4" }}>{row}</Box>
+                                    <Chip 
+                                        key={row}
+                                        sx={{ bgcolor: "#F4F4F4" }}
+                                        label={row}
+                                        onDelete={()=>handleDelete(row)}
+                                    />
                                 ))}
                             </ImageList>
                         </Box>
