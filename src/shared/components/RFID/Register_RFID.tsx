@@ -1,97 +1,47 @@
 import { Box, Modal, Divider, Typography, Button, TextField, Grid, ImageList } from "@mui/material"
+import { equal } from "assert"
 import { useState } from "react"
 
 interface RFID {
-    number: number
+    id: string
 }
 
-type RFID_List = RFID[]
+type RFID_List = string[]
 
 export const Register_RFID: React.FC<{
     open: boolean,
     handleClose: () => void
 }> = ({ open, handleClose }) => {
 
-    const [RFIDLIST, setRFIDLIST] = useState<RFID_List>([
-        { number: 232432 },
-        { number: 665546 },
-        { number: 546888 },
-        { number: 234324 },
-        { number: 232432 },
-        { number: 665546 },
-        { number: 546888 },
-        { number: 234324 },
-        { number: 232432 },
-        { number: 665546 },
-        { number: 546888 },
-        { number: 234324 },
-        { number: 232432 },
-        { number: 665546 },
-        { number: 546888 },
-        { number: 234324 },
-        { number: 232432 },
-        { number: 665546 },
-        { number: 546888 },
-        { number: 234324 },
-        { number: 232432 },
-        { number: 665546 },
-        { number: 546888 },
-        { number: 234324 },
-        { number: 234324 },
-        { number: 232432 },
-        { number: 665546 },
-        { number: 546888 },
-        { number: 232432 },
-        { number: 665546 },
-        { number: 546888 },
-        { number: 234324 },
-        { number: 232432 },
-        { number: 665546 },
-        { number: 546888 },
-        { number: 234324 },
-        { number: 232432 },
-        { number: 665546 },
-        { number: 546888 },
-        { number: 234324 },
-        { number: 234324 },
-        { number: 232432 },
-        { number: 665546 },
-        { number: 546888 },
-        { number: 232432 },
-        { number: 665546 },
-        { number: 546888 },
-        { number: 234324 },
-        { number: 232432 },
-        { number: 665546 },
-        { number: 546888 },
-        { number: 234324 },
-        { number: 232432 },
-        { number: 665546 },
-        { number: 546888 },
-        { number: 234324 },
-        { number: 234324 },
-        { number: 232432 },
-        { number: 665546 },
-        { number: 546888 },
-        { number: 232432 },
-        { number: 665546 },
-        { number: 546888 },
-        { number: 234324 },
-        { number: 232432 },
-        { number: 665546 },
-        { number: 546888 },
-        { number: 234324 },
-        { number: 232432 },
-        { number: 665546 },
-        { number: 546888 },
-        { number: 234324 },
-    ])
+    const [RFIDLIST, setRFIDLIST] = useState<RFID_List>([])
 
-    const [tempRFID, setTempRFID] = useState<string>()
+    const [tempRFID, setTempRFID] = useState<string>('')
 
+    //func para validar se existe RFID repetido
+    const validate = (e:string) =>{
+        // console.log(RFIDLIST.filter(id => id == e).length)
+        let aux = RFIDLIST.find(id => id == e)
+        if(!aux){
+            RFIDLIST.push(e)
+        }
+    }
+
+    //func para adicionar RFID
+    const addRFID = (e:string) => {
+        if (e.length == 10){
+            validate(e)
+            setTempRFID('')
+            // console.log(tempRFID)
+        }
+    }
+
+    //func para ler o que está sendo digitado no input
     const handleChange = (prop: keyof RFID) => (event: React.ChangeEvent<HTMLInputElement>) => {
         setTempRFID(event.target.value)
+        addRFID(event.target.value)
+        // console.log(RFIDLIST)
     }
+
 
     return (
         <Modal
@@ -167,7 +117,7 @@ export const Register_RFID: React.FC<{
                                     size={"small"}
                                     label=""
                                     value={tempRFID}
-                                    onChange={() => handleChange}
+                                    onChange={handleChange("id")}
                                 />
                             </Box>
 
@@ -195,10 +145,10 @@ export const Register_RFID: React.FC<{
                                     },
                                 }}
                                 gap={12}
-                                cols={6}
+                                cols={4}
                             >
                                 {RFIDLIST.map((row) => (
-                                    <Box sx={{ bgcolor: "#F4F4F4" }}>{row.number}</Box>
+                                    <Box key={row} sx={{ bgcolor: "#F4F4F4" }}>{row}</Box>
                                 ))}
                             </ImageList>
                         </Box>
