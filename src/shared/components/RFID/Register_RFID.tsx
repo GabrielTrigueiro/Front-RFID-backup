@@ -6,15 +6,16 @@ interface RFID {
     id: string
 }
 
-type RFID_List = string[]
+export type RFID_List = string[]
 
 export const Register_RFID: React.FC<{
     open: boolean,
     handleClose: () => void
 }> = ({ open, handleClose }) => {
 
-    const [RFIDLIST, setRFIDLIST] = useState<RFID_List>([])
 
+    //consts para manipular lista de RFID
+    const [RFIDLIST, setRFIDLIST] = useState<RFID_List>([])
     const [tempRFID, setTempRFID] = useState<string>('')
 
     //func para validar se existe RFID repetido
@@ -23,6 +24,7 @@ export const Register_RFID: React.FC<{
         let aux = RFIDLIST.find(id => id == e)
         if(!aux){
             RFIDLIST.push(e)
+            //RFIDLIST.push(e?.replace("[^0-9]", "ig"))
         }
     }
 
@@ -120,7 +122,6 @@ export const Register_RFID: React.FC<{
                                     }}
                                     placeholder={"digite um código RFID"}
                                     size={"small"}
-                                    label=""
                                     value={tempRFID}
                                     onChange={handleChange("id")}
                                 />
@@ -163,9 +164,6 @@ export const Register_RFID: React.FC<{
                             </ImageList>
                         </Box>
                     </Box>
-
-
-
                     <Divider color={"#F1F1F1"} />
                     <Box
                         sx={{
