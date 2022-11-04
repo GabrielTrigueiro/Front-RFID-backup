@@ -1,7 +1,7 @@
-import { Box, FormControl, InputLabel, Button, Divider, Chip } from "@mui/material"
+import { Box, FormControl, InputLabel, Button, Divider, Chip, ImageList } from "@mui/material"
 import { Form } from "@unform/web"
 import { FormInput } from "./input"
-import { useEffect, useRef, useState } from "react"
+import { useRef, useState } from "react"
 import { FormHandles } from "@unform/core"
 import { IProduct } from "../../service/api"
 import UploadFileIcon from '@mui/icons-material/UploadFile';
@@ -223,20 +223,41 @@ export const Register_Product_Form: React.FC<{
                                         </Box>
                                     </Box>
 
-                                    <Box
+                                    <ImageList
+                                        cols={1}
                                         sx={{
-                                            width: "70%",
+                                            alignContent:"center",
+                                            width: 230,
                                             height: 100,
                                             bgcolor: "#F4F4F4",
-                                        }}>
+                                            overflowY: "scroll",
+                                            '::-webkit-scrollbar': {
+                                                width: '20px',
+                                            },
+                                            '::-webkit-scrollbar-track': {
+                                                backgroundColor: 'transparent'
+                                            },
+                                            '::-webkit-scrollbar-thumb': {
+                                                backgroundColor: '#d6dee1',
+                                                borderRadius: '20px',
+                                                border: '6px solid transparent',
+                                                backgroundClip: 'content-box',
+                                            },
+                                            '::-webkit-scrollbar-thumb:hover': {
+                                                backgroundColor: '#a8bbbf'
+                                            },
+                                        }}
+                                        >
                                         {RFIDColection.map((row) => (
                                             <Chip
                                                 key={row}
-                                                sx={{ bgcolor: "#F4F4F4" }}
+                                                sx={{
+                                                    bgcolor: "#F4F4F4",
+                                                }}
                                                 label={row}
                                             />
                                         ))}
-                                    </Box>
+                                    </ImageList>
                                 </Box>
                             </Box>
                         </Box>

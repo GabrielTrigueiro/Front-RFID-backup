@@ -31,7 +31,7 @@ export const Register_RFID: React.FC<{
 
     //func para adicionar RFID
     const addRFID = (e:string) => {
-        if (e.length == 10){
+        if (e.length == 24){
             validate(e)
             setTempRFID('')
         }
@@ -128,8 +128,9 @@ export const Register_RFID: React.FC<{
                             {/* lista dos códigos rfid sendo cadastrados */}
                             <ImageList
                                 sx={{
-                                    padding:2,
+                                    padding: 2,
                                     height: 200,
+                                    
                                     overflowY: "scroll",
                                     justifyContent: "center",
                                     '::-webkit-scrollbar': {
@@ -149,7 +150,7 @@ export const Register_RFID: React.FC<{
                                     },
                                 }}
                                 gap={12}
-                                cols={4}
+                                cols={2}
                             >
                                 {RFIDLIST.map((row) => (
                                     <Chip 
