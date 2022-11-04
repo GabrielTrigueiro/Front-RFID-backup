@@ -10,9 +10,10 @@ export type RFID_List = string[]
 
 export const Register_RFID: React.FC<{
     open: boolean,
-    handleClose: () => void
-}> = ({ open, handleClose }) => {
+    handleClose: () => void,
+    setFatherList: (e: RFID_List)=> void,
 
+}> = ({ open, handleClose, setFatherList}) => {
 
     //consts para manipular lista de RFID
     const [RFIDLIST, setRFIDLIST] = useState<RFID_List>([])
@@ -33,7 +34,6 @@ export const Register_RFID: React.FC<{
         if (e.length == 10){
             validate(e)
             setTempRFID('')
-            // console.log(tempRFID)
         }
     }
 
@@ -41,12 +41,10 @@ export const Register_RFID: React.FC<{
     const handleChange = (prop: keyof RFID) => (event: React.ChangeEvent<HTMLInputElement>) => {
         setTempRFID(event.target.value)
         addRFID(event.target.value)
-        // console.log(RFIDLIST)
     }
 
     //func para deletar o RFID
     const handleDelete = (e: string) => {
-        //RFIDLIST.splice(RFIDLIST.indexOf(e),1)
         setRFIDLIST(RFIDLIST.filter(item => item !== e))
     }
 
@@ -179,7 +177,9 @@ export const Register_RFID: React.FC<{
                         }}
                     >
                         <Box>
-                            <Button variant="contained">Finalizar</Button>
+                            <Button variant="contained" onClick={()=>setFatherList(RFIDLIST)}>   
+                                Finalizar
+                            </Button>
                         </Box>
                     </Box>
                 </Box>

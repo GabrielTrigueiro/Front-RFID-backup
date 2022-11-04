@@ -36,8 +36,6 @@ export const Product_Table: React.FC<{
                 }}
                 gap={12}
             >
-
-
                 {lista.map((row) => (
                     <Product
                         saveProduct={saveProduct}
@@ -61,7 +59,6 @@ export const Product_Table: React.FC<{
                         Quantidade={row.Quantidade}
                     />
                 ))}
-
             </ImageList>
             {/* <Box sx={{ width: "100", display:"flex", justifyContent:"center", mt:1}}>
                 <Box sx={{borderRadius:"20px", padding:1}}>
