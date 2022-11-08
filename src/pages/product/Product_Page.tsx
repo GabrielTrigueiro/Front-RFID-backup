@@ -6,11 +6,12 @@ import { FormHandles } from "@unform/core"
 import { AxiosError } from "axios"
 import { useContext, useEffect, useRef, useState } from "react"
 import * as Yup from "yup"
-import { Product_Modal, Register_Product_Form, SearchInput } from "../../shared/components"
+import { ProductPageSkeleton, Product_Modal, Register_Product_Form, SearchInput } from "../../shared/components"
 import { Product_Table } from "../../shared/components/table/product-table"
 import { Snack, SnackbarContext } from "../../shared/context/AlertCardContext"
 import { ContentLayout } from "../../shared/layout"
 import { IProduct, ISendPagination, Product_Service } from "../../shared/service/api/products"
+
 import "./style.css"
 
 export const ProductRegisterSchema: Yup.SchemaOf<IProduct> = Yup.object().shape({
@@ -35,8 +36,10 @@ export const Product_Page = () => {
 
   const { setSnack } = useContext(SnackbarContext)
   const formRef = useRef<FormHandles>(null)
-  const [isLoading, setIsLoading] = useState(true)
   const [rows, setRows] = useState<IProduct[]>([])
+
+  //gerenciar o loading
+  const [loading, setLoading] = useState(true)
 
   //gerencia o modal de registro
   const [open, setOpen] = useState(false)
@@ -49,7 +52,8 @@ export const Product_Page = () => {
   const [actualpage, setActualPage] = useState<number>(0)
   const [selectContent, setSelectContent] = useState('')//não foi colocado esse componente ainda
 
-  const [value, setValue] = useState<string>("");
+  const [value, setValue] = useState<string>("")
+
   let ProductPaginationConf: ISendPagination = {
     page: actualpage,
     pageSize: pageSize,
@@ -64,23 +68,26 @@ export const Product_Page = () => {
       if (result instanceof Error) {
         alert(result.message);
       } else {
-        setIsLoading(false);
+        setLoading(false);
         setPages(result.data.numberOfPages)
         setRows(result.data.data);
       }
     })
   }
+
   const handleChangeArrow = (
     event: React.ChangeEvent<unknown>, value: number
   ) => {
     setActualPage(value - 1)
   }
+
   const selectChangePage = (event: SelectChangeEvent) => {
     setSelectContent(event.target.value as string);
     const translate = parseInt(event.target.value as string)
     setActualPage(0)
     setPageSize(translate)
   }
+
   //func para registrar produto
   const handleSave = (dados: IProduct) => {
     console.log(dados)
@@ -120,6 +127,7 @@ export const Product_Page = () => {
     update();
   }, [value, actualpage, pageSize])
 
+  if (loading) return <ProductPageSkeleton/>;
   return (
     <ContentLayout tittle={'Produtos'}>
       <Box
