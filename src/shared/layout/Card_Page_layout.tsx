@@ -14,15 +14,15 @@ export const Card_Page_Layout: React.FC<{tittle: string}> = ({ children, tittle 
             <Box
                 bgcolor={"#fff"}
                 sx={{
-                    width: 300,
-                    height:450,
+                    width: 350,
+                    height: 450,
 
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
                     flexDirection: "column",
                     
-                    borderRadius: '5px',
+                    borderRadius: '25px',
                     p:4
                 }}
             >

@@ -7,7 +7,6 @@ export const ProductPageSkeleton: React.FC = () => {
       sx={{
         height:"100%",
         width:"100%",
-        // bgcolor:"#453"
         display:"flex",
         alignItems:"center",
         justifyContent:"center"
