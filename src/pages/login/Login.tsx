@@ -1,25 +1,18 @@
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
+import {
+  Button, Checkbox, CircularProgress, FormControl, FormControlLabel, FormGroup, InputAdornment, InputLabel
+} from "@mui/material";
 import { FormHandles } from "@unform/core";
 import { Form } from "@unform/web";
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { FormInput } from "../../shared/components";
-import "./style.css"
-import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { Navigate } from "react-router-dom";
-import {
-  FormControl,
-  InputLabel,
-  InputAdornment,
-  Button,
-  CircularProgress,
-  FormGroup,
-  FormControlLabel,
-  Checkbox,
-} from "@mui/material";
-import { useAuthContext } from "../../shared/context/AuthContext";
 import * as Yup from "yup";
-import { SnackbarContext, Snack } from "../../shared/context/AlertCardContext";
+import { FormInput } from "../../shared/components";
+import { Snack, SnackbarContext } from "../../shared/context/AlertCardContext";
+import { useAuthContext } from "../../shared/context/AuthContext";
 import { Card_Page_Layout } from "../../shared/layout/Card_Page_layout";
+import "./style.css";
 
 //dados pro login
 interface State {
@@ -126,6 +119,7 @@ export const Login: React.FC = () => {
             Usuário
           </InputLabel>
           <FormInput
+            sx={{"& fieldset": { border: '-moz-initial' },}}
             name="usuario"
             autoComplete="off"
             type={"text"}
@@ -148,6 +142,7 @@ export const Login: React.FC = () => {
             Senha
           </InputLabel>
           <FormInput
+            sx={{"& fieldset": { border: '-moz-initial' },}}
             name="password"
             autoComplete="off"
             id="outlined-adornment-password"
