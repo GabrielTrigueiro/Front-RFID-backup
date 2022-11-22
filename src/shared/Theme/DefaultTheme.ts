@@ -1,8 +1,8 @@
 import { createTheme } from "@mui/material";
-import { makeStyles } from "@mui/styles";
 
 export const DefaultTheme = createTheme({
     typography: {
+        fontFamily: " Poppins",
         body1:{
             color: "#727272"
         }
