@@ -1,6 +1,6 @@
 import { Box } from "@mui/system";
 import { Navigate, Outlet } from "react-router-dom";
-import { SideBar } from "../components/side-bar";
+import { SideBar } from "../components/side_bar";
 import { useAuthContext } from "../context/AuthContext";
 
 export const Layout = () => {

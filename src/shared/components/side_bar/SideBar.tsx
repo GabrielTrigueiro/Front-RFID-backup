@@ -44,9 +44,9 @@ const closedMixin = (theme: Theme): CSSObject => ({
         duration: theme.transitions.duration.leavingScreen,
     }),
     overflowX: "hidden",
-    width: `calc(${theme.spacing(8)} + 1px)`,
+    width: `calc(${theme.spacing(8)} + 0px)`,
     [theme.breakpoints.up("sm")]: {
-        width: `calc(${theme.spacing(9)} + 1px)`,
+        width: `calc(${theme.spacing(9)} + 0px)`,
     },
 });
 
@@ -98,7 +98,8 @@ const Drawer = styled(MuiDrawer, {
 })(({ theme, open }) => ({
     width: drawerWidth,
     flexShrink: 0,
-    whiteSpace: "nowrap",
+    zIndex: 0,
+    // whiteSpace: "nowrap",
     boxSizing: "border-box",
     borderColor: "transparent",
     ...(open && {
