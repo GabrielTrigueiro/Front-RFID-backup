@@ -1,6 +1,6 @@
-import { AxiosError } from "axios"
-import { environment } from "../../../environment"
-import { api } from "../axios"
+import { AxiosError } from "axios";
+import { environment } from "../../../environment";
+import { api } from "../axios";
 
 //type usuario
 export type TUser = {
@@ -20,17 +20,17 @@ export interface IAuth{
 export const auth = 
 async (username: string, password: string):Promise<any | AxiosError> => {
     return await api.post(environment.url_login, {username, password})
-    .then(data => {
-        if(data instanceof AxiosError){
-            return data
-        }
-        return data.data
-    })
-    .catch(err => {
-        console.error(err)
-    })
-}
+        .then(data => {
+            if(data instanceof AxiosError){
+                return data;
+            }
+            return data.data;
+        })
+        .catch(err => {
+            console.error(err);
+        });
+};
 
 export const AuthService = {
     auth,
-}
+};

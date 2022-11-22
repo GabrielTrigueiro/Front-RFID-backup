@@ -1,1 +1,1 @@
-export * from "./Register_RFID"
+export * from "./Register_RFID";

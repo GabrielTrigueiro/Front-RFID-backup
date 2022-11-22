@@ -8,22 +8,22 @@ type TLoginOutlinedInput = OutlinedInputProps & {
 
 export const FormInput: React.FC<TLoginOutlinedInput> = ({ name, ...rest }) => {
 
-    const { clearError, defaultValue, error, fieldName, registerField } = useField(name)
+    const { clearError, defaultValue, error, fieldName, registerField } = useField(name);
 
-    const [value, setValue] = useState<string>(defaultValue || '')
+    const [value, setValue] = useState<string>(defaultValue || "");
 
     useEffect(() => {
         registerField({
             name: fieldName,
             getValue: () => value,
             setValue: (_, newValue) => setValue(newValue),
-        })
-    }, [registerField, fieldName, value])
+        });
+    }, [registerField, fieldName, value]);
 
     return (
         <OutlinedInput
             sx={{
-                "& fieldset": { border: 'none' }, //tira a borda
+                "& fieldset": { border: "none" }, //tira a borda
             }}
             {...rest}
             autoComplete="off"
@@ -35,5 +35,5 @@ export const FormInput: React.FC<TLoginOutlinedInput> = ({ name, ...rest }) => {
             value={value}
             onChange={e => setValue(e.target.value)}
         />
-    )
+    );
 };

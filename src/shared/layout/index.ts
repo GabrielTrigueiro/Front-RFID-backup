@@ -1,2 +1,2 @@
-export * from "./Layout"
-export * from "./ContentLayout"
+export * from "./Layout";
+export * from "./ContentLayout";

@@ -1,7 +1,7 @@
-import { AxiosError } from "axios"
-import { api } from "../axios"
-import {environment}  from "../../../environment"
-import { newUser_data } from "../../../components"
+import { AxiosError } from "axios";
+import { api } from "../axios";
+import {environment}  from "../../../environment";
+import { newUser_data } from "../../../components";
 
 //info de cada usuário
 export interface IUser{
@@ -55,84 +55,84 @@ export type TAllUsers = {
 const getAll = async (dados: ISendUserPagination): Promise<any | Error> => {
     const token = {
         headers:{
-          Authorization: 
-          `Bearer ${localStorage.getItem('Acess_Token')?.replace(/"/g,'')}`
-         }
-     }
-    return await api.post<IUserSearch>(environment.url_users_Search, dados, token)
-    .then(data => {
-        if(data instanceof AxiosError){
-            return data
+            Authorization: 
+          `Bearer ${localStorage.getItem("Acess_Token")?.replace(/"/g,"")}`
         }
-        return data
-    })
-    .catch(err => {
-        console.error(err)
-    })
-}
+    };
+    return await api.post<IUserSearch>(environment.url_users_Search, dados, token)
+        .then(data => {
+            if(data instanceof AxiosError){
+                return data;
+            }
+            return data;
+        })
+        .catch(err => {
+            console.error(err);
+        });
+};
 
 const Create = async (dados: newUser_data): Promise<any | Error> => {
     const token = {
         headers:{
-          Authorization: 
-          `Bearer ${localStorage.getItem('Acess_Token')?.replace(/"/g,'')}`
-         }
-     }
-    return await api.post<IUserPackage>(environment.url_users_Search, dados, token)
-    .then(data => {
-        if (data instanceof AxiosError){
-            return data.response?.data
+            Authorization: 
+          `Bearer ${localStorage.getItem("Acess_Token")?.replace(/"/g,"")}`
         }
-        return data.data
-      })
-      .catch(err => { 
-        return err
-        console.error(err)
-      })
-}
+    };
+    return await api.post<IUserPackage>(environment.url_users_Search, dados, token)
+        .then(data => {
+            if (data instanceof AxiosError){
+                return data.response?.data;
+            }
+            return data.data;
+        })
+        .catch(err => { 
+            return err;
+            console.error(err);
+        });
+};
 
 const Delete = async (id: string): Promise<void | Error> => {
     const token = {
         headers:{
-          Authorization: 
-          `Bearer ${localStorage.getItem('Acess_Token')?.replace(/"/g,'')}`
-         }
-     }
-    return await api.delete(environment.url_users + `${id}`, token)
-    .then(data => {
-        if (data instanceof AxiosError){
-            return data.response?.data
+            Authorization: 
+          `Bearer ${localStorage.getItem("Acess_Token")?.replace(/"/g,"")}`
         }
-        return data.data
-      })
-      .catch(err => { 
-        console.error(err)
-      })
-}
+    };
+    return await api.delete(environment.url_users + `${id}`, token)
+        .then(data => {
+            if (data instanceof AxiosError){
+                return data.response?.data;
+            }
+            return data.data;
+        })
+        .catch(err => { 
+            console.error(err);
+        });
+};
 
 const UpdateById = async (id: string, dados: IUser): Promise<void | Error> => {
     const token = {
         headers:{
-          Authorization: 
-          `Bearer ${localStorage.getItem('Acess_Token')?.replace(/"/g,'')}`
-         }
-     }
-    return  await api.put<IUser>(environment.url_users + `${id}`, dados, token)
-    .then(data => {
-        if (data instanceof AxiosError){
-            return data.response?.data
+            Authorization: 
+          `Bearer ${localStorage.getItem("Acess_Token")?.replace(/"/g,"")}`
         }
-        return data.data
-      })
-      .catch(err => { 
-        return err
-        console.error(err)
-      })
-}
+    };
+    return  await api.put<IUser>(environment.url_users + `${id}`, dados, token)
+        .then(data => {
+            if (data instanceof AxiosError){
+                return data.response?.data;
+            }
+            return data.data;
+        })
+        .catch(err => { 
+            return err;
+            console.error(err);
+        });
+};
 
 export const User_Service = {
     getAll,
     Create,
     Delete,
     UpdateById
-}
+};

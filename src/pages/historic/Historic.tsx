@@ -1,9 +1,9 @@
-import { ContentLayout } from "../../shared/layout"
+import { ContentLayout } from "../../shared/layout";
 
 export const Historic = () => {
-  return (
-    <ContentLayout tittle={'Histórico'}>
+    return (
+        <ContentLayout tittle={"Histórico"}>
       historico
-    </ContentLayout>
-  )
-}
+        </ContentLayout>
+    );
+};

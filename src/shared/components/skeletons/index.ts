@@ -1,1 +1,1 @@
-export * from "./ProductPageSkeleton"
+export * from "./ProductPageSkeleton";

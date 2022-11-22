@@ -11,53 +11,53 @@ export const Register_User_Modal: React.FC<props> = ({
     children, outState, closeModal
 }) =>{
 
-    const [dialog, setDialog] = useState<boolean>(false)
+    const [dialog, setDialog] = useState<boolean>(false);
     
     return(
-      <>
-        <Modal
-        open={outState}
-        onClose={()=>setDialog(true)}
-        >
-          <Box
-          sx={{
-            display:'flex',
-            alignItems:'center',
-            justifyContent:'center',
-
-            position:'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-
-            width: 420,
-            height:510,
-
-            bgcolor:"#fff",
-            borderRadius:"18px",
-            p: 2
-          }}
-          >
-            <Box
-            sx={{
-                width:"100%",
-                height:"100%",
-                display:"flex",
-                flexDirection:"column"
-            }}
+        <>
+            <Modal
+                open={outState}
+                onClose={()=>setDialog(true)}
             >
-              {children}
-            </Box>
-          </Box>
-        </Modal>
-        <Confirm_Dialog
-        messageOne={'Não'}
-        messageTwo={'Sim'}
-        tittle={'Cancelar registro?'}
-        state={dialog}
-        funcDialog={()=>setDialog(false)}
-        funcModal={closeModal}
-        />
-      </>
-    )
-}
+                <Box
+                    sx={{
+                        display:"flex",
+                        alignItems:"center",
+                        justifyContent:"center",
+
+                        position:"absolute",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+
+                        width: 420,
+                        height:510,
+
+                        bgcolor:"#fff",
+                        borderRadius:"18px",
+                        p: 2
+                    }}
+                >
+                    <Box
+                        sx={{
+                            width:"100%",
+                            height:"100%",
+                            display:"flex",
+                            flexDirection:"column"
+                        }}
+                    >
+                        {children}
+                    </Box>
+                </Box>
+            </Modal>
+            <Confirm_Dialog
+                messageOne={"Não"}
+                messageTwo={"Sim"}
+                tittle={"Cancelar registro?"}
+                state={dialog}
+                funcDialog={()=>setDialog(false)}
+                funcModal={closeModal}
+            />
+        </>
+    );
+};

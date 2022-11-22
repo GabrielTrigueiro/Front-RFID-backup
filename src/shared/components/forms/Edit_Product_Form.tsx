@@ -1,9 +1,9 @@
-import { Box, FormControl, InputLabel, Divider, Button } from "@mui/material"
-import { Form } from "@unform/web"
-import { FormInput } from "./input"
-import { useRef } from "react"
-import { FormHandles } from "@unform/core"
-import { IProduct } from "../../service/api"
+import { Box, FormControl, InputLabel, Divider, Button } from "@mui/material";
+import { Form } from "@unform/web";
+import { FormInput } from "./input";
+import { useRef } from "react";
+import { FormHandles } from "@unform/core";
+import { IProduct } from "../../service/api";
 
 export const Edit_Product_Form: React.FC<{
     editProduct: (e: IProduct)=> void,
@@ -13,7 +13,7 @@ export const Edit_Product_Form: React.FC<{
     product
 }) => {
     //props form
-    const formRef = useRef<FormHandles>(null)
+    const formRef = useRef<FormHandles>(null);
 
     return (
         <div>
@@ -123,5 +123,5 @@ export const Edit_Product_Form: React.FC<{
                 </Box>
             </Form>
         </div>
-    )
-}
+    );
+};

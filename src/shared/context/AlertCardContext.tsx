@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import React, { createContext, useContext, useState } from "react";
-import MuiAlert, { AlertColor, AlertProps } from '@mui/material/Alert';
+import MuiAlert, { AlertColor, AlertProps } from "@mui/material/Alert";
 import { Stack, Snackbar, Typography } from "@mui/material";
 
 class Snack {
@@ -9,14 +10,14 @@ class Snack {
     open: boolean;
   
     constructor(data: Snack) {
-      this.message = data.message || '';
-      this.color = data.color || 'info';
-      this.autoHideDuration = data.autoHideDuration || 3000;
-      this.open = data.open;
+        this.message = data.message || "";
+        this.color = data.color || "info";
+        this.autoHideDuration = data.autoHideDuration || 3000;
+        this.open = data.open;
     }
 }
 
-export {Snack}
+export {Snack};
 
 type SnackDefaultValue = {
     snack: Snack,
@@ -26,7 +27,7 @@ type SnackDefaultValue = {
 export const SnackbarContext = createContext<SnackDefaultValue>({
     snack: new Snack({open: false}),
     setSnack: () => {}
-})
+});
 
 export const TesteSnackBar: React.FC = ({children}) => {
 
@@ -35,44 +36,44 @@ export const TesteSnackBar: React.FC = ({children}) => {
     const handleClose = (
         event?: React.SyntheticEvent | Event,
         reason?: string) => {
-            if (reason === 'clickaway') {
-                return;
-            }
-            setSnack(new Snack({color: snack.color, open:false}));
-        };
+        if (reason === "clickaway") {
+            return;
+        }
+        setSnack(new Snack({color: snack.color, open:false}));
+    };
     
     const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
         function Alert(props,ref,){
-        return(
-            <MuiAlert
-                elevation={6}
-                ref={ref}
-                variant="filled"
-                {...props}
-            />
-        )
-    })
+            return(
+                <MuiAlert
+                    elevation={6}
+                    ref={ref}
+                    variant="filled"
+                    {...props}
+                />
+            );
+        });
     
     return (
         <SnackbarContext.Provider value={{snack, setSnack}}>
-            <Stack spacing={2} sx={{ width: '100%' }}>
+            <Stack spacing={2} sx={{ width: "100%" }}>
                 <Snackbar 
                     anchorOrigin={{
-                        vertical: 'top',
-                        horizontal:'right'
+                        vertical: "top",
+                        horizontal:"right"
                     }}
                     open={snack.open}
                     autoHideDuration={4000}
                     onClose={handleClose}
                 >
                     <Alert 
-                    sx={{
-                        width: '200px',
-                        display:'flex',
-                        alignItems:'center'
-                    }}
-                    onClose={handleClose}
-                    severity={snack.color}>
+                        sx={{
+                            width: "200px",
+                            display:"flex",
+                            alignItems:"center"
+                        }}
+                        onClose={handleClose}
+                        severity={snack.color}>
                         <Typography>{snack.message}</Typography>
                     </Alert>
                 </Snackbar>

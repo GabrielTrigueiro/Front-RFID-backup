@@ -1,5 +1,5 @@
-import { ImageList, ImageListItem, Box, Pagination, Stack, Container } from "@mui/material"
-import { IProduct } from "../../../service/api/products"
+import { ImageList, ImageListItem, Box, Pagination, Stack, Container } from "@mui/material";
+import { IProduct } from "../../../service/api/products";
 import { Product } from "../../product";
 
 export const Product_Table: React.FC<{
@@ -14,24 +14,24 @@ export const Product_Table: React.FC<{
         <>
             <ImageList
                 sx={{
-                    gridTemplateColumns: 'repeat(auto-fill, minmax(0px, 200px))!important', //truque milenar
+                    gridTemplateColumns: "repeat(auto-fill, minmax(0px, 200px))!important", //truque milenar
                     overflowY: "scroll",
                     height: "100%",
                     justifyContent: "center",
-                    '::-webkit-scrollbar': {
-                        width: '20px',
+                    "::-webkit-scrollbar": {
+                        width: "20px",
                     },
-                    '::-webkit-scrollbar-track': {
-                        backgroundColor: 'transparent'
+                    "::-webkit-scrollbar-track": {
+                        backgroundColor: "transparent"
                     },
-                    '::-webkit-scrollbar-thumb': {
-                        backgroundColor: '#d6dee1',
-                        borderRadius: '20px',
-                        border: '6px solid transparent',
-                        backgroundClip: 'content-box',
+                    "::-webkit-scrollbar-thumb": {
+                        backgroundColor: "#d6dee1",
+                        borderRadius: "20px",
+                        border: "6px solid transparent",
+                        backgroundClip: "content-box",
                     },
-                    '::-webkit-scrollbar-thumb:hover': {
-                        backgroundColor: '#a8bbbf'
+                    "::-webkit-scrollbar-thumb:hover": {
+                        backgroundColor: "#a8bbbf"
                     },
                 }}
                 gap={12}
@@ -74,5 +74,5 @@ export const Product_Table: React.FC<{
                 </Box>
             </Box> */}
         </>
-    )
-}
+    );
+};

@@ -1,8 +1,8 @@
-import { AxiosError } from "axios"
-import jwtDecode from "jwt-decode"
-import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react"
-import { AuthService } from "../service"
-import { Snack, SnackbarContext } from "./AlertCardContext"
+import { AxiosError } from "axios";
+import jwtDecode from "jwt-decode";
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { AuthService } from "../service";
+import { Snack, SnackbarContext } from "./AlertCardContext";
 
 
 //dados user
@@ -21,10 +21,10 @@ interface IAuthContext{
 }
 
 //contexto auth
-const AuthContext = createContext({} as IAuthContext)
+const AuthContext = createContext({} as IAuthContext);
 
 //var token do local storage
-export const AcessToken = "Acess_Token"
+export const AcessToken = "Acess_Token";
 
 export const AuthProvider: React.FC = ({children}) =>{
     const [acessToken, setAcessToken] = useState<string>();
@@ -36,35 +36,35 @@ export const AuthProvider: React.FC = ({children}) =>{
         const acessToken = localStorage.getItem(AcessToken);
     
         if (acessToken) {
-          setDados(jwtDecode(acessToken))
-          setAcessToken(acessToken)
+            setDados(jwtDecode(acessToken));
+            setAcessToken(acessToken);
         } else {
-          setAcessToken(undefined)
+            setAcessToken(undefined);
         }
-      }, [acessToken])
+    }, [acessToken]);
 
     //login e validação
     const handleLogin = useCallback(
         async (username: string, password: string) => {
-          await AuthService.auth(username, password)
-          .then( result => {
-            if (result instanceof AxiosError) {
-              setSnack(new Snack({
-                message: result.response?.data.message,
-                color:'error',
-                open: true}))
-          }else{
-              setSnack(new Snack({
-                message: 'Login realizado com sucesso',
-                color:'success',
-                open: true
-              }))
-              localStorage.setItem(
-                'Acess_Token', JSON.stringify(result.acessToken)
-              );
-              setAcessToken(result.acessToken);
-            }
-          })     
+            await AuthService.auth(username, password)
+                .then( result => {
+                    if (result instanceof AxiosError) {
+                        setSnack(new Snack({
+                            message: result.response?.data.message,
+                            color:"error",
+                            open: true}));
+                    }else{
+                        setSnack(new Snack({
+                            message: "Login realizado com sucesso",
+                            color:"success",
+                            open: true
+                        }));
+                        localStorage.setItem(
+                            "Acess_Token", JSON.stringify(result.acessToken)
+                        );
+                        setAcessToken(result.acessToken);
+                    }
+                });     
         },[]
     );
 
@@ -72,7 +72,7 @@ export const AuthProvider: React.FC = ({children}) =>{
     const handleLogout = useCallback(() => {
         localStorage.removeItem(AcessToken);
         setAcessToken(undefined);
-      }, []
+    }, []
     );
 
     //status auth ou não
@@ -82,15 +82,15 @@ export const AuthProvider: React.FC = ({children}) =>{
 
     return (
         <AuthContext.Provider
-          value={{
-            dados,
-            isAuthenticated,
-            login: handleLogin,
-            logout: handleLogout }}
+            value={{
+                dados,
+                isAuthenticated,
+                login: handleLogin,
+                logout: handleLogout }}
         >
-          {children}
+            {children}
         </AuthContext.Provider>
     );
     
-}
-export const useAuthContext = () => useContext(AuthContext)
+};
+export const useAuthContext = () => useContext(AuthContext);

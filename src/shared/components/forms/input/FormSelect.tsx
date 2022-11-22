@@ -13,17 +13,17 @@ export const FormSelect: React.FC<TSelectField> = ({ name, ...rest }) => {
         setRole(event.target.value as string);
     };
 
-    const { clearError, defaultValue, error, fieldName, registerField } = useField(name)
+    const { clearError, defaultValue, error, fieldName, registerField } = useField(name);
 
-    const [value, setValue] = useState<string>(defaultValue || '')
+    const [value, setValue] = useState<string>(defaultValue || "");
 
     useEffect(() => {
         registerField({
             name: fieldName,
             getValue: () => value,
             setValue: (_, newValue) => setValue(newValue),
-        })
-    }, [registerField, fieldName, value])
+        });
+    }, [registerField, fieldName, value]);
 
     return (
         <>
@@ -44,5 +44,5 @@ export const FormSelect: React.FC<TSelectField> = ({ name, ...rest }) => {
                 <MenuItem value={"admin"}>Admin</MenuItem>
             </Select>
         </>
-    )
+    );
 };

@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useState } from "react"
+import { createContext, useCallback, useContext, useState } from "react";
 
 interface ISideBarItem{
     path: string
@@ -13,32 +13,32 @@ interface ISideBarProps{
     setSideBarOption: (newSideBarOption: ISideBarItem[]) => void
 }
 
-const SideBarContext = createContext({} as ISideBarProps)
+const SideBarContext = createContext({} as ISideBarProps);
 
 export const useSideBarContext = () => {
-    return useContext(SideBarContext)
-}
+    return useContext(SideBarContext);
+};
 
 export const SideBarProvider: React.FC = ({children}) => {
 
-    const [sideOpen, setSideOpen] = useState<boolean>(false)
-    const [sideItem, setSideItem] = useState<ISideBarItem[]>([])
+    const [sideOpen, setSideOpen] = useState<boolean>(false);
+    const [sideItem, setSideItem] = useState<ISideBarItem[]>([]);
     const toggleSide = useCallback(()=>{
-        setSideOpen((oldSideOpen) => !oldSideOpen)
-    },[])
+        setSideOpen((oldSideOpen) => !oldSideOpen);
+    },[]);
     const handleSetSideBarItems = useCallback((newSideItem: ISideBarItem[])=>{
-        setSideItem(newSideItem)
-    },[])
+        setSideItem(newSideItem);
+    },[]);
 
     return(
         <SideBarContext.Provider
-        value={{
-            toggleSideBar: toggleSide,
-            isSideBarOpen: sideOpen,
-            setSideBarOption: handleSetSideBarItems,
-            sideBarOption: sideItem,
-        }}>
+            value={{
+                toggleSideBar: toggleSide,
+                isSideBarOpen: sideOpen,
+                setSideBarOption: handleSetSideBarItems,
+                sideBarOption: sideItem,
+            }}>
             {children}
         </SideBarContext.Provider>
-    )
-}
+    );
+};

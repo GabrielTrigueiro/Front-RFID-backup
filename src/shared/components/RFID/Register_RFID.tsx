@@ -1,6 +1,6 @@
-import { Box, Modal, Divider, Typography, Button, TextField, Grid, ImageList, Chip } from "@mui/material"
-import { equal } from "assert"
-import { useEffect, useState } from "react"
+import { Box, Modal, Divider, Typography, Button, TextField, Grid, ImageList, Chip } from "@mui/material";
+import { equal } from "assert";
+import { useEffect, useState } from "react";
 
 interface RFID {
     id: string
@@ -16,37 +16,37 @@ export const Register_RFID: React.FC<{
 }> = ({ open, handleClose, setFatherList}) => {
 
     //consts para manipular lista de RFID
-    const [RFIDLIST, setRFIDLIST] = useState<RFID_List>([])
-    const [tempRFID, setTempRFID] = useState<string>('')
+    const [RFIDLIST, setRFIDLIST] = useState<RFID_List>([]);
+    const [tempRFID, setTempRFID] = useState<string>("");
 
     //func para validar se existe RFID repetido
     const validate = (e:string) =>{
         // console.log(RFIDLIST.filter(id => id == e).length)
-        let aux = RFIDLIST.find(id => id == e)
+        const aux = RFIDLIST.find(id => id == e);
         if(!aux){
-            RFIDLIST.push(e)
+            RFIDLIST.push(e);
             //RFIDLIST.push(e?.replace("[^0-9]", "ig"))
         }
-    }
+    };
 
     //func para adicionar RFID
     const addRFID = (e:string) => {
         if (e.length == 24){
-            validate(e)
-            setTempRFID('')
+            validate(e);
+            setTempRFID("");
         }
-    }
+    };
 
     //func para ler o que está sendo digitado no input
     const handleChange = (prop: keyof RFID) => (event: React.ChangeEvent<HTMLInputElement>) => {
-        setTempRFID(event.target.value)
-        addRFID(event.target.value)
-    }
+        setTempRFID(event.target.value);
+        addRFID(event.target.value);
+    };
 
     //func para deletar o RFID
     const handleDelete = (e: string) => {
-        setRFIDLIST(RFIDLIST.filter(item => item !== e))
-    }
+        setRFIDLIST(RFIDLIST.filter(item => item !== e));
+    };
 
     return (
         <Modal
@@ -56,14 +56,14 @@ export const Register_RFID: React.FC<{
         >
             <Box
                 sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
 
-                    position: 'absolute',
-                    top: '50%',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)',
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
 
                     width: {
                         sm: 600,
@@ -115,7 +115,7 @@ export const Register_RFID: React.FC<{
                                 <TextField
                                     sx={{
                                         bgcolor: "#F4F4F4",
-                                        "& fieldset": { border: 'none' },
+                                        "& fieldset": { border: "none" },
                                         width: "100%",
                                     }}
                                     placeholder={"digite um código RFID"}
@@ -133,20 +133,20 @@ export const Register_RFID: React.FC<{
                                     
                                     overflowY: "scroll",
                                     justifyContent: "center",
-                                    '::-webkit-scrollbar': {
-                                        width: '20px',
+                                    "::-webkit-scrollbar": {
+                                        width: "20px",
                                     },
-                                    '::-webkit-scrollbar-track': {
-                                        backgroundColor: 'transparent'
+                                    "::-webkit-scrollbar-track": {
+                                        backgroundColor: "transparent"
                                     },
-                                    '::-webkit-scrollbar-thumb': {
-                                        backgroundColor: '#d6dee1',
-                                        borderRadius: '20px',
-                                        border: '6px solid transparent',
-                                        backgroundClip: 'content-box',
+                                    "::-webkit-scrollbar-thumb": {
+                                        backgroundColor: "#d6dee1",
+                                        borderRadius: "20px",
+                                        border: "6px solid transparent",
+                                        backgroundClip: "content-box",
                                     },
-                                    '::-webkit-scrollbar-thumb:hover': {
-                                        backgroundColor: '#a8bbbf'
+                                    "::-webkit-scrollbar-thumb:hover": {
+                                        backgroundColor: "#a8bbbf"
                                     },
                                 }}
                                 gap={12}
@@ -186,5 +186,5 @@ export const Register_RFID: React.FC<{
                 </Box>
             </Box>
         </Modal>
-    )
-}
+    );
+};

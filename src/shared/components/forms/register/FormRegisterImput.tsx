@@ -8,16 +8,16 @@ type TRegisterOutlinedInput = OutlinedInputProps & {
 
 export const FormRegisterImput: React.FC<TRegisterOutlinedInput> = ({name, ...rest}) => {
 
-    const {clearError, defaultValue, error, fieldName, registerField} = useField(name)
-    const [value, setValue] = useState<string>(defaultValue || '')
+    const {clearError, defaultValue, error, fieldName, registerField} = useField(name);
+    const [value, setValue] = useState<string>(defaultValue || "");
 
     useEffect(() => {
         registerField({
             name: fieldName,
             getValue: () => value,
             setValue: (_, newValue) => setValue(newValue) ,
-        })
-    } , [registerField, fieldName, value])
+        });
+    } , [registerField, fieldName, value]);
 
     return(
         <OutlinedInput
@@ -31,5 +31,5 @@ export const FormRegisterImput: React.FC<TRegisterOutlinedInput> = ({name, ...re
             value={value}
             onChange={e => setValue(e.target.value)}
         />
-    )
-}
+    );
+};

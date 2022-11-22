@@ -5,15 +5,15 @@ import { AuthProvider } from "./shared/context/AuthContext";
 import { SideBarProvider } from "./shared/context/SideBarContext";
 
 export const App = () => {
-  return (
-    <TesteSnackBar>
-      <AuthProvider>
-        <AppThemeProvider>
-          <SideBarProvider>
-            <AppRoutes/>
-          </SideBarProvider>
-        </AppThemeProvider>
-      </AuthProvider>
-    </TesteSnackBar>
-  );
-}
+    return (
+        <TesteSnackBar>
+            <AuthProvider>
+                <AppThemeProvider>
+                    <SideBarProvider>
+                        <AppRoutes/>
+                    </SideBarProvider>
+                </AppThemeProvider>
+            </AuthProvider>
+        </TesteSnackBar>
+    );
+};

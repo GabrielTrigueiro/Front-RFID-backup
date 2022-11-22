@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { FormHandles } from "@unform/core";
-import { Form } from "@unform/web"
-import { Card_Page_Layout } from "../../shared/layout/Card_Page_layout"
+import { Form } from "@unform/web";
+import { Card_Page_Layout } from "../../shared/layout/Card_Page_layout";
 import { InputAdornment, InputLabel, FormControl, CircularProgress, Button, Select, MenuItem, SelectChangeEvent, OutlinedInput } from "@mui/material";
 import { FormInput } from "../../shared/components";
-import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import "./style.css"
+import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import "./style.css";
 import { FormSelect } from "../../shared/components/forms/input/FormSelect";
 
 //dados novo usario
@@ -23,7 +23,7 @@ export const Register_User: React.FC = () => {
         password: "",
         usuario: "",
         posicao: ""
-    })
+    });
 
     //func duplicada de login, inxutar isso depois
     const handleChange = (prop: keyof newUser_data) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,7 +56,7 @@ export const Register_User: React.FC = () => {
                     />
                 </FormControl>
                 <FormControl
-                    sx={{ marginTop: '10px' }}
+                    sx={{ marginTop: "10px" }}
                     className="form-item"
                 >
                     <InputLabel htmlFor="outlined-adornment-password">
@@ -78,7 +78,7 @@ export const Register_User: React.FC = () => {
                     />
                 </FormControl>
                 <FormControl
-                    sx={{ marginTop: '10px' }}
+                    sx={{ marginTop: "10px" }}
                     className="form-item"
                 >
                     <InputLabel htmlFor="outlined-adornment-password">
@@ -106,7 +106,7 @@ export const Register_User: React.FC = () => {
                     disabled={loading}
                     sx={{
                         mt: 2,
-                        width: '90%',
+                        width: "90%",
                         fontSize: "20px",
                         fontStyle: "normal",
                         fontWeight: 500,
@@ -131,5 +131,5 @@ export const Register_User: React.FC = () => {
                 </Button>
             </Form>
         </Card_Page_Layout>
-    )
-}
+    );
+};

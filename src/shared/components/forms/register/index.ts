@@ -1,1 +1,1 @@
-export * from "./FormRegisterImput"
+export * from "./FormRegisterImput";

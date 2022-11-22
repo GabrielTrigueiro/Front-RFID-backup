@@ -19,39 +19,39 @@ export const UserTable: React.FC<IUserTableProps> = ({ lista, update }) => {
 
     //campos da tabela
     const columns: GridColDef[] = [
-        { field: 'username', headerName: 'Nome', width: 120 },
-        { field: 'id', headerName: 'Id', width: 210 },
-        { field: 'roles', headerName: 'Cargo', width: 120 }
-    ]
+        { field: "username", headerName: "Nome", width: 120 },
+        { field: "id", headerName: "Id", width: 210 },
+        { field: "roles", headerName: "Cargo", width: 120 }
+    ];
 
     //role, setor, search
-    const [role, setRole] = useState('')
-    const [branch, setBranch] = useState('')
+    const [role, setRole] = useState("");
+    const [branch, setBranch] = useState("");
     const handleChangeRole = (event: SelectChangeEvent) => {
         setRole(event.target.value as string);
-    }
+    };
     const handleChangeBranch = (event: SelectChangeEvent) => {
         setBranch(event.target.value as string);
-    }
+    };
 
     return (
-        <Box sx={{ height: 400, width: '100%', display: 'flex', flexDirection: 'column' }}>
+        <Box sx={{ height: 400, width: "100%", display: "flex", flexDirection: "column" }}>
 
             <Box
                 sx={{
-                    bgcolor: '#fff',
+                    bgcolor: "#fff",
                     flex: 1,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    padding:1
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    padding: 1
                 }}
             >
-                <Button sx={{ bgcolor: 'red', color: '#fff' }}>
+                <Button sx={{ bgcolor: "red", color: "#fff" }}>
                     Excluir
                 </Button>
 
-                <Box sx={{ display: 'flex' }}>
+                <Box sx={{ display: "flex" }}>
 
                     <Box sx={{ minWidth: 120 }}>
                         <FormControl size="small" fullWidth>
@@ -70,7 +70,7 @@ export const UserTable: React.FC<IUserTableProps> = ({ lista, update }) => {
                         </FormControl>
                     </Box>
 
-                    <Box sx={{ minWidth: 120, marginLeft: 1  }}>
+                    <Box sx={{ minWidth: 120, marginLeft: 1 }}>
                         <FormControl size="small" fullWidth>
                             <InputLabel id="demo-simple-select-label">Setor</InputLabel>
                             <Select
@@ -87,14 +87,20 @@ export const UserTable: React.FC<IUserTableProps> = ({ lista, update }) => {
                         </FormControl>
                     </Box>
 
-                    <SearchInput change={()=>console.log('a')}/>
+                    <SearchInput change={() => console.log("a")} />
                 </Box>
 
             </Box>
 
             <Box
-                sx={{ bgcolor: '#fff', flex: 5 }}>
-                b
+                sx={{
+                    bgcolor: "#fff",
+                    flex: 5
+                }}
+            >
+                {lista.map((row) => {
+                    <Box>oi</Box>;
+                })}
             </Box>
 
             {/* <DataGrid
@@ -105,5 +111,5 @@ export const UserTable: React.FC<IUserTableProps> = ({ lista, update }) => {
             /> */}
 
         </Box>
-    )
-}
+    );
+};

@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material"
+import { Box, Typography } from "@mui/material";
 
 export const Card_Page_Layout: React.FC<{tittle: string}> = ({ children, tittle }) => {
     return (
@@ -8,7 +8,7 @@ export const Card_Page_Layout: React.FC<{tittle: string}> = ({ children, tittle 
             bgcolor={"#23A0C9"}
             display={"flex"}
             justifyContent={"center"}
-            alignItems={'center'}
+            alignItems={"center"}
         >
             {/* card */}
             <Box
@@ -22,7 +22,7 @@ export const Card_Page_Layout: React.FC<{tittle: string}> = ({ children, tittle 
                     alignItems: "center",
                     flexDirection: "column",
                     
-                    borderRadius: '25px',
+                    borderRadius: "25px",
                     p:4
                 }}
             >
@@ -32,5 +32,5 @@ export const Card_Page_Layout: React.FC<{tittle: string}> = ({ children, tittle 
                 {children}
             </Box>
         </Box>
-    )
-}
+    );
+};

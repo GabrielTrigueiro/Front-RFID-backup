@@ -1,1 +1,1 @@
-export * from "./MustBuyTable"
+export * from "./MustBuyTable";
