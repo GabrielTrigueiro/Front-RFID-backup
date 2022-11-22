@@ -184,7 +184,12 @@ export const Register_RFID: React.FC<{
                         }}
                     >
                         <Box>
-                            <Button variant="contained" onClick={()=>setFatherList(RFIDLIST)}>   
+                            <Button variant="contained"
+                                onClick={()=>{
+                                    setFatherList(RFIDLIST),
+                                    handleClose();
+                                }}
+                            >   
                                 Finalizar
                             </Button>
                         </Box>

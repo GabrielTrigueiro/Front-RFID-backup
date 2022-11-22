@@ -280,6 +280,7 @@ export const Register_Product_Form: React.FC<{
                         <Button
                             type="submit"
                             variant="contained"
+                            onClick={()=>handleCloseRFID()}
                         >
                                 Finalizar
                         </Button>
