@@ -1,4 +1,4 @@
-import { Box, FormControl, InputLabel, Button, Divider, Chip, ImageList } from "@mui/material";
+import { Box, FormControl, InputLabel, Button, Divider, Chip, ImageList, Typography } from "@mui/material";
 import { Form } from "@unform/web";
 import { FormInput } from "./input";
 import { useRef, useState } from "react";
@@ -7,6 +7,7 @@ import { IProduct } from "../../service/api";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
 import "./register_Product.css";
 import { Register_RFID, RFID_List } from "../RFID";
+import { style } from "@mui/system";
 
 export const Register_Product_Form: React.FC<{
     saveProduct: (e: IProduct) => void
@@ -69,6 +70,7 @@ export const Register_Product_Form: React.FC<{
                             alignItems: "center",
                             justifyContent: "center",
                             bgcolor: "#D9D9D9",
+                            borderRadius: "4px",
                         }}
                     >
                         <Button
@@ -86,6 +88,7 @@ export const Register_Product_Form: React.FC<{
                             justifyContent: "center",
                         }}
                     >
+                        {/* box do formulário começa aqui */}
                         <Box className="form"
                             sx={{
                                 width: "90%",
@@ -188,13 +191,13 @@ export const Register_Product_Form: React.FC<{
                                 sx={{
                                     display: "flex",
                                     width: "100%",
-                                    justifyContent: "space-evenly",
+                                    justifyContent: "space-between",
                                     alignItems: "center",
-                                    //bgcolor:"#000",
                                 }}>
                                 <Box
                                     sx={{
-                                        height: "100%",
+                                        margin: 1,
+                                        height: "80%",
                                         display: "flex",
                                         flexDirection: "column",
                                         justifyContent: "space-between",
@@ -209,25 +212,34 @@ export const Register_Product_Form: React.FC<{
                                             height: 40,
                                         }}
                                     >
-                                            Cadastrar RFID
+                                        <Typography fontSize={12} color={"#FFF"}>Cadastrar RFID</Typography>
                                     </Button>
 
                                     <Box
                                         sx={{
                                             bgcolor: "#D9D9D9",
-                                            height: "42px",
-                                            width: "62px",
+                                            height: 40,
+                                            width: 60,
+
+                                            display: "flex",
+                                            justifyContent: "center",
+                                            alignItems: "center",
+
+                                            borderRadius: "4px",
                                         }}
                                     >
-                                            nº
+                                        <Typography>nº : {RFIDColection.length}</Typography>
                                     </Box>
                                 </Box>
 
                                 <ImageList
                                     cols={1}
                                     sx={{
+                                        borderRadius: "4px",
+                                        alignItems: "flex-start",
+                                        margin: 1,
                                         alignContent:"center",
-                                        width: 230,
+                                        width: "60%",
                                         height: 100,
                                         bgcolor: "#F4F4F4",
                                         overflowY: "scroll",

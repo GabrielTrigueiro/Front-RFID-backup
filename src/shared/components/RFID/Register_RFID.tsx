@@ -60,6 +60,9 @@ export const Register_RFID: React.FC<{
                     alignItems: "center",
                     justifyContent: "center",
 
+                    bgcolor:"#fff",
+                    borderRadius: "18px",
+
                     position: "absolute",
                     top: "50%",
                     left: "50%",
@@ -111,6 +114,9 @@ export const Register_RFID: React.FC<{
                         }}
                     >
                         <Box sx={{ height: "100%", width: "100%" }}>
+                            <Box sx={{padding: 1}}>
+                                <Typography>Quantidade: {RFIDLIST.length}</Typography>
+                            </Box>
                             <Box>
                                 <TextField
                                     sx={{
