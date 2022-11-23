@@ -1,4 +1,4 @@
-import { TextField, OutlinedInputProps, OutlinedInput } from "@mui/material";
+import { OutlinedInputProps, OutlinedInput } from "@mui/material";
 import { useField } from "@unform/core";
 import { useEffect, useState } from "react";
 
@@ -22,9 +22,9 @@ export const FormInput: React.FC<TLoginOutlinedInput> = ({ name, ...rest }) => {
 
     return (
         <OutlinedInput
-            sx={{
-                "& fieldset": { border: "none" }, //tira a borda
-            }}
+            // sx={{
+            //     "& fieldset": { border: "none" }, //tira a borda
+            // }}
             {...rest}
             autoComplete="off"
 

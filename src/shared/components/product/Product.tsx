@@ -16,7 +16,6 @@ type TInfoProduct = IProduct & {
   key: string,
   update: () => void,
   produto: IProduct
-  saveProduct: (e: IProduct) => void;
 }
 
 export const Product: React.FC<TInfoProduct> = ({
@@ -25,7 +24,6 @@ export const Product: React.FC<TInfoProduct> = ({
     codesRFID,
     update,
     produto,
-    saveProduct
 }) => {
   
     const { setSnack } = useContext(SnackbarContext);

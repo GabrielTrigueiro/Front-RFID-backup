@@ -82,49 +82,11 @@ export const Product_Page = () => {
         setActualPage(0);
         setPageSize(translate);
     };
-
-    //func para registrar produto
-    const handleSave = (dados: IProduct) => {
-        console.log(dados);
-        console.log("save");
-        ProductRegisterSchema
-            .validate(dados, { abortEarly: false })
-            .then((dadosValidados) => {
-                console.log(dadosValidados);
-                Product_Service.Create(dadosValidados).then((result) => {
-                    if (result instanceof AxiosError) {
-                        console.log(result.response?.data.message,);
-                        setSnack(new Snack({
-                            message: result.response?.data.message,
-                            color: "error",
-                            open: true
-                        }));
-                    } else {
-                        setSnack(new Snack({
-                            message: "Produto cadastrado com sucesso",
-                            color: "success",
-                            open: true
-                        }));
-                        handleClose();
-                        update();
-                    }
-                });
-            })
-            .catch((erros: Yup.ValidationError) => {
-                console.log(erros.errors);
-                const validandoErros: { [key: string]: string } = {};
-                erros.inner.forEach(erros => {
-                    if (!erros.path) return;
-                    validandoErros[erros.path] = erros.message;
-                });
-                formRef.current?.setErrors(validandoErros);
-            });
-    };
+    
     useEffect(() => {
         update();
     }, [value, actualpage, pageSize]);
 
-    if (loading) return <ProductPageSkeleton/>;
     return (
         <ContentLayout tittle={"Produtos"}>
             <Box
@@ -141,17 +103,21 @@ export const Product_Page = () => {
                 </Button>
             </Box>
             <Box height={"100%"}>
-                <Product_Table
-                    saveProduct={handleSave}
-                    update={update}
-                    lista={rows}
-                    actualpage={actualpage + 1}
-                    handleChangeArrow={()=>handleChangeArrow}
-                    pages={pages}
-                />
+                { loading ? <ProductPageSkeleton/> :
+                    <Product_Table
+                        // vai ser handleEdit saveProduct={handleSave}
+                        update={update}
+                        lista={rows}
+                        actualpage={actualpage + 1}
+                        handleChangeArrow={()=>handleChangeArrow}
+                        pages={pages}
+                    />}
             </Box>
             <Product_Modal closeModal={handleClose} outState={open}>
-                <Register_Product_Form saveProduct={handleSave}/>
+                <Register_Product_Form
+                    RegisterClose={handleClose}
+                    update={update}
+                />
             </Product_Modal>
         </ContentLayout>
     );

@@ -4,12 +4,11 @@ import { Product } from "../../product";
 
 export const Product_Table: React.FC<{
     lista: IProduct[];
-    saveProduct: (e: IProduct) => void;
     update: () => void;
     pages: number;
     actualpage: number;
     handleChangeArrow: () => void
-}> = ({ lista, update, pages, actualpage, handleChangeArrow, saveProduct }) => {
+}> = ({ lista, update, pages, actualpage, handleChangeArrow }) => {
     return (
         <>
             <ImageList
@@ -38,7 +37,7 @@ export const Product_Table: React.FC<{
             >
                 {lista.map((row) => (
                     <Product
-                        saveProduct={saveProduct}
+                        // saveProduct={saveProduct}
                         produto={row}
                         update={update}
 

@@ -1,21 +1,28 @@
 import { Box, FormControl, InputLabel, Button, Divider, Chip, ImageList, Typography } from "@mui/material";
 import { Form } from "@unform/web";
 import { FormInput } from "./input";
-import { useRef, useState } from "react";
+import { useRef, useState, useContext } from "react";
 import { FormHandles } from "@unform/core";
-import { IProduct } from "../../service/api";
+import { IProduct, Product_Service } from "../../service/api";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
 import "./register_Product.css";
 import { Register_RFID, RFID_List } from "../RFID";
+import { AxiosError } from "axios";
+import { ProductRegisterSchema } from "../../../pages";
+import { Snack, SnackbarContext } from "../../context/AlertCardContext";
+import Yup from "yup";
 
 export const Register_Product_Form: React.FC<{
-    saveProduct: (e: IProduct) => void
+    RegisterClose: ()=> void
+    update: ()=> void
 }> = ({
-    saveProduct
+    RegisterClose,
+    update
 }) => {
+    
+    const { setSnack } = useContext(SnackbarContext);
     //props form
     const formRef = useRef<FormHandles>(null);
-
     //gerenciar modal RFID
     const [RFID, setRFID] = useState<boolean>(false);
     const handleOpenRFID = () => {
@@ -24,12 +31,51 @@ export const Register_Product_Form: React.FC<{
     const handleCloseRFID = () => {
         setRFID(false);
     };
-
     //salvar info do form RFID
     const [RFIDColection, setRFIDColection] = useState<RFID_List>([]);
-
     const teste = (e: RFID_List) => {
         setRFIDColection(e);
+    };
+
+    const handleSave = (dados: IProduct) => {
+        console.log(dados);
+        console.log("save");
+        ProductRegisterSchema
+            .validate(dados, { abortEarly: false })
+            .then((dadosValidados) => {
+                console.log(dadosValidados);
+                Product_Service.Create(dadosValidados).then((result) => {
+                    if (result instanceof AxiosError) {
+                        console.log(result.response?.data.message,);
+                        setSnack(new Snack({
+                            message: result.response?.data.message,
+                            color: "error",
+                            open: true
+                        }));
+                    } else {
+                        setSnack(new Snack({
+                            message: "Produto cadastrado com sucesso",
+                            color: "success",
+                            open: true
+                        }));
+                        RegisterClose();
+                        update();
+                    }
+                });
+            })
+            .catch((erros: Yup.ValidationError) => {
+                const validandoErros: { [key: string]: string } = {};
+                erros.inner.forEach((erros) => {
+                    if (!erros.path) return;
+                    validandoErros[erros.path] = erros.message;
+                    setSnack(new Snack({
+                        message: "Quantidade mínima de digitos não respeitada",
+                        color: "error",
+                        open: true
+                    }));
+                });
+                formRef.current?.setErrors(validandoErros);
+            });
     };
 
     return (
@@ -40,8 +86,8 @@ export const Register_Product_Form: React.FC<{
                 className="product-form"
                 onSubmit={(dados) => {
                     dados.codesRFID = RFIDColection;
-                    console.log("aqui");
-                    saveProduct(dados);
+                    console.log(formRef);
+                    handleSave(dados);
                 }}
             >
                 <Box className="tittle">
@@ -125,6 +171,7 @@ export const Register_Product_Form: React.FC<{
                                     <FormControl sx={{ margin: 1, borderRadius: 1 }} size="small" className="input">
                                         <InputLabel>Id de referência</InputLabel>
                                         <FormInput
+                                           
                                             name="productReferenceId"
                                             type="text"
                                             label="Id de referência"
