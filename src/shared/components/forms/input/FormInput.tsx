@@ -22,9 +22,6 @@ export const FormInput: React.FC<TLoginOutlinedInput> = ({ name, ...rest }) => {
 
     return (
         <OutlinedInput
-            // sx={{
-            //     "& fieldset": { border: "none" }, //tira a borda
-            // }}
             {...rest}
             autoComplete="off"
 
@@ -34,6 +31,10 @@ export const FormInput: React.FC<TLoginOutlinedInput> = ({ name, ...rest }) => {
 
             value={value}
             onChange={e => setValue(e.target.value)}
+
+            sx={{
+                "& fieldset": {  border: error ? null : "none"}, //tira a borda
+            }}
         />
     );
 };
