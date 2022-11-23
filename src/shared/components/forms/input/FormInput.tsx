@@ -1,8 +1,8 @@
-import { OutlinedInputProps, OutlinedInput } from "@mui/material";
+import { OutlinedInputProps, OutlinedInput,TextFieldProps, TextField} from "@mui/material";
 import { useField } from "@unform/core";
 import { useEffect, useState } from "react";
 
-type TLoginOutlinedInput = OutlinedInputProps & {
+type TLoginOutlinedInput = OutlinedInputProps & TextFieldProps & {
     name: string
 }
 
@@ -21,19 +21,22 @@ export const FormInput: React.FC<TLoginOutlinedInput> = ({ name, ...rest }) => {
     }, [registerField, fieldName, value]);
 
     return (
-        <OutlinedInput
+        <TextField
             {...rest}
             autoComplete="off"
 
+            size="small"
+
             error={!!error}
+            helperText={error}
             defaultValue={defaultValue}
             onKeyDown={() => error ? clearError() : undefined}
 
             value={value}
             onChange={e => setValue(e.target.value)}
-
+            FormHelperTextProps={{style: {fontSize:9, margin:0, padding: 0, backgroundColor: "#fff"}}}
             sx={{
-                "& fieldset": {  border: error ? null : "none"}, //tira a borda
+                "& fieldset": {border: error ? null : "none"}, //tira a borda
             }}
         />
     );

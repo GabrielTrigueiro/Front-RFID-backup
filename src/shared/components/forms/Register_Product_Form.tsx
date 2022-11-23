@@ -66,13 +66,6 @@ export const Register_Product_Form: React.FC<{
                     validandoErros[erros.path] = erros.message;
                 });
                 formRef.current?.setErrors(validandoErros);
-                {erros.inner.map((erro) => (
-                    setSnack(new Snack({
-                        message: erro.message,
-                        color: "error",
-                        open: true
-                    }))
-                ));}
             });
     };
 
@@ -138,7 +131,7 @@ export const Register_Product_Form: React.FC<{
                         <Box className="form"
                             sx={{
                                 width: "90%",
-                                height: "100%",
+                                maxHeight: "100%",
                                 display: "flex",
                                 flexDirection: "column",
                                 justifyContent: "center"
@@ -146,8 +139,8 @@ export const Register_Product_Form: React.FC<{
                             }}
                         >
                             <FormControl sx={{ margin: 1 }} size="small" className="input">
-                                <InputLabel>Nome do Produto</InputLabel>
                                 <FormInput
+                                    error
                                     name="description"
                                     type="text"
                                     label="Nome do Produto"
@@ -157,7 +150,6 @@ export const Register_Product_Form: React.FC<{
                             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                                 <Box sx={{ display: "flex", flexDirection: "column", width: "50%" }}>
                                     <FormControl sx={{ margin: 1, borderRadius: 1 }} size="small" className="input">
-                                        <InputLabel>Quantidade</InputLabel>
                                         <FormInput
                                             name="quantity"
                                             type="text"
@@ -166,9 +158,7 @@ export const Register_Product_Form: React.FC<{
                                     </FormControl>
 
                                     <FormControl sx={{ margin: 1, borderRadius: 1 }} size="small" className="input">
-                                        <InputLabel>Id de referência</InputLabel>
                                         <FormInput
-                                           
                                             name="productReferenceId"
                                             type="text"
                                             label="Id de referência"
@@ -177,7 +167,6 @@ export const Register_Product_Form: React.FC<{
 
 
                                     <FormControl sx={{ margin: 1, borderRadius: 1 }} size="small" className="input">
-                                        <InputLabel>Tamanho</InputLabel>
                                         <FormInput
                                             name="size"
                                             type="text"
@@ -186,7 +175,6 @@ export const Register_Product_Form: React.FC<{
                                     </FormControl>
 
                                     <FormControl sx={{ margin: 1, borderRadius: 1 }} size="small" className="input">
-                                        <InputLabel>Cor</InputLabel>
                                         <FormInput
                                             name="color"
                                             type="text"
@@ -197,7 +185,6 @@ export const Register_Product_Form: React.FC<{
 
                                 <Box sx={{ display: "flex", flexDirection: "column", width: "50%" }}>
                                     <FormControl sx={{ margin: 1, borderRadius: 1 }} size="small" className="input">
-                                        <InputLabel>Preço</InputLabel>
                                         <FormInput
                                             name="price"
                                             type="number"
@@ -206,7 +193,6 @@ export const Register_Product_Form: React.FC<{
                                     </FormControl>
 
                                     <FormControl sx={{ margin: 1, borderRadius: 1 }} size="small" className="input">
-                                        <InputLabel>Id de fornecimento</InputLabel>
                                         <FormInput
                                             name="supplierId"
                                             type="text"
@@ -215,7 +201,6 @@ export const Register_Product_Form: React.FC<{
                                     </FormControl>
 
                                     <FormControl sx={{ margin: 1, borderRadius: 1 }} size="small" className="input">
-                                        <InputLabel>Genero</InputLabel>
                                         <FormInput
                                             name="genre"
                                             type="text"
@@ -224,7 +209,6 @@ export const Register_Product_Form: React.FC<{
                                     </FormControl>
 
                                     <FormControl sx={{ margin: 1, borderRadius: 1 }} size="small" className="input">
-                                        <InputLabel>Tipo</InputLabel>
                                         <FormInput
                                             name="type"
                                             type="text"

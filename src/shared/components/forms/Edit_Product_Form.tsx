@@ -152,7 +152,6 @@ export const Edit_Product_Form: React.FC<{
                             }}
                         >
                             <FormControl sx={{ margin: 1 }} size="small" className="input">
-                                <InputLabel>Nome do Produto</InputLabel>
                                 <FormInput
                                     name="description"
                                     type="text"
@@ -163,7 +162,6 @@ export const Edit_Product_Form: React.FC<{
                             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                                 <Box sx={{ display: "flex", flexDirection: "column", width: "50%" }}>
                                     <FormControl sx={{ margin: 1, borderRadius: 1 }} size="small" className="input">
-                                        <InputLabel>Quantidade</InputLabel>
                                         <FormInput
                                             name="quantity"
                                             type="text"
@@ -172,7 +170,6 @@ export const Edit_Product_Form: React.FC<{
                                     </FormControl>
 
                                     <FormControl sx={{ margin: 1, borderRadius: 1 }} size="small" className="input">
-                                        <InputLabel>Id de referência</InputLabel>
                                         <FormInput
                                            
                                             name="productReferenceId"
@@ -183,7 +180,6 @@ export const Edit_Product_Form: React.FC<{
 
 
                                     <FormControl sx={{ margin: 1, borderRadius: 1 }} size="small" className="input">
-                                        <InputLabel>Tamanho</InputLabel>
                                         <FormInput
                                             name="size"
                                             type="text"
@@ -192,7 +188,6 @@ export const Edit_Product_Form: React.FC<{
                                     </FormControl>
 
                                     <FormControl sx={{ margin: 1, borderRadius: 1 }} size="small" className="input">
-                                        <InputLabel>Cor</InputLabel>
                                         <FormInput
                                             name="color"
                                             type="text"
@@ -203,7 +198,6 @@ export const Edit_Product_Form: React.FC<{
 
                                 <Box sx={{ display: "flex", flexDirection: "column", width: "50%" }}>
                                     <FormControl sx={{ margin: 1, borderRadius: 1 }} size="small" className="input">
-                                        <InputLabel>Preço</InputLabel>
                                         <FormInput
                                             name="price"
                                             type="number"
@@ -212,7 +206,6 @@ export const Edit_Product_Form: React.FC<{
                                     </FormControl>
 
                                     <FormControl sx={{ margin: 1, borderRadius: 1 }} size="small" className="input">
-                                        <InputLabel>Id de fornecimento</InputLabel>
                                         <FormInput
                                             name="supplierId"
                                             type="text"
@@ -221,7 +214,6 @@ export const Edit_Product_Form: React.FC<{
                                     </FormControl>
 
                                     <FormControl sx={{ margin: 1, borderRadius: 1 }} size="small" className="input">
-                                        <InputLabel>Genero</InputLabel>
                                         <FormInput
                                             name="genre"
                                             type="text"
@@ -230,7 +222,6 @@ export const Edit_Product_Form: React.FC<{
                                     </FormControl>
 
                                     <FormControl sx={{ margin: 1, borderRadius: 1 }} size="small" className="input">
-                                        <InputLabel>Tipo</InputLabel>
                                         <FormInput
                                             name="type"
                                             type="text"

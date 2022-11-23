@@ -17,14 +17,14 @@ export const ProductRegisterSchema: Yup.Schema<IProduct> = Yup.object().shape({
     productReferenceId: Yup.string().required("Campo Obrigatório"),
     codesRFID:          Yup.array().min(1).required(),
     supplierId:         Yup.string().required("Campo Obrigatório"),
-    price:              Yup.number().required("Campo Obrigatório"),
+    price:              Yup.number().typeError("Preencher com números").min(0).required("Campo Obrigatório"),
     description:        Yup.string().required("Campo Obrigatório"),
 
     type:               Yup.string().required("Campo Obrigatório"),
     genre:              Yup.string().required("Campo Obrigatório"),
     color:              Yup.string().required("Campo Obrigatório"),
     size:               Yup.string().required("Campo Obrigatório"),
-    quantity:           Yup.number().required("Campo Obrigatório"),
+    quantity:           Yup.number().typeError("Preencher com números").min(0).required("Campo Obrigatório"),
 });
 
 export const Product_Page = () => {
