@@ -38,15 +38,11 @@ export const Register_Product_Form: React.FC<{
     };
 
     const handleSave = (dados: IProduct) => {
-        console.log(dados);
-        console.log("save");
         ProductRegisterSchema
             .validate(dados, { abortEarly: false })
             .then((dadosValidados) => {
-                console.log(dadosValidados);
                 Product_Service.Create(dadosValidados).then((result) => {
                     if (result instanceof AxiosError) {
-                        console.log(result.response?.data.message,);
                         setSnack(new Snack({
                             message: result.response?.data.message,
                             color: "error",
@@ -68,13 +64,15 @@ export const Register_Product_Form: React.FC<{
                 erros.inner.forEach((erros) => {
                     if (!erros.path) return;
                     validandoErros[erros.path] = erros.message;
-                    setSnack(new Snack({
-                        message: "Quantidade mínima de digitos não respeitada",
-                        color: "error",
-                        open: true
-                    }));
                 });
                 formRef.current?.setErrors(validandoErros);
+                {erros.inner.map((erro) => (
+                    setSnack(new Snack({
+                        message: erro.message,
+                        color: "error",
+                        open: true
+                    }))
+                ));}
             });
     };
 
@@ -86,7 +84,6 @@ export const Register_Product_Form: React.FC<{
                 className="product-form"
                 onSubmit={(dados) => {
                     dados.codesRFID = RFIDColection;
-                    console.log(formRef);
                     handleSave(dados);
                 }}
             >
