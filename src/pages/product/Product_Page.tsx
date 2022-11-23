@@ -11,25 +11,20 @@ import { Product_Table } from "../../shared/components/table/product-table";
 import { Snack, SnackbarContext } from "../../shared/context/AlertCardContext";
 import { ContentLayout } from "../../shared/layout";
 import { IProduct, ISendPagination, Product_Service } from "../../shared/service/api/products";
-
 import "./style.css";
 
-export const ProductRegisterSchema: Yup.SchemaOf<IProduct> = Yup.object().shape({
-    id: Yup.string(),
+export const ProductRegisterSchema: Yup.Schema<IProduct> = Yup.object().shape({
     productReferenceId: Yup.string().required("Campo Obrigatório"),
-    codeRFID:     Yup.string().required("Campo Obrigatório"),
-    companyId:    Yup.string().required("Campo Obrigatório"),
-    supplierId:   Yup.string().required("Campo Obrigatório"),
-    price:        Yup.number().required("Campo Obrigatório"),
-    description:  Yup.string().required("Campo Obrigatório"),
-    info:         Yup.string().required("Campo Obrigatório"),
+    codesRFID:          Yup.array().min(1).required(),
+    supplierId:         Yup.string().required("Campo Obrigatório"),
+    price:              Yup.number().required("Campo Obrigatório"),
+    description:        Yup.string().required("Campo Obrigatório"),
 
-    Tipo:         Yup.string().required("Campo Obrigatório"),
-    Genero:       Yup.string().required("Campo Obrigatório"),
-    Cor:          Yup.string().required("Campo Obrigatório"),
-    Tamanho:      Yup.string().required("Campo Obrigatório"),
-    Quantidade:   Yup.string().required("Campo Obrigatório"),
-
+    type:               Yup.string().required("Campo Obrigatório"),
+    genre:              Yup.string().required("Campo Obrigatório"),
+    color:              Yup.string().required("Campo Obrigatório"),
+    size:               Yup.string().required("Campo Obrigatório"),
+    quantity:           Yup.number().required("Campo Obrigatório"),
 });
 
 export const Product_Page = () => {
@@ -91,9 +86,11 @@ export const Product_Page = () => {
     //func para registrar produto
     const handleSave = (dados: IProduct) => {
         console.log(dados);
+        console.log("save");
         ProductRegisterSchema
             .validate(dados, { abortEarly: false })
             .then((dadosValidados) => {
+                console.log(dadosValidados);
                 Product_Service.Create(dadosValidados).then((result) => {
                     if (result instanceof AxiosError) {
                         console.log(result.response?.data.message,);
@@ -114,7 +111,7 @@ export const Product_Page = () => {
                 });
             })
             .catch((erros: Yup.ValidationError) => {
-                console.log("atumalaka");
+                console.log(erros.errors);
                 const validandoErros: { [key: string]: string } = {};
                 erros.inner.forEach(erros => {
                     if (!erros.path) return;

@@ -42,21 +42,21 @@ export const Product_Table: React.FC<{
                         produto={row}
                         update={update}
 
-                        key={row.codeRFID}
+                        key={row.description}
 
                         productReferenceId={row.productReferenceId}
-                        codeRFID={row.codeRFID}
+                        codesRFID={row.codesRFID}
                         companyId={row.companyId}
                         supplierId={row.supplierId}
                         price={row.price}
                         description={row.description}
                         info={row.info}
 
-                        Tipo={row.Tipo}
-                        Genero={row.Genero}
-                        Cor={row.Cor}
-                        Tamanho={row.Tamanho}
-                        Quantidade={row.Quantidade}
+                        type={row.type}
+                        genre={row.genre}
+                        color={row.color}
+                        size={row.size}
+                        quantity={row.quantity}
                     />
                 ))}
             </ImageList>

@@ -66,7 +66,7 @@ export const Login: React.FC = () => {
     }, []);
 
     //yup
-    const schema: Yup.SchemaOf<State> = Yup.object().shape({
+    const schema: Yup.Schema<State> = Yup.object().shape({
         usuario:
       Yup.string()
           .required("Campo obrigatório")
@@ -126,6 +126,7 @@ export const Login: React.FC = () => {
                         label="Usuário"
                         value={values.usuario}
                         onChange={handleChange("usuario")}
+                        
                         endAdornment={
                             <InputAdornment position="end">
                                 <PersonOutlineOutlinedIcon />

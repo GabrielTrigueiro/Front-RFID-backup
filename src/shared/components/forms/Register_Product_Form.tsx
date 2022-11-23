@@ -7,7 +7,6 @@ import { IProduct } from "../../service/api";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
 import "./register_Product.css";
 import { Register_RFID, RFID_List } from "../RFID";
-import { style } from "@mui/system";
 
 export const Register_Product_Form: React.FC<{
     saveProduct: (e: IProduct) => void
@@ -39,7 +38,11 @@ export const Register_Product_Form: React.FC<{
             <Form
                 ref={formRef}
                 className="product-form"
-                onSubmit={(dados) => saveProduct(dados)}
+                onSubmit={(dados) => {
+                    dados.codesRFID = RFIDColection;
+                    console.log("aqui");
+                    saveProduct(dados);
+                }}
             >
                 <Box className="tittle">
                         Cadastrar
@@ -102,7 +105,7 @@ export const Register_Product_Form: React.FC<{
                             <FormControl sx={{ margin: 1 }} size="small" className="input">
                                 <InputLabel>Nome do Produto</InputLabel>
                                 <FormInput
-                                    name="info"
+                                    name="description"
                                     type="text"
                                     label="Nome do Produto"
                                 />
@@ -113,7 +116,7 @@ export const Register_Product_Form: React.FC<{
                                     <FormControl sx={{ margin: 1, borderRadius: 1 }} size="small" className="input">
                                         <InputLabel>Quantidade</InputLabel>
                                         <FormInput
-                                            name="Quantidade"
+                                            name="quantity"
                                             type="text"
                                             label="Quantidade"
                                         />
@@ -132,7 +135,7 @@ export const Register_Product_Form: React.FC<{
                                     <FormControl sx={{ margin: 1, borderRadius: 1 }} size="small" className="input">
                                         <InputLabel>Tamanho</InputLabel>
                                         <FormInput
-                                            name="Tamanho"
+                                            name="size"
                                             type="text"
                                             label="Tamanho"
                                         />
@@ -141,7 +144,7 @@ export const Register_Product_Form: React.FC<{
                                     <FormControl sx={{ margin: 1, borderRadius: 1 }} size="small" className="input">
                                         <InputLabel>Cor</InputLabel>
                                         <FormInput
-                                            name="Cor"
+                                            name="color"
                                             type="text"
                                             label="Cor"
                                         />
@@ -170,7 +173,7 @@ export const Register_Product_Form: React.FC<{
                                     <FormControl sx={{ margin: 1, borderRadius: 1 }} size="small" className="input">
                                         <InputLabel>Genero</InputLabel>
                                         <FormInput
-                                            name="Gênero"
+                                            name="genre"
                                             type="text"
                                             label="Genero"
                                         />
@@ -179,7 +182,7 @@ export const Register_Product_Form: React.FC<{
                                     <FormControl sx={{ margin: 1, borderRadius: 1 }} size="small" className="input">
                                         <InputLabel>Tipo</InputLabel>
                                         <FormInput
-                                            name="Tipo"
+                                            name="type"
                                             type="text"
                                             label="Tipo"
                                         />

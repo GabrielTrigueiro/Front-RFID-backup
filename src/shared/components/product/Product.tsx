@@ -22,7 +22,7 @@ type TInfoProduct = IProduct & {
 export const Product: React.FC<TInfoProduct> = ({
     description,
     info,
-    codeRFID,
+    codesRFID,
     update,
     produto,
     saveProduct
@@ -133,7 +133,7 @@ export const Product: React.FC<TInfoProduct> = ({
                     <Box sx={{width:"100%", display:"flex", justifyContent:"space-between"}}>
                         <Box>
                             <Typography fontSize={"12px"} fontWeight={500} color={"#505050"}>Descrição: {produto.description}</Typography>
-                            <Typography fontSize={"12px"} fontWeight={500} color={"#505050"}>{produto.Quantidade}</Typography>
+                            <Typography fontSize={"12px"} fontWeight={500} color={"#505050"}>{produto.quantity}</Typography>
                         </Box>
                         <Box>
                             <IconButton

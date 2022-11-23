@@ -6,21 +6,19 @@ import {environment}  from "../../../environment";
 export interface IProduct{
     id?: string
     
-    productReferenceId: string
-    codeRFID: string
-    companyId: string
-    supplierId: string
-    price: number
+    codesRFID: Array<string>
+    color:string
     description: string
-    info: string
-
-    Tipo:string
-    Genero:string
-    Cor:string
-    Tamanho:string
-    Quantidade:string
-    //Active?: boolean
-    // createAt: date
+    genre:string
+    price: number
+    productReferenceId: string
+    quantity:number
+    size:string
+    supplierId: string
+    type:string
+    
+    companyId?: string
+    info?: string
 }
 
 //o que vai ser recebido da api

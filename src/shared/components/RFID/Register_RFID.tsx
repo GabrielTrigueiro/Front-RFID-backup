@@ -1,6 +1,5 @@
-import { Box, Modal, Divider, Typography, Button, TextField, Grid, ImageList, Chip } from "@mui/material";
-import { equal } from "assert";
-import { useEffect, useState } from "react";
+import { Box, Modal, Divider, Typography, Button, TextField, ImageList, Chip } from "@mui/material";
+import { useState } from "react";
 
 interface RFID {
     id: string

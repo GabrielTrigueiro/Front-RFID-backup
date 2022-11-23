@@ -17,7 +17,7 @@ export interface newUser_data {
 }
 
 //avaliar erros de preenchimento ao criar user
-const UserRegisterSchema: Yup.SchemaOf<newUser_data> = Yup.object().shape({
+const UserRegisterSchema: Yup.Schema<newUser_data> = Yup.object().shape({
     username:   Yup.string().required("Campo Obrigatório"),
     password:   Yup.string().required("Campo Obrigatório"),
     roles:      Yup.string().required("Campo Obrigatório"),

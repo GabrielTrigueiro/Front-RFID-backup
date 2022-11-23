@@ -19,7 +19,7 @@
     "react-router-dom": "6",
     "react-scripts": "5.0.0",
     "sass": "^1.54.4",
-    "yup": "^0.32.11"
+    "yup": "1.0.0-beta.8"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.1",
