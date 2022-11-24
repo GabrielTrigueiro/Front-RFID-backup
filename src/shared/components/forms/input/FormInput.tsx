@@ -28,7 +28,7 @@ export const FormInput: React.FC<TLoginOutlinedInput> = ({ name, ...rest }) => {
             size="small"
 
             error={!!error}
-            helperText={error}
+            //helperText={error}
             defaultValue={defaultValue}
             onKeyDown={() => error ? clearError() : undefined}
 

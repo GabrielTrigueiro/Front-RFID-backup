@@ -1,4 +1,4 @@
-import { Box, FormControl, InputLabel, Button, Divider, Chip, ImageList, Typography } from "@mui/material";
+import { Box, FormControl, Button, Divider, Chip, ImageList, Typography } from "@mui/material";
 import { Form } from "@unform/web";
 import { FormInput } from "./input";
 import { useRef, useState, useContext } from "react";
@@ -11,6 +11,8 @@ import { AxiosError } from "axios";
 import { ProductRegisterSchema } from "../../../pages";
 import { Snack, SnackbarContext } from "../../context/AlertCardContext";
 import Yup from "yup";
+import { ToastNotification } from "../notifications/Notifications";
+import { toast } from "react-toastify";
 
 export const Register_Product_Form: React.FC<{
     RegisterClose: ()=> void
@@ -64,6 +66,7 @@ export const Register_Product_Form: React.FC<{
                 erros.inner.forEach((erros) => {
                     if (!erros.path) return;
                     validandoErros[erros.path] = erros.message;
+                    ToastNotification(erros.message, "error");
                 });
                 formRef.current?.setErrors(validandoErros);
             });
