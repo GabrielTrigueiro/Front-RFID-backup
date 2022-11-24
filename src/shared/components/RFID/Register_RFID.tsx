@@ -1,5 +1,6 @@
 import { Box, Modal, Divider, Typography, Button, TextField, ImageList, Chip } from "@mui/material";
 import { useEffect, useState } from "react";
+import { Notification } from "../notifications";
 
 interface RFID {
     id: string
@@ -21,11 +22,12 @@ export const Register_RFID: React.FC<{
 
     //func para validar se existe RFID repetido
     const validate = (e:string) =>{
-        // console.log(RFIDLIST.filter(id => id == e).length)
         const aux = RFIDLIST.find(id => id == e);
         if(!aux){
             RFIDLIST.push(e);
-            //RFIDLIST.push(e?.replace("[^0-9]", "ig"))
+        }
+        else{
+            Notification("RFID repetido", "error");
         }
     };
 
@@ -194,7 +196,7 @@ export const Register_RFID: React.FC<{
                             <Button variant="contained"
                                 onClick={()=>{
                                     //coleção prévia atualiza coleção, sem coleção cria uma nova
-                                    setFatherList(FatherList ? FatherList.filter(item => !RFIDLIST.includes(item)) : RFIDLIST);
+                                    setFatherList(FatherList ? FatherList.filter(item => RFIDLIST.includes(item)) : RFIDLIST);
                                     handleClose();
                                 }}
                             >   
