@@ -4,14 +4,11 @@ import { BaseModal, Register_User_Modal, UserTable, User_Form } from "../../shar
 import { ContentLayout } from "../../shared/layout";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import { ISendUserPagination, IUser, User_Service } from "../../shared/service/api/users";
-import { SnackbarContext } from "../../shared/context/AlertCardContext";
 
 export const Users = () => {
 
-
     const [isLoading, setIsLoading] = useState(true);
     const [rows, setRows] = useState<IUser[]>([]);
-    const { setSnack } = useContext(SnackbarContext);
 
     //gerenciar páginas
     const [pages, setPages] = useState<number>(0);

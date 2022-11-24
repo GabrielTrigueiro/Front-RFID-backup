@@ -9,3 +9,4 @@ export * from "./product";
 export * from "./dialog";
 export * from "./RFID";
 export * from "./skeletons";
+export * from "./notifications";

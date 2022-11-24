@@ -8,7 +8,6 @@ import { useContext, useEffect, useRef, useState } from "react";
 import * as Yup from "yup";
 import { ProductPageSkeleton, Product_Modal, Register_Product_Form, SearchInput } from "../../shared/components";
 import { Product_Table } from "../../shared/components/table/product-table";
-import { Snack, SnackbarContext } from "../../shared/context/AlertCardContext";
 import { ContentLayout } from "../../shared/layout";
 import { IProduct, ISendPagination, Product_Service } from "../../shared/service/api/products";
 import "./style.css";
@@ -29,7 +28,6 @@ export const ProductRegisterSchema: Yup.Schema<IProduct> = Yup.object().shape({
 
 export const Product_Page = () => {
 
-    const { setSnack } = useContext(SnackbarContext);
     const formRef = useRef<FormHandles>(null);
     const [rows, setRows] = useState<IProduct[]>([]);
 

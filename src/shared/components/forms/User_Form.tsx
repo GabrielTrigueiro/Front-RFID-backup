@@ -7,7 +7,7 @@ import { FormHandles } from "@unform/core";
 import * as Yup from "yup";
 import { AxiosError } from "axios";
 import { IUser, User_Service } from "../../service/api";
-import { Snack, SnackbarContext } from "../../context";
+import { Notification } from "../notifications";
 
 //dados novo usario
 export interface newUser_data {
@@ -43,9 +43,6 @@ export const User_Form: React.FC<{
         setNewUser({ ...newUser, [prop]: event.target.value });
     };
 
-    //func para usar o toast Alert
-    const { setSnack } = useContext(SnackbarContext);
-
     //func para registrar usuário
     const handleSave = (dados: newUser_data) => {
         console.log(dados);
@@ -55,17 +52,9 @@ export const User_Form: React.FC<{
                 User_Service.Create(dadosValidados).then((result) => {
                     if (result instanceof AxiosError) {
                         console.log(result.response?.data.message,);
-                        setSnack(new Snack({
-                            message: result.response?.data.message,
-                            color: "error",
-                            open: true
-                        }));
+                        Notification(result.message, "error");
                     } else {
-                        setSnack(new Snack({
-                            message: "Produto cadastrado com sucesso",
-                            color: "success",
-                            open: true
-                        }));
+                        Notification(result.message, "success");
                         //handleClose()
                         update();
                     }

@@ -1,4 +1,4 @@
-import { Box, FormControl, InputLabel, Button, Divider, Chip, ImageList, Typography } from "@mui/material";
+import { Box, FormControl, Button, Divider, Chip, ImageList, Typography } from "@mui/material";
 import { Form } from "@unform/web";
 import { FormInput } from "./input";
 import { useRef, useState, useContext, useEffect } from "react";
@@ -9,8 +9,8 @@ import "./register_Product.css";
 import { Register_RFID, RFID_List } from "../RFID";
 import { AxiosError } from "axios";
 import { ProductRegisterSchema } from "../../../pages";
-import { Snack, SnackbarContext } from "../../context/AlertCardContext";
 import Yup from "yup";
+import { Notification } from "../notifications";
 
 export const Edit_Product_Form: React.FC<{
     RegisterClose: ()=> void
@@ -22,8 +22,6 @@ export const Edit_Product_Form: React.FC<{
     product,
 }) => {
     
-    const { setSnack } = useContext(SnackbarContext);
-
     //props form
     const formRef = useRef<FormHandles>(null);
 
@@ -52,17 +50,10 @@ export const Edit_Product_Form: React.FC<{
                 if (product.id)
                     Product_Service.UpdateById(product.id, dadosValidados).then((result) => {
                         if (result instanceof AxiosError) {
-                            setSnack(new Snack({
-                                message: result.response?.data.message,
-                                color: "error",
-                                open: true
-                            }));
-                        } else {
-                            setSnack(new Snack({
-                                message: "Produto cadastrado com sucesso",
-                                color: "success",
-                                open: true
-                            }));
+                            Notification(result.message, "error");
+                        }
+                        else {
+                            Notification(result.message, "success");
                             RegisterClose();
                             update();
                         }
@@ -73,15 +64,9 @@ export const Edit_Product_Form: React.FC<{
                 erros.inner.forEach((erros) => {
                     if (!erros.path) return;
                     validandoErros[erros.path] = erros.message;
+                    Notification(erros.message, "error");
                 });
                 formRef.current?.setErrors(validandoErros);
-                {erros.inner.map((erro) => (
-                    setSnack(new Snack({
-                        message: erro.message,
-                        color: "error",
-                        open: true
-                    }))
-                ));}
             });
     };
 

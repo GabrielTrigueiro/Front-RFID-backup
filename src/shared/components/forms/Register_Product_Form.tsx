@@ -9,20 +9,14 @@ import "./register_Product.css";
 import { Register_RFID, RFID_List } from "../RFID";
 import { AxiosError } from "axios";
 import { ProductRegisterSchema } from "../../../pages";
-import { Snack, SnackbarContext } from "../../context/AlertCardContext";
 import Yup from "yup";
-import { ToastNotification } from "../notifications/Notifications";
-import { toast } from "react-toastify";
+import { Notification } from "../notifications/Notifications";
 
-export const Register_Product_Form: React.FC<{
-    RegisterClose: ()=> void
-    update: ()=> void
-}> = ({
+export const Register_Product_Form: React.FC<{RegisterClose: ()=> void, update: ()=> void}> = ({
     RegisterClose,
     update
 }) => {
     
-    const { setSnack } = useContext(SnackbarContext);
     //props form
     const formRef = useRef<FormHandles>(null);
     //gerenciar modal RFID
@@ -48,17 +42,10 @@ export const Register_Product_Form: React.FC<{
             .then((dadosValidados) => {
                 Product_Service.Create(dadosValidados).then((result) => {
                     if (result instanceof AxiosError) {
-                        setSnack(new Snack({
-                            message: result.response?.data.message,
-                            color: "error",
-                            open: true
-                        }));
-                    } else {
-                        setSnack(new Snack({
-                            message: "Produto cadastrado com sucesso",
-                            color: "success",
-                            open: true
-                        }));
+                        Notification(result.response?.data.message, "error");
+                    }
+                    else {
+                        Notification(result.message, "success");
                         RegisterClose();
                         update();
                     }
@@ -69,7 +56,7 @@ export const Register_Product_Form: React.FC<{
                 erros.inner.forEach((erros) => {
                     if (!erros.path) return;
                     validandoErros[erros.path] = erros.message;
-                    ToastNotification(erros.message, "error");
+                    Notification(erros.message, "error");
                 });
                 formRef.current?.setErrors(validandoErros);
             });

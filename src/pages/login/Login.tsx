@@ -1,15 +1,14 @@
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import {
-    Button, Checkbox, CircularProgress, FormControl, FormControlLabel, FormGroup, InputAdornment, InputLabel
+    Button, Checkbox, CircularProgress, FormControl, FormControlLabel, FormGroup, InputAdornment
 } from "@mui/material";
 import { FormHandles } from "@unform/core";
 import { Form } from "@unform/web";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Navigate } from "react-router-dom";
 import * as Yup from "yup";
-import { FormInput } from "../../shared/components";
-import { Snack, SnackbarContext } from "../../shared/context/AlertCardContext";
+import { FormInput, Notification } from "../../shared/components";
 import { useAuthContext } from "../../shared/context/AuthContext";
 import { Card_Page_Layout } from "../../shared/layout/Card_Page_layout";
 import "./style.css";
@@ -23,7 +22,6 @@ interface State {
 //pagina de login
 export const Login: React.FC = () => {
     const { isAuthenticated, login } = useAuthContext();
-    const { setSnack } = useContext(SnackbarContext);
     const timer = useRef<number>();
     const [success, setSuccess] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -86,19 +84,12 @@ export const Login: React.FC = () => {
                 handleButtonClick();
             })
             .catch((erros: Yup.ValidationError) => {
-                setSnack(new Snack({
-                    message: "Quantidade mínima de digitos não respeitada",
-                    color: "error",
-                    open: true
-                }));
-
                 const validandoErros: { [key: string]: string } = {};
-
                 erros.inner.forEach((erros) => {
                     if (!erros.path) return;
                     validandoErros[erros.path] = erros.message;
+                    Notification(erros.message, "error");
                 });
-
                 formRef.current?.setErrors(validandoErros);
             });
     };
@@ -115,11 +106,7 @@ export const Login: React.FC = () => {
                 <FormControl
                     className="form-item"
                 >
-                    <InputLabel htmlFor="outlined-adornment-user">
-            Usuário
-                    </InputLabel>
                     <FormInput
-                        sx={{"& fieldset": { border: "-moz-initial" },}}
                         name="usuario"
                         autoComplete="off"
                         type={"text"}
@@ -139,9 +126,6 @@ export const Login: React.FC = () => {
                     sx={{ marginTop: "10px" }}
                     className="form-item"
                 >
-                    <InputLabel htmlFor="outlined-adornment-password">
-            Senha
-                    </InputLabel>
                     <FormInput
                         sx={{"& fieldset": { border: "-moz-initial" },}}
                         name="password"

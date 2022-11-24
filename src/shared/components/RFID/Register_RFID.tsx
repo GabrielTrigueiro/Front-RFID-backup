@@ -1,6 +1,5 @@
 import { Box, Modal, Divider, Typography, Button, TextField, ImageList, Chip } from "@mui/material";
 import { useEffect, useState } from "react";
-import { Product } from "../product";
 
 interface RFID {
     id: string

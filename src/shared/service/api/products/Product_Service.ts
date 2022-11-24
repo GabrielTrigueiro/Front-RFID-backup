@@ -99,7 +99,7 @@ const Create = async (dados: IProduct): Promise<any | Error> => {
         });
 };
 
-const Delete = async (id: string): Promise<void | Error> => {
+const Delete = async (id: string): Promise<any | Error> => {
     const token = {
         headers:{
             Authorization: 
@@ -118,7 +118,7 @@ const Delete = async (id: string): Promise<void | Error> => {
         });
 };
 
-const UpdateById = async (id: string, dados: IProduct): Promise<void | Error> => {
+const UpdateById = async (id: string, dados: IProduct): Promise<any | Error> => {
     const token = {
         headers:{
             Authorization: 

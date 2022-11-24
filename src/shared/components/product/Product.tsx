@@ -5,11 +5,11 @@ import { Box, Grid, IconButton, Menu, MenuItem, Typography } from "@mui/material
 import { AxiosError } from "axios";
 import { useContext, useState } from "react";
 import place from "../../../assets/camisa.jpg";
-import { Snack, SnackbarContext } from "../../context/AlertCardContext";
 import { IProduct, Product_Service } from "../../service/api/products";
 import { Confirm_Dialog } from "../dialog";
 import { Edit_Product_Form } from "../forms";
 import { Product_Modal } from "../modal";
+import { Notification } from "../notifications";
 
 
 type TInfoProduct = IProduct & {
@@ -26,7 +26,6 @@ export const Product: React.FC<TInfoProduct> = ({
     produto,
 }) => {
   
-    const { setSnack } = useContext(SnackbarContext);
     const [edit, setEdit] = useState<boolean>();
     const [dialog, setDialog] = useState<boolean>(false);
     const menuId = "primary-search-account-menu";
@@ -49,11 +48,7 @@ export const Product: React.FC<TInfoProduct> = ({
         if (e.id)
             Product_Service.Delete(e.id)
                 .then((result) => {
-                    setSnack(new Snack({
-                        message: "Produto removido com sucesso",
-                        color: "success",
-                        open: true
-                    }));
+                    Notification(result.message, "success");
                     console.log(e.id);
                     update();
                 });
