@@ -32,11 +32,12 @@ export const Product: React.FC<TInfoProduct> = ({
     const menuId = "primary-search-account-menu";
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const isMenuOpen = Boolean(anchorEl);
+
     //gerencia modal de edição
     const [editModal, setEditModal] = useState(false);
     const handleEditOpen = () => setEditModal(true);
     const handleEditClose = () => setEditModal(false);
-
+    
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
     };
@@ -57,29 +58,7 @@ export const Product: React.FC<TInfoProduct> = ({
                     update();
                 });
     };
-    //func para editar produto
-    const editProduct = (e: IProduct) => {
-        if (e.id) {
-            Product_Service.UpdateById(e.id, e)
-                .then((result) => {
-                    if(result instanceof AxiosError){
-                        setSnack(new Snack({
-                            message: result.response?.data.message,
-                            color: "error",
-                            open: true
-                        }));
-                    }else{
-                        setSnack(new Snack({
-                            message: "Alterações salvas",
-                            color: "success",
-                            open: true
-                        }));
-                        handleEditClose();
-                        update();
-                    }
-                });
-        }
-    };
+
     const renderMenu = (
         <Menu
             anchorEl={anchorEl}

@@ -1,7 +1,7 @@
 import { Box, FormControl, InputLabel, Button, Divider, Chip, ImageList, Typography } from "@mui/material";
 import { Form } from "@unform/web";
 import { FormInput } from "./input";
-import { useRef, useState, useContext } from "react";
+import { useRef, useState, useContext, useEffect } from "react";
 import { FormHandles } from "@unform/core";
 import { IProduct, Product_Service } from "../../service/api";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
@@ -19,12 +19,14 @@ export const Edit_Product_Form: React.FC<{
 }> = ({
     RegisterClose,
     update,
-    product
+    product,
 }) => {
     
     const { setSnack } = useContext(SnackbarContext);
+
     //props form
     const formRef = useRef<FormHandles>(null);
+
     //gerenciar modal RFID
     const [RFID, setRFID] = useState<boolean>(false);
     const handleOpenRFID = () => {
@@ -33,20 +35,22 @@ export const Edit_Product_Form: React.FC<{
     const handleCloseRFID = () => {
         setRFID(false);
     };
+
     //salvar info do form RFID
     const [RFIDColection, setRFIDColection] = useState<RFID_List>([]);
-    const teste = (e: RFID_List) => {
+
+    //seta a coleção deste componente através do filho
+    const setFatherColection = (e: RFID_List) => {
         setRFIDColection(e);
     };
 
+    //salva a edição
     const handleSaveEdit = (dados: IProduct) => {
         ProductRegisterSchema
             .validate(dados, { abortEarly: false })
             .then((dadosValidados) => {
-                console.log("dados: " +  dados.id);
-                console.log("dadosValidados: " + dadosValidados.id);
-                if (dadosValidados.id)
-                    Product_Service.UpdateById(dadosValidados.id, dadosValidados).then((result) => {
+                if (product.id)
+                    Product_Service.UpdateById(product.id, dadosValidados).then((result) => {
                         if (result instanceof AxiosError) {
                             setSnack(new Snack({
                                 message: result.response?.data.message,
@@ -80,6 +84,11 @@ export const Edit_Product_Form: React.FC<{
                 ));}
             });
     };
+
+    //array RFID com RFID do produto provido do componente pai
+    useEffect(() => {
+        setRFIDColection(product.codesRFID);
+    }, []);
 
     return (
 
@@ -272,7 +281,7 @@ export const Edit_Product_Form: React.FC<{
                                             borderRadius: "4px",
                                         }}
                                     >
-                                        <Typography>nº : {RFIDColection.length}</Typography>
+                                        <Typography>nº : {product.codesRFID.length}</Typography>
                                     </Box>
                                 </Box>
 
@@ -333,7 +342,8 @@ export const Edit_Product_Form: React.FC<{
             </Form>
 
             <Register_RFID
-                setFatherList={teste}
+                FatherList={RFIDColection}
+                setFatherList={setFatherColection}
                 handleClose={handleCloseRFID}
                 open={RFID}
             />

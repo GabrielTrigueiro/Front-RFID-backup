@@ -1,5 +1,6 @@
 import { Box, Modal, Divider, Typography, Button, TextField, ImageList, Chip } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Product } from "../product";
 
 interface RFID {
     id: string
@@ -11,8 +12,9 @@ export const Register_RFID: React.FC<{
     open: boolean,
     handleClose: () => void,
     setFatherList: (e: RFID_List)=> void,
+    FatherList?: RFID_List,
 
-}> = ({ open, handleClose, setFatherList}) => {
+}> = ({ open, handleClose, setFatherList, FatherList}) => {
 
     //consts para manipular lista de RFID
     const [RFIDLIST, setRFIDLIST] = useState<RFID_List>([]);
@@ -46,6 +48,11 @@ export const Register_RFID: React.FC<{
     const handleDelete = (e: string) => {
         setRFIDLIST(RFIDLIST.filter(item => item !== e));
     };
+
+    //se houver uma coleção prévia seta a coleção deste componente para a prévia
+    useEffect(() => {
+        FatherList ? setRFIDLIST(FatherList) : null;
+    }, [FatherList]);
 
     return (
         <Modal
@@ -114,7 +121,7 @@ export const Register_RFID: React.FC<{
                     >
                         <Box sx={{ height: "100%", width: "100%" }}>
                             <Box sx={{padding: 1}}>
-                                <Typography>Quantidade: {RFIDLIST.length}</Typography>
+                                <Typography>Quantidade: {FatherList? FatherList.length : RFIDLIST.length}</Typography>
                             </Box>
                             <Box>
                                 <TextField
@@ -130,7 +137,7 @@ export const Register_RFID: React.FC<{
                                 />
                             </Box>
 
-                            {/* lista dos códigos rfid sendo cadastrados */}
+                            {/* lista dos códigos rfid sendo editados */}
                             <ImageList
                                 sx={{
                                     padding: 2,
@@ -157,14 +164,16 @@ export const Register_RFID: React.FC<{
                                 gap={12}
                                 cols={2}
                             >
-                                {RFIDLIST.map((row) => (
-                                    <Chip 
-                                        key={row}
-                                        sx={{ bgcolor: "#F4F4F4" }}
-                                        label={row}
-                                        onDelete={()=>handleDelete(row)}
-                                    />
-                                ))}
+                                {
+                                    RFIDLIST.map((row) => (
+                                        <Chip 
+                                            key={row}
+                                            sx={{ bgcolor: "#F4F4F4" }}
+                                            label={row}
+                                            onDelete={()=>handleDelete(row)}
+                                        />
+                                    ))
+                                }
                             </ImageList>
                         </Box>
                     </Box>
@@ -185,7 +194,8 @@ export const Register_RFID: React.FC<{
                         <Box>
                             <Button variant="contained"
                                 onClick={()=>{
-                                    setFatherList(RFIDLIST),
+                                    //coleção prévia atualiza coleção, sem coleção cria uma nova
+                                    setFatherList(FatherList ? FatherList.filter(item => !RFIDLIST.includes(item)) : RFIDLIST);
                                     handleClose();
                                 }}
                             >   

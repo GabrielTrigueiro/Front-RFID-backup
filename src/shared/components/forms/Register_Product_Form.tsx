@@ -35,10 +35,13 @@ export const Register_Product_Form: React.FC<{
     };
     //salvar info do form RFID
     const [RFIDColection, setRFIDColection] = useState<RFID_List>([]);
-    const teste = (e: RFID_List) => {
+
+    //seta a coleção deste componente através do filho
+    const setFatherColection = (e: RFID_List) => {
         setRFIDColection(e);
     };
 
+    //salva o produto
     const handleSave = (dados: IProduct) => {
         ProductRegisterSchema
             .validate(dados, { abortEarly: false })
@@ -323,7 +326,7 @@ export const Register_Product_Form: React.FC<{
             </Form>
 
             <Register_RFID
-                setFatherList={teste}
+                setFatherList={setFatherColection}
                 handleClose={handleCloseRFID}
                 open={RFID}
             />
