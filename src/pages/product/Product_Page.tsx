@@ -1,6 +1,6 @@
 import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
-import { Button, Pagination, Typography } from "@mui/material";
-import { SelectChangeEvent } from "@mui/material/Select";
+import { Button, FormControl, InputLabel, MenuItem, Pagination, Typography } from "@mui/material";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { Box } from "@mui/system";
 import { FormHandles } from "@unform/core";
 import { useEffect, useRef, useState } from "react";
@@ -40,7 +40,8 @@ export const Product_Page = () => {
   
     //gerenciar paginas
     const [pages, setPages] = useState<number>(0);
-    const [pageSize, setPageSize] = useState<number>(7);
+    const [size, setSize] = useState<number>(6);
+    const [pageSize, setPageSize] = useState<number>(size);
     const [actualpage, setActualPage] = useState<number>(0);
     const [selectContent, setSelectContent] = useState("");//não foi colocado esse componente ainda
     const [value, setValue] = useState<string>("");
@@ -81,6 +82,11 @@ export const Product_Page = () => {
     const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
         setActualPage(value - 1);
     };
+
+    const changeSize = (event: SelectChangeEvent) => {
+        setSize(Number(event.target.value));
+        setPageSize(Number(event.target.value));
+    };
     
     useEffect(() => {
         update();
@@ -96,6 +102,23 @@ export const Product_Page = () => {
             >
                 <Box mr={5} width={300}>
                     <SearchInput change={(value) => { setValue(value.target.value); }} />
+                </Box>
+                <Box sx={{ minWidth: 120,  mr: 5}}>
+                    <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">Age</InputLabel>
+                        <Select
+                            size="small"
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={String(size)}
+                            label="Items"
+                            onChange={changeSize}
+                        >
+                            <MenuItem value={6}>6</MenuItem>
+                            <MenuItem value={12}>12</MenuItem>
+                            <MenuItem value={20}>20</MenuItem>
+                        </Select>
+                    </FormControl>
                 </Box>
                 <Button variant="contained" onClick={handleOpen}>
                     <AddBoxOutlinedIcon sx={{ pr: 1 }} /> Cadastrar Produto
