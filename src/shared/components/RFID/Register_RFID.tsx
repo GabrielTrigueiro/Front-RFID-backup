@@ -41,8 +41,9 @@ export const Register_RFID: React.FC<{
 
     //func para ler o que está sendo digitado no input
     const handleChange = (prop: keyof RFID) => (event: React.ChangeEvent<HTMLInputElement>) => {
-        setTempRFID(event.target.value);
-        addRFID(event.target.value);
+        const value = event.target.value.replace(/[^A-Z0-9]/ig, "");
+        setTempRFID(value);
+        addRFID(tempRFID);
     };
 
     //func para deletar o RFID

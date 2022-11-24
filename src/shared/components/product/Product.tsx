@@ -70,11 +70,11 @@ export const Product: React.FC<TInfoProduct> = ({
             open={isMenuOpen}
             onClose={handleClose}
         >
-            <MenuItem onClick={()=>handleEditOpen()}>
+            <MenuItem onClick={()=>{handleEditOpen(); handleClose();} }>
                 <BorderColorIcon sx={{ marginRight: 1 }} fontSize="small" />
                 <Typography fontSize={"16px"}>Editar</Typography>
             </MenuItem>
-            <MenuItem onClick={() => setDialog(true)}>
+            <MenuItem onClick={() => {setDialog(true); handleClose();}}>
                 <DeleteOutlineIcon sx={{ marginRight: 1 }} fontSize="small" />
                 <Typography fontSize={"16px"}>Excluir</Typography>
             </MenuItem>

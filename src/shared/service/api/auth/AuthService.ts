@@ -1,4 +1,5 @@
 import { AxiosError } from "axios";
+import { Notification } from "../../../components";
 import { environment } from "../../../environment";
 import { api } from "../axios";
 
@@ -27,7 +28,8 @@ async (username: string, password: string):Promise<any | AxiosError> => {
             return data.data;
         })
         .catch(err => {
-            console.error(err);
+            console.log(err);
+            Notification(err.response.data.message, "error");
         });
 };
 

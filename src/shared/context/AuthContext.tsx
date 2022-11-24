@@ -56,7 +56,7 @@ export const AuthProvider: React.FC = ({children}) =>{
                         );
                         setAcessToken(result.acessToken);
                     }
-                });     
+                });
         },[]
     );
 
