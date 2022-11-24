@@ -105,7 +105,7 @@ export const Product_Page = () => {
                 </Box>
                 <Box sx={{ minWidth: 120,  mr: 5}}>
                     <FormControl fullWidth>
-                        <InputLabel id="demo-simple-select-label">Age</InputLabel>
+                        <InputLabel id="demo-simple-select-label">Items</InputLabel>
                         <Select
                             size="small"
                             labelId="demo-simple-select-label"
