@@ -1,10 +1,9 @@
 import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
-import { Button } from "@mui/material";
+import { Button, Pagination, Typography } from "@mui/material";
 import { SelectChangeEvent } from "@mui/material/Select";
 import { Box } from "@mui/system";
 import { FormHandles } from "@unform/core";
-import { AxiosError } from "axios";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as Yup from "yup";
 import { ProductPageSkeleton, Product_Modal, Register_Product_Form, SearchInput } from "../../shared/components";
 import { Product_Table } from "../../shared/components/table/product-table";
@@ -41,12 +40,10 @@ export const Product_Page = () => {
   
     //gerenciar paginas
     const [pages, setPages] = useState<number>(0);
-    const [pageSize, setPageSize] = useState<number>(20);
+    const [pageSize, setPageSize] = useState<number>(7);
     const [actualpage, setActualPage] = useState<number>(0);
     const [selectContent, setSelectContent] = useState("");//não foi colocado esse componente ainda
-
     const [value, setValue] = useState<string>("");
-
     const ProductPaginationConf: ISendPagination = {
         page: actualpage,
         pageSize: pageSize,
@@ -80,6 +77,10 @@ export const Product_Page = () => {
         setActualPage(0);
         setPageSize(translate);
     };
+
+    const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+        setActualPage(value - 1);
+    };
     
     useEffect(() => {
         update();
@@ -101,15 +102,29 @@ export const Product_Page = () => {
                 </Button>
             </Box>
             <Box height={"100%"}>
-                { loading ? <ProductPageSkeleton/> :
+                {loading ? <ProductPageSkeleton/> :
                     <Product_Table
-                        // vai ser handleEdit saveProduct={handleSave}
                         update={update}
                         lista={rows}
                         actualpage={actualpage + 1}
                         handleChangeArrow={()=>handleChangeArrow}
                         pages={pages}
-                    />}
+                    />
+                }
+                <Box
+                    sx={{
+                        width: "100%",
+                        marginTop: 2,
+                        display:"flex",
+                        justifyContent:"center"
+                    }}
+                >
+                    <Pagination
+                        count={pages}
+                        shape="rounded"
+                        onChange={handleChange}
+                    />
+                </Box>
             </Box>
             <Product_Modal closeModal={handleClose} outState={open}>
                 <Register_Product_Form
