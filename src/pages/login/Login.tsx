@@ -67,12 +67,12 @@ export const Login: React.FC = () => {
     const schema: Yup.Schema<State> = Yup.object().shape({
         usuario:
       Yup.string()
-          .required("Campo obrigatório")
-          .min(6, "Mínimo 6 digitos"),
+          .required("Usuário obrigatório")
+          .min(6, "Usuário mínimo 6 digitos"),
         password:
       Yup.string()
-          .required("Campo obrigatório")
-          .min(4, "Mínimo 4 digitos")
+          .required("Senha obrigatória")
+          .min(4, "Senha mínimo 4 digitos")
     });
 
     //login
@@ -104,6 +104,9 @@ export const Login: React.FC = () => {
                 className="form-login"
             >
                 <FormControl
+                    sx={{
+                        "& fieldset": {border: 1, borderColor: "#6B6B6B"}
+                    }}
                     className="form-item"
                 >
                     <FormInput
@@ -123,7 +126,7 @@ export const Login: React.FC = () => {
                 </FormControl>
 
                 <FormControl
-                    sx={{ marginTop: "10px" }}
+                    sx={{ marginTop: "10px", "& fieldset": {border: 1, borderColor: "#6B6B6B"}}}
                     className="form-item"
                 >
                     <FormInput
