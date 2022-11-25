@@ -22,7 +22,15 @@ export const ProductRegisterSchema: Yup.Schema<IProduct> = Yup.object().shape({
     genre:              Yup.string().required("Campo Obrigatório"),
     color:              Yup.string().required("Campo Obrigatório"),
     size:               Yup.string().required("Campo Obrigatório"),
-    quantity:           Yup.number().typeError("Preencher com números").min(0).required("Campo Obrigatório"),
+    quantity:           Yup.number().typeError("Preencher com números").min(0).required("Campo Obrigatório")
+        .test(
+            "ok",
+            "inválido",
+            function(value){
+                const { codesRFID } = this.parent;
+                return Object.keys(codesRFID).length <= value ? true : false;
+            }   
+        ),
 });
 
 export const Product_Page = () => {
