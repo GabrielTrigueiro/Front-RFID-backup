@@ -1,7 +1,7 @@
 import { Box, FormControl, Button, Divider, Chip, ImageList, Typography } from "@mui/material";
 import { Form } from "@unform/web";
 import { FormInput } from "./input";
-import { useRef, useState, useContext } from "react";
+import React, { useRef, useState } from "react";
 import { FormHandles } from "@unform/core";
 import { IProduct, Product_Service } from "../../service/api";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
@@ -61,6 +61,8 @@ export const Register_Product_Form: React.FC<{RegisterClose: ()=> void, update: 
                 formRef.current?.setErrors(validandoErros);
             });
     };
+
+    const [quantidade, setQuantidade] = useState<string>("");
 
     return (
 
@@ -228,7 +230,12 @@ export const Register_Product_Form: React.FC<{RegisterClose: ()=> void, update: 
                                     }}
                                 >
                                     <Button
-                                        onClick={handleOpenRFID}
+                                        onClick={
+                                            () => {
+                                                handleOpenRFID;
+                                                
+                                            }
+                                        }
                                         variant={"contained"}
                                         sx={{
                                             fontSize: "11px",
@@ -304,7 +311,7 @@ export const Register_Product_Form: React.FC<{RegisterClose: ()=> void, update: 
                         <Button
                             type="submit"
                             variant="contained"
-                            onClick={()=>handleCloseRFID()}
+                            onClick={()=>{handleCloseRFID();}}
                         >
                                 Finalizar
                         </Button>
