@@ -104,12 +104,11 @@ export const Login: React.FC = () => {
                 className="form-login"
             >
                 <FormControl
-                    sx={{
-                        "& fieldset": {border: 1, borderColor: "#6B6B6B"}
-                    }}
+                    sx={{ marginTop: "10px", "& fieldset": {border: 1, borderColor: "#6B6B6B"}}}
                     className="form-item"
                 >
                     <FormInput
+                        sx={{"& fieldset": { border: "-moz-initial" },}}
                         name="usuario"
                         autoComplete="off"
                         type={"text"}

@@ -10,6 +10,7 @@ export const AppRoutes = () => {
     const { setSideBarOption } = useSideBarContext();
 
     useEffect(() => {
+
         setSideBarOption([
             {
                 label: "DashBoard",
