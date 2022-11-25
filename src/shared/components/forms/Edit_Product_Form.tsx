@@ -88,7 +88,7 @@ export const Edit_Product_Form: React.FC<{
                 }}
             >
                 <Box className="tittle">
-                        Cadastrar
+                        Editar
                 </Box>
                 <Divider flexItem />
                 <Box className="form_box"
@@ -266,7 +266,7 @@ export const Edit_Product_Form: React.FC<{
                                             borderRadius: "4px",
                                         }}
                                     >
-                                        <Typography>nº : {product.codesRFID.length}</Typography>
+                                        <Typography>nº : {RFIDColection.length}</Typography>
                                     </Box>
                                 </Box>
 

@@ -60,7 +60,6 @@ export const Register_RFID: React.FC<{
         <Modal
             sx={{ borderRadius: "20px" }}
             open={open}
-            onClose={() => handleClose()}
         >
             <Box
                 sx={{
