@@ -1,9 +1,13 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Dashboard, Historic, Login, NotFound, Product_Page, Users } from "../pages";
 import { Register_User } from "../pages/register_user/Register_User";
 import { useSideBarContext } from "../shared/context/SideBarContext";
 import { Layout } from "../shared/layout";
+
+import AuthVerify from "../shared/service/api/auth/AuthVerify";
+import { useDispatch } from "react-redux";
+import { useAuthContext } from "../shared/context/AuthContext";
 
 export const AppRoutes = () => {
 
