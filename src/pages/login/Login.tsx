@@ -108,7 +108,6 @@ export const Login: React.FC = () => {
                     className="form-item"
                 >
                     <FormInput
-                        sx={{"& fieldset": { border: "-moz-initial" },}}
                         name="usuario"
                         autoComplete="off"
                         type={"text"}
@@ -116,11 +115,11 @@ export const Login: React.FC = () => {
                         value={values.usuario}
                         onChange={handleChange("usuario")}
                         
-                        endAdornment={
-                            <InputAdornment position="end">
-                                <PersonOutlineOutlinedIcon />
-                            </InputAdornment>
-                        }
+                        // endAdornment={
+                        //     <InputAdornment position="end">
+                        //         <PersonOutlineOutlinedIcon />
+                        //     </InputAdornment>
+                        // }
                     />
                 </FormControl>
 
@@ -129,18 +128,18 @@ export const Login: React.FC = () => {
                     className="form-item"
                 >
                     <FormInput
-                        sx={{"& fieldset": { border: "-moz-initial" },}}
                         name="password"
                         autoComplete="off"
                         id="outlined-adornment-password"
                         type={values.showPassword ? "text" : "password"}
                         value={values.password}
                         onChange={handleChange("password")}
-                        endAdornment={
-                            <InputAdornment position="end">
-                                <LockOutlinedIcon />
-                            </InputAdornment>
-                        }
+
+                        // endAdornment={
+                        //     <InputAdornment position="end">
+                        //         <LockOutlinedIcon />
+                        //     </InputAdornment>
+                        // }
                         label="senha"
                     />
                 </FormControl>
