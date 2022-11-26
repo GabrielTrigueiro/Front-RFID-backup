@@ -10,16 +10,13 @@ import { Edit_Product_Form } from "../forms";
 import { Product_Modal } from "../modal";
 import { Notification } from "../notifications";
 
-type TInfoProduct = IProduct & {
+type TInfoProduct =  {
   key: string,
   update: () => void,
   produto: IProduct
 }
 
 export const ListProduct: React.FC<TInfoProduct> = ({
-    description,
-    info,
-    codesRFID,
     update,
     produto,
 }) => {

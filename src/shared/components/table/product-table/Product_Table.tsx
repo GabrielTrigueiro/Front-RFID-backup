@@ -1,7 +1,7 @@
-import { ImageList } from "@mui/material";
+import { ImageList, styled } from "@mui/material";
 import Box from "@mui/material/Box/Box";
 import { IProduct } from "../../../service/api/products";
-import { ListProduct, Product } from "../../product";
+import { ListProduct, BoxProduct } from "../../product";
 
 export const Product_Table: React.FC<{
     update: () => void;
@@ -11,108 +11,59 @@ export const Product_Table: React.FC<{
     actualpage: number;
     type: string;
 }> = ({lista, update, pages, actualpage, handleChangeArrow, type}) => {
+
+    const ProductImageListBox = styled(ImageList) ({
+        gridTemplateColumns: "repeat(auto-fill, minmax(0px, 200px))!important",
+        overflowY: "scroll",
+        height: "100%",
+        justifyContent: "center",
+        "::-webkit-scrollbar": {
+            width: "20px",
+        },
+        "::-webkit-scrollbar-track": {
+            backgroundColor: "transparent"
+        },
+        "::-webkit-scrollbar-thumb": {
+            backgroundColor: "#d6dee1",
+            borderRadius: "20px",
+            border: "6px solid transparent",
+            backgroundClip: "content-box",
+        },
+        "::-webkit-scrollbar-thumb:hover": {
+            backgroundColor: "#a8bbbf"
+        },
+    });
+
     return (
         <>
             {type == "box" ? 
-                <ImageList
-                    sx={{
-                        gridTemplateColumns: "repeat(auto-fill, minmax(0px, 200px))!important", //truque milenar
-                        overflowY: "scroll",
-                        height: "100%",
-                        justifyContent: "center",
-                        "::-webkit-scrollbar": {
-                            width: "20px",
-                        },
-                        "::-webkit-scrollbar-track": {
-                            backgroundColor: "transparent"
-                        },
-                        "::-webkit-scrollbar-thumb": {
-                            backgroundColor: "#d6dee1",
-                            borderRadius: "20px",
-                            border: "6px solid transparent",
-                            backgroundClip: "content-box",
-                        },
-                        "::-webkit-scrollbar-thumb:hover": {
-                            backgroundColor: "#a8bbbf"
-                        },
-                    }}
-                    gap={12}
-                >
+                <ProductImageListBox gap={12}>
                     {lista.map((row) => (
-                        <Product
+                        <BoxProduct
+                            key={row.description}
                             produto={row}
                             update={update}
-
-                            key={row.description}
-
-                            productReferenceId={row.productReferenceId}
-                            codesRFID={row.codesRFID}
-                            companyId={row.companyId}
-                            supplierId={row.supplierId}
-                            price={row.price}
-                            description={row.description}
-                            info={row.info}
-
-                            type={row.type}
-                            genre={row.genre}
-                            color={row.color}
-                            size={row.size}
-                            quantity={row.quantity}
                         />
                     ))}
-                </ImageList>
+                </ProductImageListBox>
                 :
-                <ImageList
+                <ProductImageListBox
                     sx={{
-                        gridTemplateColumns: "repeat(auto-fill, minmax(0px, 200px))!important", //truque milenar
-                        overflowY: "scroll",
-
-                        height: "100%",
                         width: "100%",
-
                         display: "flex",
                         flexDirection: "column",
-
                         alignItems: "center",
-
-                        "::-webkit-scrollbar": {
-                            width: "20px",
-                        },
-                        "::-webkit-scrollbar-track": {
-                            backgroundColor: "transparent"
-                        },
-                        "::-webkit-scrollbar-thumb": {
-                            backgroundColor: "#d6dee1",
-                            borderRadius: "20px",
-                            border: "6px solid transparent",
-                            backgroundClip: "content-box",
-                        },
-                        "::-webkit-scrollbar-thumb:hover": {
-                            backgroundColor: "#a8bbbf"
-                        },
                     }}
                 >
                     {lista.map((row) => (
                         <ListProduct
                             key={row.description}
-
                             produto={row}
                             update={update}
-                            productReferenceId={row.productReferenceId}
-                            codesRFID={row.codesRFID}
-                            companyId={row.companyId}
-                            supplierId={row.supplierId}
-                            price={row.price}
-                            description={row.description}
-                            info={row.info}
-                            type={row.type}
-                            genre={row.genre}
-                            color={row.color}
-                            size={row.size}
-                            quantity={row.quantity}
+   
                         />
                     ))}
-                </ImageList>
+                </ProductImageListBox>
             }
         </>
     );
