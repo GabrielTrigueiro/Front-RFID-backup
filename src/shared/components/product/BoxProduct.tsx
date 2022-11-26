@@ -2,15 +2,13 @@ import BorderColorIcon from "@mui/icons-material/BorderColor";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Box, Grid, IconButton, Menu, MenuItem, Typography } from "@mui/material";
-import { AxiosError } from "axios";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import place from "../../../assets/camisa.jpg";
 import { IProduct, Product_Service } from "../../service/api/products";
 import { Confirm_Dialog } from "../dialog";
 import { Edit_Product_Form } from "../forms";
 import { Product_Modal } from "../modal";
 import { Notification } from "../notifications";
-
 
 type TInfoProduct = IProduct & {
   key: string,

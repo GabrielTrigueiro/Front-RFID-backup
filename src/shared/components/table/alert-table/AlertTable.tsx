@@ -1,15 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
 import {
-    TableContainer,
-    Paper,
-    Table,
-    TableHead,
-    TableRow,
-    TableCell,
-    TableBody,
-    Avatar,
-    Box,
-    Typography,
+    Box, Table, TableBody, TableCell, TableContainer, TableRow, Typography
 } from "@mui/material";
 import { styled } from "@mui/styles";
 import "./styles.css";

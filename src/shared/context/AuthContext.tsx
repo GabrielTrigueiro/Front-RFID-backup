@@ -23,7 +23,7 @@ interface IAuthContext{
 //contexto auth
 const AuthContext = createContext({} as IAuthContext);
 
-//var token do local storage
+//token do local storage
 export const AcessToken = "Acess_Token";
 
 export const AuthProvider: React.FC = ({children}) =>{

@@ -7,10 +7,12 @@ import { useEffect, useRef, useState } from "react";
 import * as Yup from "yup";
 import { ProductPageSkeleton, Product_Modal, Register_Product_Form, SearchInput } from "../../shared/components";
 import { Product_Table } from "../../shared/components/table/product-table";
-import { AcessToken } from "../../shared/context/AuthContext";
 import { ContentLayout } from "../../shared/layout";
 import { IProduct, ISendPagination, Product_Service } from "../../shared/service/api/products";
 import "./style.css";
+
+import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
+import WidgetsIcon from "@mui/icons-material/Widgets";
 
 export const ProductRegisterSchema: Yup.Schema<IProduct> = Yup.object().shape({
     productReferenceId: Yup.string().required("Campo Obrigatório"),
@@ -63,6 +65,12 @@ export const Product_Page = () => {
         value: value,
     };
 
+    //gerenciar layout da lista
+    const [layout, setLayout] = useState<"list" | "box">("box");
+    const changeLayout = () => {
+        layout == "box" ? setLayout("list") : setLayout("box");
+    };
+
     const update = () => {
         Product_Service.getAll(ProductPaginationConf).then((result) => {
             if (result instanceof Error) {
@@ -105,41 +113,54 @@ export const Product_Page = () => {
         <ContentLayout tittle={"Produtos"}>
             <Box
                 mb={"20px"}
-                justifyContent={"flex-end"}
+                justifyContent={"space-between"}
                 display={"flex"}
                 alignItems={"center"}
             >
-                <Box mr={5} width={300}>
-                    <SearchInput change={(value) => { setValue(value.target.value); }} />
-                </Box>
-                <Box sx={{ minWidth: 120,  mr: 5}}>
-                    <FormControl fullWidth>
-                        <InputLabel id="demo-simple-select-label">Items</InputLabel>
-                        <Select
-                            size="small"
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            value={String(size)}
-                            label="Items"
-                            onChange={changeSize}
-                        >
-                            <MenuItem value={6}>6</MenuItem>
-                            <MenuItem value={12}>12</MenuItem>
-                            <MenuItem value={20}>20</MenuItem>
-                        </Select>
-                    </FormControl>
-                </Box>
-                <Button variant="contained" onClick={handleOpen}>
-                    <AddBoxOutlinedIcon sx={{ pr: 1 }} /> Cadastrar Produto
+                <Button
+                    sx={{mr: 5, width: 100, ml: 5}}
+                    variant="contained"
+                    onClick={changeLayout}
+                >
+                    {
+                        layout == "box" ? <WidgetsIcon sx={{mr: 1}}/> : <FormatListBulletedIcon sx={{mr: 1}}/>
+                    }
+                    {layout == "box" ? "Bloco" : "lista" }
                 </Button>
+                <Box sx={{display:"flex"}}>
+                    <Box mr={5} width={300}>
+                        <SearchInput change={(value) => { setValue(value.target.value); }} />
+                    </Box>
+                    <Box sx={{ minWidth: 120,  mr: 5}}>
+                        <FormControl fullWidth>
+                            <InputLabel id="demo-simple-select-label">Items</InputLabel>
+                            <Select
+                                size="small"
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={String(size)}
+                                label="Items"
+                                onChange={changeSize}
+                            >
+                                <MenuItem value={6}>6</MenuItem>
+                                <MenuItem value={12}>12</MenuItem>
+                                <MenuItem value={20}>20</MenuItem>
+                            </Select>
+                        </FormControl>
+                    </Box>
+                    <Button variant="contained" onClick={handleOpen}>
+                        <AddBoxOutlinedIcon sx={{ pr: 1 }} /> Cadastrar Produto
+                    </Button>
+                </Box>
             </Box>
             <Box height={"100%"}>
                 {loading ? <ProductPageSkeleton/> :
                     <Product_Table
                         update={update}
+                        handleChangeArrow={()=>handleChangeArrow}
+                        type={layout}
                         lista={rows}
                         actualpage={actualpage + 1}
-                        handleChangeArrow={()=>handleChangeArrow}
                         pages={pages}
                     />
                 }
