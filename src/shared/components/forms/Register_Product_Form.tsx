@@ -232,8 +232,8 @@ export const Register_Product_Form: React.FC<{RegisterClose: ()=> void, update: 
                                     <Button
                                         onClick={
                                             () => {
-                                                handleOpenRFID;
-                                                
+                                                handleOpenRFID() ;
+                                                console.log(RFID);
                                             }
                                         }
                                         variant={"contained"}
