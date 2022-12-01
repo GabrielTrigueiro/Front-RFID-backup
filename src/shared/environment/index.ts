@@ -7,4 +7,5 @@ export const environment = {
     url_product: URL + "/product/",
     url_users_Search: URL + "/user/search",
     url_users: URL + "/user/",
+    url_user_info: URL + "/user/info",
 };

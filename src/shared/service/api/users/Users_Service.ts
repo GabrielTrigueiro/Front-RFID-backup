@@ -52,6 +52,26 @@ export type TAllUsers = {
     data: IUserPackage
 }
 
+const getUserInfo = async (): Promise<any | Error> => {
+    const token = {
+        headers:{
+            Authorization: 
+          `Bearer ${localStorage.getItem("Acess_Token")?.replace(/"/g,"")}`
+        }
+    };
+    return await api.get(environment.url_user_info, token)
+        .then(data => {
+            if(data instanceof AxiosError){
+                return data;
+            }
+            return data;
+        })
+        .catch(err => {
+            console.error(err);
+            console.log("abacate azul");
+        });
+};
+
 const getAll = async (dados: ISendUserPagination): Promise<any | Error> => {
     const token = {
         headers:{
@@ -134,5 +154,6 @@ export const User_Service = {
     getAll,
     Create,
     Delete,
-    UpdateById
+    UpdateById,
+    getUserInfo
 };
