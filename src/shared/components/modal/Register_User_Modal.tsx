@@ -35,7 +35,7 @@ export const Register_User_Modal: React.FC<props> = ({
 
                         bgcolor:"#fff",
                         borderRadius:"18px",
-                        p: 2
+                        p: 0
                     }}
                 >
                     <Box

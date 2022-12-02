@@ -74,7 +74,10 @@ export const Users = () => {
                     pageSize={pageSize}
                 />
             </Box>
-            <Register_User_Modal outState={open} closeModal={handleClose}>
+            <Register_User_Modal
+                outState={open}
+                closeModal={handleClose}
+            >
                 <User_Form update={update}/>
             </Register_User_Modal>
         </ContentLayout>

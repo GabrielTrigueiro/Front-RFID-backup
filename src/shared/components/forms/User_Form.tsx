@@ -1,13 +1,13 @@
-import { Typography, FormControl, InputLabel, InputAdornment, OutlinedInput, Button } from "@mui/material";
+import { FormControl, Button, Box, Divider } from "@mui/material";
 import { Form } from "@unform/web";
 import { FormInput } from "./input";
-import { FormSelect } from "./input/FormSelect";
-import { useContext, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { FormHandles } from "@unform/core";
 import * as Yup from "yup";
 import { AxiosError } from "axios";
-import { IUser, User_Service } from "../../service/api";
+import { User_Service } from "../../service/api";
 import { Notification } from "../notifications";
+import UploadFileIcon from "@mui/icons-material/UploadFile";
 
 //dados novo usario
 export interface newUser_data {
@@ -70,68 +70,107 @@ export const User_Form: React.FC<{
             });
     };
 
+    //#6B6B6B cor imput
+
     return (
         <Form
-            className="form-cadastro"
-            ref={formRef}
-            onSubmit={(dados) => {
-                console.log(dados); 
-                handleSave(dados);
+            style={{
+                height: "100%",
+                display: "flex",
+                flexDirection: "column"
             }}
+            ref={formRef}
+            onSubmit={(dados) => {console.log("submit form");}}
         >
-            <Typography
-                fontSize={21}
-                fontWeight={500}
+            <Box
+                sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    padding: 3,
+                }}
             >
-                Cadastrar Usuário
-            </Typography>
-            <FormControl
-                className="form-item"
-                sx={{ mt: "10px" }}
+                Cadastrar
+            </Box>
+            <Divider flexItem />
+
+            {/* INPUTS */}
+            <Box
+                sx={{
+                    flex: 1,    
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center"
+                }}
             >
-                <InputLabel htmlFor="outlined-adornment-user">Usuário</InputLabel>
-                <FormInput
-                    name="usuario"
-                    autoComplete="off"
-                    type={"text"}
-                    label="Usuário"
-                    value={"username"}
-                    // endAdornment={
-                    //     <InputAdornment position="end">
-                    //         <PersonOutlineOutlinedIcon />
-                    //     </InputAdornment>
-                    // }
-                />
-            </FormControl>
-            <FormControl
-                sx={{ marginTop: "10px" }}
-                className="form-item"
-            >
-                <InputLabel htmlFor="outlined-adornment-password">
-                    Senha
-                </InputLabel>
-                <FormInput
-                    name="password"
-                    autoComplete="off"
-                    id="outlined-adornment-password"
-                    label="Senha"
-                    value={"password"}
-                    // endAdornment={
-                    //     <InputAdornment position="end">
-                    //         <LockOutlinedIcon />
-                    //     </InputAdornment>
-                    // }
-                />
-            </FormControl>
-            <FormControl
-                className="form-item" sx={{ marginTop: "10px" }}>
-                <FormSelect name="authority" />
-            </FormControl>
-            <Button
-                type="submit"
-            >
-                Registrar
-            </Button>
-        </Form> 
+                <Box    
+                    sx={{
+                        width: 150,
+                        height: 150,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        bgcolor: "#D9D9D9",
+                        borderRadius: "4px",
+                    }}
+                >
+                    <Button
+                        type="submit"
+                        variant="contained"
+                    >
+                        <UploadFileIcon />Upload
+                    </Button>
+
+                </Box>
+                <Box>
+                    {/* box do formulário começa aqui */}
+                    <Box 
+                        sx={{
+                            display: "flex",
+                            flexDirection: "column"
+                        }}
+                    >
+                        <FormControl>
+                            <FormInput
+                                error
+                                name="username"
+                                type="text"
+                                label="Nome de usuário"
+                            />
+                        </FormControl>
+
+                        <FormControl>
+                            <FormInput
+                                error
+                                name="password"
+                                type="text"
+                                label="Senha"
+                            />
+                        </FormControl>
+
+                        <FormControl>
+                            <FormInput
+                                error
+                                name="password"
+                                type="text"
+                                label="Repetir senha"
+                            />
+                        </FormControl>
+                    </Box>
+                </Box>
+            </Box>
+
+            <Divider flexItem />
+            
+            <Box sx={{padding: 2, display: "flex", justifyContent: "flex-end"}}>
+                <Button
+                    type="submit"
+                    variant="contained"
+                >
+                        Finalizar
+                </Button>
+            </Box>
+            
+        </Form>
     );
 };
