@@ -118,7 +118,7 @@ export const Product_Page = () => {
                 alignItems={"center"}
             >
                 <Button
-                    sx={{mr: 5, width: 100, ml: 5}}
+                    sx={{mr: 5, width: 100}}
                     variant="contained"
                     onClick={changeLayout}
                 >

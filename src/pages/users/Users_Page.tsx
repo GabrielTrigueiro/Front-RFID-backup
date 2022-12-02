@@ -1,6 +1,6 @@
 import { Box, Button } from "@mui/material";
-import { useState, useEffect, useContext } from "react";
-import { BaseModal, Register_User_Modal, UserTable, User_Form } from "../../shared/components";
+import { useState, useEffect } from "react";
+import { Register_User_Modal, SearchInput, UserTable, User_Form } from "../../shared/components";
 import { ContentLayout } from "../../shared/layout";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import { ISendUserPagination, IUser, User_Service } from "../../shared/service/api/users";
@@ -33,7 +33,7 @@ export const Users = () => {
                 setIsLoading(false);
                 setPages(result.data.numberOfPages);
                 setRows(result.data.data);
-            }
+            }   
         });
     };
 
@@ -49,13 +49,25 @@ export const Users = () => {
     
     return (
         <ContentLayout tittle={"Usuários"}>
-            <Box sx={{mb:"20px", display:"flex", justifyContent:"flex-end"}}>
-                <Button variant="contained" onClick={handleOpen}>
-                    <PersonAddAltIcon sx={{pr:1}}/>
-                Cadastrar Usuário
+            <Box sx={{display: "flex", justifyContent: "space-between"}}>
+
+                {/* excluir */}
+                <Button variant="contained" sx={{color: "#fff", justifySelf: "flex-start"}}>
+                    Excluir
                 </Button>
+                
+                {/* search e cadastrar */}
+                <Box sx={{display: "flex"}}>
+                    <Box sx={{ display: "flex", marginRight: 5}}>
+                        <SearchInput change={() => console.log("a")} />
+                    </Box> 
+                    <Button variant="contained" onClick={handleOpen}>
+                        <PersonAddAltIcon sx={{pr:1}}/>
+                        Cadastrar Usuário
+                    </Button>
+                </Box>
             </Box>
-            <Box bgcolor={"#fff"}>
+            <Box sx={{width: "100%", height: "100%"}}>
                 <UserTable
                     lista={rows}
                     update={update}

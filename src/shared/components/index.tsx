@@ -10,3 +10,4 @@ export * from "./dialog";
 export * from "./RFID";
 export * from "./skeletons";
 export * from "./notifications";
+export * from "./user";
