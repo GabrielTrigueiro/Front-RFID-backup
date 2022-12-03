@@ -16,9 +16,10 @@ export const Product_Table: React.FC<{
         gridTemplateColumns: "repeat(auto-fill, minmax(0px, 200px))!important",
         overflowY: "scroll",
         height: "100%",
-        justifyContent: "center",
+        width: "100%",
+        justifyContent: "space-between",
         "::-webkit-scrollbar": {
-            width: "20px",
+            width: "15px",
         },
         "::-webkit-scrollbar-track": {
             backgroundColor: "transparent"
@@ -37,7 +38,7 @@ export const Product_Table: React.FC<{
     return (
         <>
             {type == "box" ? 
-                <ProductImageListBox gap={12}>
+                <ProductImageListBox>
                     {lista.map((row) => (
                         <BoxProduct
                             key={row.description}

@@ -79,7 +79,7 @@ export const BoxProduct: React.FC<TInfoProduct> = ({
         <Box
             sx={{
                 height: "250px",
-                width: "200px",
+                width: 190,
                 bgcolor: "#fff",
                 borderRadius: 3,
                 m:1

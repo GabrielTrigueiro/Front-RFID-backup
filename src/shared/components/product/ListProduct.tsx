@@ -89,7 +89,7 @@ export const ListProduct: React.FC<TInfoProduct> = ({
                 sx={{
                     minHeight: "40px",
                     maxHeight: "40px",
-                    width: "93%",
+                    width: "97%",
                     bgcolor: "#fff",
                     borderRadius: 3,
                     m:1,
