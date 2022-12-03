@@ -1,4 +1,4 @@
-import { ImageList, styled } from "@mui/material";
+import { ImageList, styled, TableCell, TableHead, TableRow, TableBody } from "@mui/material";
 import Box from "@mui/material/Box/Box";
 import { IProduct } from "../../../service/api/products";
 import { ListProduct, BoxProduct } from "../../product";
@@ -15,7 +15,7 @@ export const Product_Table: React.FC<{
     const ProductImageListBox = styled(ImageList) ({
         gridTemplateColumns: "repeat(auto-fill, minmax(0px, 200px))!important",
         overflowY: "scroll",
-        height: "100%",
+        height: "90%",
         width: "100%",
         justifyContent: "space-between",
         "::-webkit-scrollbar": {
@@ -35,10 +35,24 @@ export const Product_Table: React.FC<{
         },
     });
 
+    const MyTableBody = styled(TableBody) ({
+        width: "100%",
+        //backgroundColor: "#322"
+    });
+
+    const MyTableRow = styled(TableRow) ({
+        width: "100%",
+        display: "flex",
+    });
+
+    const MyTableCell = styled(TableCell) ({
+        width: 235
+    });
+
     return (
         <>
             {type == "box" ? 
-                <ProductImageListBox>
+                <ProductImageListBox sx={{height: "100%"}}>
                     {lista.map((row) => (
                         <BoxProduct
                             key={row.description}
@@ -48,23 +62,39 @@ export const Product_Table: React.FC<{
                     ))}
                 </ProductImageListBox>
                 :
-                <ProductImageListBox
-                    sx={{
-                        width: "100%",
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                    }}
-                >
-                    {lista.map((row) => (
-                        <ListProduct
-                            key={row.description}
-                            produto={row}
-                            update={update}
-   
-                        />
-                    ))}
-                </ProductImageListBox>
+                <>
+                    <TableHead>
+                        <TableRow>
+                            <MyTableCell>Produto</MyTableCell>
+                            <MyTableCell>Quantidade</MyTableCell>
+                            <MyTableCell>Descrição</MyTableCell>
+                            <MyTableCell>Cor</MyTableCell>
+                            <MyTableCell>Tamanho</MyTableCell>
+                        </TableRow>
+                    </TableHead>
+                    <ProductImageListBox
+                        sx={{
+                            width: "100%",
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                        }}
+                    >
+                        <MyTableBody>
+                            {lista.map((row) => (
+                                <MyTableRow>
+                                    <MyTableCell>{row.description}</MyTableCell>
+                                    <MyTableCell>{row.quantity}</MyTableCell>
+                                    <MyTableCell>{row.info}</MyTableCell>
+                                    <MyTableCell>{row.color}</MyTableCell>
+                                    <MyTableCell>{row.size}</MyTableCell>
+                                </MyTableRow>
+                            ))}
+                        </MyTableBody>
+                    
+
+                    </ProductImageListBox>
+                </>
             }
         </>
     );
