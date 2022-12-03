@@ -42,6 +42,9 @@ export const Users = () => {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
+    //excluir?
+    const [delet, setDelet] = useState<boolean>(false);
+
     //atualizar a cada alteração nas seguintes vars
     useEffect(() => {
         update();
@@ -49,10 +52,15 @@ export const Users = () => {
     
     return (
         <ContentLayout tittle={"Usuários"}>
+            {/* menu superior */}
             <Box sx={{display: "flex", justifyContent: "space-between"}}>
 
                 {/* excluir */}
-                <Button variant="contained" sx={{color: "#fff", justifySelf: "flex-start"}}>
+                <Button 
+                    disabled={delet}
+                    variant="contained"
+                    sx={{color: "#fff", justifySelf: "flex-start"}}
+                >
                     Excluir
                 </Button>
                 
@@ -67,16 +75,19 @@ export const Users = () => {
                     </Button>
                 </Box>
             </Box>
+            {/* tabela */}
             <Box sx={{height: "100%"}}>
                 
                 {isLoading ? <Box sx={{height: "100%", marginTop: 3}}><ProductPageSkeleton/></Box> :
                     <UserTable
+                        setDelet={setDelet}
                         lista={rows}
                         update={update}
                         pageSize={pageSize}
                     />
                 }
             </Box>
+            {/* modal cadastro usuário */}
             <Register_User_Modal
                 outState={open}
                 closeModal={handleClose}

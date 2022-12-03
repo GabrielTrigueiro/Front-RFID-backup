@@ -1,22 +1,49 @@
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import { IUser } from "../../../service/api/users";
 import {Checkbox, FormControlLabel} from "@mui/material";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 interface IUserTableProps {
     lista: IUser[]
-    update: () => void
     pageSize: number
+    update: () => void
+    setDelet: (e: boolean) => void
 }
 
-export const UserTable: React.FC<IUserTableProps> = ({ lista, update }) => {
+export const UserTable: React.FC<IUserTableProps> = ({lista, update, setDelet}) => {
 
     //controles de check-box
-    const label = { inputProps: { "aria-label": "Checkbox demo" } };
-    const [checked, setChecked] = useState<boolean>(false);
-    const handleChangeCheck = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setChecked(event.target.checked);
+    const [isChecked, setIsChecked] = useState<string[]>([]);
+
+    const handleCheck = (event: React.ChangeEvent<HTMLInputElement>) => {        
+        let updateList = [...isChecked];
+        if (event.target.checked) {
+            updateList = [...isChecked, event.target.value];
+        }
+        else {
+            updateList.splice(isChecked.indexOf(event.target.value),1);
+        }
+        setIsChecked(updateList);
     };
+
+    const verifyCheck = (id: string) => {
+        if (isChecked.includes(id)){
+            return true;
+        }
+        else {
+            return false;
+        }
+    };
+
+    //atualiza o estado do botão de excluir
+    useEffect(()=>{
+        if (isChecked.length >= 1) {
+            setDelet(false);
+        }
+        else {
+            setDelet(true);
+        }
+    },[isChecked]);
 
     return (
         <>
@@ -31,17 +58,18 @@ export const UserTable: React.FC<IUserTableProps> = ({ lista, update }) => {
                     </TableHead>
 
                     <TableBody>
-                        {lista.map((row) => (
+                        {lista.map((row, index) => (
                             <TableRow key={row.id}>
 
                                 {/* Checkbox */}
                                 <TableCell>
                                     <FormControlLabel
-                                        label="Selecionado"
+                                        label=""
                                         control={
                                             <Checkbox
-                                                checked={checked}
-                                                onChange={handleChangeCheck}
+                                                value={row.id}
+                                                checked={verifyCheck(row.id)}
+                                                onChange={handleCheck}
                                             />
                                         }
                                     />
