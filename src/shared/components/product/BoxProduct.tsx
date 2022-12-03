@@ -95,12 +95,12 @@ export const BoxProduct: React.FC<TInfoProduct> = ({
                 <Box p={1} height={"20%"} display={"flex"} flexDirection={"column"}  alignItems={"center"} justifyContent={"space-between"}>
                     <Box sx={{width:"100%", display:"flex", justifyContent:"space-between"}}>
                         <Typography fontSize={"16px"} fontWeight={700} color={"#505050"}>{produto.description}</Typography>
-                        <Typography fontSize={"16px"} fontWeight={700} color={"#505050"}>{produto.price}</Typography>
+                        <Typography fontSize={"16px"} fontWeight={700} color={"#505050"}>R$: {produto.price}</Typography>
                     </Box>
                     <Box sx={{width:"100%", display:"flex", justifyContent:"space-between"}}>
                         <Box>
                             <Typography fontSize={"12px"} fontWeight={500} color={"#505050"}>Descrição: {produto.info}</Typography>
-                            <Typography fontSize={"12px"} fontWeight={500} color={"#505050"}>{produto.quantity}</Typography>
+                            <Typography fontSize={"12px"} fontWeight={500} color={"#505050"}>Quantidade: {produto.quantity}</Typography>
                         </Box>
                         <Box>
                             <IconButton
