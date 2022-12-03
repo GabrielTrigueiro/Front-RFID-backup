@@ -15,11 +15,12 @@ export const ProductPageSkeleton: React.FC = () => {
             <Skeleton
                 variant="rectangular"
                 sx={{
-                    marginTop: 15,
-                    width:"90%",
-                    height:"65%"
+                    height:"100%",
+                    width:"100%",
                 }}
-            />
+            >
+                {/* melhorar depois */}
+            </Skeleton>
         </Stack>
     );
 };

@@ -1,6 +1,6 @@
 import { Box, Button } from "@mui/material";
 import { useState, useEffect } from "react";
-import { Register_User_Modal, SearchInput, UserTable, User_Form } from "../../shared/components";
+import { ProductPageSkeleton, Register_User_Modal, SearchInput, UserTable, User_Form } from "../../shared/components";
 import { ContentLayout } from "../../shared/layout";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import { ISendUserPagination, IUser, User_Service } from "../../shared/service/api/users";
@@ -67,12 +67,15 @@ export const Users = () => {
                     </Button>
                 </Box>
             </Box>
-            <Box sx={{width: "100%", height: "100%"}}>
-                <UserTable
-                    lista={rows}
-                    update={update}
-                    pageSize={pageSize}
-                />
+            <Box sx={{height: "100%"}}>
+                
+                {isLoading ? <Box sx={{height: "100%", marginTop: 3}}><ProductPageSkeleton/></Box> :
+                    <UserTable
+                        lista={rows}
+                        update={update}
+                        pageSize={pageSize}
+                    />
+                }
             </Box>
             <Register_User_Modal
                 outState={open}
