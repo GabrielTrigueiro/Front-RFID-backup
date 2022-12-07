@@ -8,4 +8,5 @@ export const environment = {
     url_users_Search: URL + "/user/search",
     url_users: URL + "/user/",
     url_user_info: URL + "/user/info",
+    url_roles: URL + "/roles",
 };

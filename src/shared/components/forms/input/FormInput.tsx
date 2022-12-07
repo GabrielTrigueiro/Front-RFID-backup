@@ -35,9 +35,9 @@ export const FormInput: React.FC<TLoginOutlinedInput> = ({ name, ...rest }) => {
             value={value}
             onChange={e => setValue(e.target.value)}
             FormHelperTextProps={{style: {fontSize:9, margin:0, padding: 0, backgroundColor: "#fff"}}}
-            sx={{
-                "& fieldset": {border: error ? null : "none"}, //tira a borda
-            }}
+            // sx={{
+            //     "& fieldset": {border: error ? null : "none"}, //tira a borda
+            // }}
         />
     );
 };

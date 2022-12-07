@@ -72,6 +72,26 @@ const getUserInfo = async (): Promise<any | Error> => {
         });
 };
 
+const getRoles = async (): Promise<any | Error> => {
+    const token = {
+        headers:{
+            Authorization: 
+          `Bearer ${localStorage.getItem("Acess_Token")?.replace(/"/g,"")}`
+        }
+    };
+    return await api.get(environment.url_roles, token)
+        .then(data => {
+            if(data instanceof AxiosError){
+                return data;
+            }
+            return data;
+        })
+        .catch(err => {
+            console.error(err);
+            console.log("erro ao pegar as rotas");
+        });
+};
+
 const getAll = async (dados: ISendUserPagination): Promise<any | Error> => {
     const token = {
         headers:{
@@ -155,5 +175,6 @@ export const User_Service = {
     Create,
     Delete,
     UpdateById,
-    getUserInfo
+    getUserInfo,
+    getRoles
 };

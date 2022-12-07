@@ -1,7 +1,7 @@
 import { FormControl, Button, Box, Divider } from "@mui/material";
 import { Form } from "@unform/web";
 import { FormInput } from "./input";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FormHandles } from "@unform/core";
 import * as Yup from "yup";
 import { AxiosError } from "axios";
@@ -15,6 +15,8 @@ export interface newUser_data {
     password:   string
     roles:     string
 }
+
+type oneRole = {id: string, name: string}
 
 //avaliar erros de preenchimento ao criar user
 const UserRegisterSchema: Yup.Schema<newUser_data> = Yup.object().shape({
@@ -71,6 +73,16 @@ export const User_Form: React.FC<{
     };
 
     //#6B6B6B cor imput
+    const [roles, setRoles] = useState<oneRole[]>();
+
+    const handleGetRoles = () => {
+        User_Service.getRoles().then((result) => setRoles(result.data.data));
+    };
+
+    useEffect(()=>{
+        handleGetRoles();
+        console.log(roles);
+    },[roles != undefined]);//atualiza até roles for difernete de undefined
 
     return (
         <Form
