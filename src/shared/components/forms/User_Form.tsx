@@ -8,81 +8,28 @@ import { AxiosError } from "axios";
 import { User_Service } from "../../service/api";
 import { Notification } from "../notifications";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
+import { FormSelect } from "./input/FormSelect";
+import { TesteSelect } from "./input/testeSelect";
 
 //dados novo usario
 export interface newUser_data {
     username:   string
     password:   string
-    roles:     string
+    roles:      string
 }
-
-type oneRole = {id: string, name: string}
-
-//avaliar erros de preenchimento ao criar user
-const UserRegisterSchema: Yup.Schema<newUser_data> = Yup.object().shape({
-    username:   Yup.string().required("Campo Obrigatório"),
-    password:   Yup.string().required("Campo Obrigatório"),
-    roles:      Yup.string().required("Campo Obrigatório"),
-});
 
 export const User_Form: React.FC<{
     update: () => void
-}> = ({update}) => {
+    listRoles: any
+
+}> = ({update, listRoles}) => {
 
     //prop do form
     const formRef = useRef<FormHandles>(null);
 
-    //state para guardar novos usuários
-    const [newUser, setNewUser] = useState<newUser_data>({
-        password:"",
-        roles:"",
-        username:"",
-    });
-
-    //func para mudar valor de newUser ao digitar
-    const handleChange = (prop: keyof newUser_data) => (
-        event: React.ChangeEvent<HTMLInputElement>) => {
-        setNewUser({ ...newUser, [prop]: event.target.value });
-    };
-
-    //func para registrar usuário
-    const handleSave = (dados: newUser_data) => {
-        console.log(dados);
-        UserRegisterSchema
-            .validate(dados, { abortEarly: false })
-            .then((dadosValidados) => {
-                User_Service.Create(dadosValidados).then((result) => {
-                    if (result instanceof AxiosError) {
-                        console.log(result.response?.data.message,);
-                        Notification(result.message, "error");
-                    } else {
-                        Notification(result.message, "success");
-                        //handleClose()
-                        update();
-                    }
-                });
-            })
-            .catch((erros: Yup.ValidationError) => {
-                const validandoErros: { [key: string]: string } = {};
-                erros.inner.forEach(erros => {
-                    if (!erros.path) return;
-                    validandoErros[erros.path] = erros.message;
-                });
-                formRef.current?.setErrors(validandoErros);
-            });
-    };
-
-    //#6B6B6B cor imput
-    const [roles, setRoles] = useState<oneRole[]>();
-
-    const handleGetRoles = () => {
-        User_Service.getRoles().then((result) => setRoles(result.data.data));
-    };
-
-    useEffect(()=>{
-        handleGetRoles();
-        console.log(roles);
-    },[roles != undefined]);//atualiza até roles for difernete de undefined
+    useEffect(() => {
+        update();
+    },[]);
 
     return (
         <Form
@@ -92,7 +39,7 @@ export const User_Form: React.FC<{
                 flexDirection: "column"
             }}
             ref={formRef}
-            onSubmit={(dados) => {console.log("submit form");}}
+            onSubmit={(dados) => console.log(dados)}
         >
             <Box
                 sx={{
@@ -156,16 +103,14 @@ export const User_Form: React.FC<{
                                 error
                                 name="password"
                                 type="text"
-                                label="Senha"
+                                label="Repetir senha"
                             />
                         </FormControl>
 
                         <FormControl>
-                            <FormInput
-                                error
-                                name="password"
-                                type="text"
-                                label="Repetir senha"
+                            <TesteSelect
+                                lista={listRoles}
+                                name="roles"
                             />
                         </FormControl>
                     </Box>

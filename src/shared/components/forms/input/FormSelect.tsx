@@ -7,11 +7,6 @@ type TSelectField = SelectProps & {
 }
 
 export const FormSelect: React.FC<TSelectField> = ({ name, ...rest }) => {
-    const [role, setRole] = useState<string>();
-
-    const selectHandleChange = (event: SelectChangeEvent) => {
-        setRole(event.target.value as string);
-    };
 
     const { clearError, defaultValue, error, fieldName, registerField } = useField(name);
 

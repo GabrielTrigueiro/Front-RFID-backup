@@ -79,6 +79,7 @@ export const Product_Page = () => {
                 setLoading(false);
                 setPages(result.data.numberOfPages);
                 setRows(result.data.data);
+                // console.log(result.data.data);
             }
         });
     };

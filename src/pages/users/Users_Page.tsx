@@ -4,6 +4,7 @@ import { ProductPageSkeleton, Register_User_Modal, SearchInput, UserTable, User_
 import { ContentLayout } from "../../shared/layout";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import { ISendUserPagination, IUser, User_Service } from "../../shared/service/api/users";
+import { Roles_Service } from "../../shared/service/api/roles/Roles_Service";
 
 export const Users = () => {
 
@@ -16,6 +17,8 @@ export const Users = () => {
     const [actualpage, setActualPage] = useState<number>(0);
     const [value, setValue] = useState<string>("");
 
+    const [roles, setRoles] = useState<any>();
+
     const UserPaginationConf: ISendUserPagination = {
         page: actualpage,
         pageSize: pageSize,
@@ -24,8 +27,18 @@ export const Users = () => {
         sortField: "name",
         value: value,
     };
+    
+    const ListRoles = () => {
+        Roles_Service.getAll().then((result) => {
+            if (result instanceof Error) {
+                alert(result.message);
+            } else {
+                setRoles(result.data.data);
+            }
+        });
+    };
 
-    const update = () => {
+    const ListUser = () => {
         User_Service.getAll(UserPaginationConf).then((result) => {
             if (result instanceof Error) {
                 alert(result.message);
@@ -35,6 +48,11 @@ export const Users = () => {
                 setRows(result.data.data);
             }   
         });
+    };
+
+    const update = () => {
+        ListRoles();
+        ListUser();
     };
 
     //gerencia o modal de registro
@@ -92,7 +110,7 @@ export const Users = () => {
                 outState={open}
                 closeModal={handleClose}
             >
-                <User_Form update={update}/>
+                <User_Form listRoles={roles} update={update}/>
             </Register_User_Modal>
         </ContentLayout>
     );
