@@ -11,3 +11,4 @@ export * from "./RFID";
 export * from "./skeletons";
 export * from "./notifications";
 export * from "./user";
+export * from "./inbox_item";
