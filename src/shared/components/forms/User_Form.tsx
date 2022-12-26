@@ -30,7 +30,7 @@ export const User_Form: React.FC<{
 
     const formRef = useRef<FormHandles>(null);
 
-    //salva o produto
+    //salva o usuário
     const saveUser = (e: any) => {
         UserRegisterSchema
             .validate(e, { abortEarly: false })
