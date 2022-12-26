@@ -1,31 +1,61 @@
 import { FormControl, Button, Box, Divider } from "@mui/material";
 import { Form } from "@unform/web";
 import { FormInput } from "./input";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { FormHandles } from "@unform/core";
-import * as Yup from "yup";
-import { AxiosError } from "axios";
+import UploadFileIcon from "@mui/icons-material/UploadFile";
+import { TesteSelect } from "./input/testeSelect";
 import { User_Service } from "../../service/api";
 import { Notification } from "../notifications";
-import UploadFileIcon from "@mui/icons-material/UploadFile";
-import { FormSelect } from "./input/FormSelect";
-import { TesteSelect } from "./input/testeSelect";
+import { AxiosError } from "axios";
+import * as Yup from "yup";
 
 //dados novo usario
 export interface newUser_data {
     username:   string
     password:   string
-    roles:      string
+    role:      string[]
 }
+
+export const UserRegisterSchema: Yup.Schema<newUser_data> = Yup.object().shape({
+    username:   Yup.string().required(),
+    password:   Yup.string().required(),
+    role:       Yup.array().required()
+});
 
 export const User_Form: React.FC<{
     update: () => void
-    listRoles: any
+    fechar: () => void
+}> = ({update, fechar}) => {
 
-}> = ({update, listRoles}) => {
-
-    //prop do form
     const formRef = useRef<FormHandles>(null);
+
+    //salva o produto
+    const saveUser = (e: any) => {
+        UserRegisterSchema
+            .validate(e, { abortEarly: false })
+            .then((dadosValidados) => {
+                User_Service.Create(dadosValidados).then((result) => {
+                    if (result instanceof AxiosError) {
+                        Notification(result.response?.data.message, "error");
+                    }
+                    else {
+                        Notification(result.message, "success");
+                        fechar();
+                        update();
+                    }
+                });
+            })
+            .catch((erros: Yup.ValidationError) => {
+                const validandoErros: { [key: string]: string } = {};
+                erros.inner.forEach((erros) => {
+                    if (!erros.path) return;
+                    validandoErros[erros.path] = erros.message;
+                    Notification(erros.message, "error");
+                });
+                formRef.current?.setErrors(validandoErros);
+            });
+    };
 
     useEffect(() => {
         update();
@@ -39,7 +69,11 @@ export const User_Form: React.FC<{
                 flexDirection: "column"
             }}
             ref={formRef}
-            onSubmit={(dados) => console.log(dados)}
+            onSubmit={(dados) => {
+                const novo = {password: dados.password, username: dados.username, role: [dados.role], roles: [dados.role]};
+                // console.log(novo);
+                saveUser(novo);
+            }}
         >
             <Box
                 sx={{
@@ -77,7 +111,7 @@ export const User_Form: React.FC<{
                         type="submit"
                         variant="contained"
                     >
-                        <UploadFileIcon />Upload
+                        <UploadFileIcon/>Upload
                     </Button>
 
                 </Box>
@@ -109,8 +143,7 @@ export const User_Form: React.FC<{
 
                         <FormControl>
                             <TesteSelect
-                                lista={listRoles}
-                                name="roles"
+                                name="role"
                             />
                         </FormControl>
                     </Box>

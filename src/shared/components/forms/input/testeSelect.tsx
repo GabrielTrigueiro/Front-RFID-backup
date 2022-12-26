@@ -1,20 +1,20 @@
 import { Select, SelectProps, SelectChangeEvent, MenuItem, InputLabel } from "@mui/material";
 import { useField } from "@unform/core";
 import { useEffect, useState } from "react";
-import { IRole } from "../../../service/api/roles/Roles_Service";
 
 type TSelectField = SelectProps & {
     name: string
-    lista: IRole[]
 }
 
-export const TesteSelect: React.FC<TSelectField> = ({ name, lista, ...rest }) => {
+export const TesteSelect: React.FC<TSelectField> = ({ name, ...rest }) => {
 
     const { clearError, defaultValue, error, fieldName, registerField } = useField(name);
 
     const [value, setValue] = useState<string>(defaultValue || "");
 
-    const [listRoles, setListRoles] = useState<IRole[]>([{name: "teste", id: "id de teste"}]);
+    //ids roles
+    const admin = "6320bb962415aefdb0a2edcf";
+    const user = "6388b981d2501bfc83d6c447";
 
     useEffect(() => {
         registerField({
@@ -22,7 +22,6 @@ export const TesteSelect: React.FC<TSelectField> = ({ name, lista, ...rest }) =>
             getValue: () => value,
             setValue: (_, newValue) => setValue(newValue),
         });
-        setListRoles(lista);
     }, [registerField, fieldName, value]);
 
     return (
@@ -38,9 +37,8 @@ export const TesteSelect: React.FC<TSelectField> = ({ name, lista, ...rest }) =>
                 value={value}
                 onChange={e => setValue(e.target.value)}
             >
-                {listRoles.map((row) => {
-                    console.log(row);
-                })}
+                <MenuItem value={admin}>Admin</MenuItem>;
+                <MenuItem value={user}>Usuário</MenuItem>;
             </Select>
         </>
     );
