@@ -1,4 +1,4 @@
-import { Modal, Box, Dialog, Button } from "@mui/material";
+import { Modal, Box, Dialog, Button, styled } from "@mui/material";
 import { useState } from "react";
 import { Confirm_Dialog } from "../dialog";
 
@@ -6,6 +6,32 @@ interface props{
     outState: boolean
     closeModal: ()=>void
 }
+
+const StyledModalBox = styled(Box)({
+    display:"flex",
+    alignItems:"center",
+    justifyContent:"center",
+
+    position:"absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+
+    width: 400,
+    height:500,
+
+    background:"#fff",
+    borderRadius:"18px",
+    p: 0
+});
+
+const StyledModalInnerBox = styled(Box)({
+    width:"100%",
+    height:"100%",
+    display:"flex",
+    flexDirection:"column"
+});
+
 //todo componente que usar o modal terá que enviar uma func de close e uma var do estado
 export const Register_User_Modal: React.FC<props> = ({
     children, outState, closeModal
@@ -19,36 +45,11 @@ export const Register_User_Modal: React.FC<props> = ({
                 open={outState}
                 onClose={()=>setDialog(true)}
             >
-                <Box
-                    sx={{
-                        display:"flex",
-                        alignItems:"center",
-                        justifyContent:"center",
-
-                        position:"absolute",
-                        top: "50%",
-                        left: "50%",
-                        transform: "translate(-50%, -50%)",
-
-                        width: 420,
-                        height:510,
-
-                        bgcolor:"#fff",
-                        borderRadius:"18px",
-                        p: 0
-                    }}
-                >
-                    <Box
-                        sx={{
-                            width:"100%",
-                            height:"100%",
-                            display:"flex",
-                            flexDirection:"column"
-                        }}
-                    >
+                <StyledModalBox>
+                    <StyledModalInnerBox>
                         {children}
-                    </Box>
-                </Box>
+                    </StyledModalInnerBox>
+                </StyledModalBox>
             </Modal>
             <Confirm_Dialog
                 messageOne={"Não"}

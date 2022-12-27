@@ -1,4 +1,4 @@
-import { FormControl, Button, Box, Divider } from "@mui/material";
+import { FormControl, Button, Box, Divider, styled } from "@mui/material";
 import { Form } from "@unform/web";
 import { FormInput } from "./input";
 import { useEffect, useRef } from "react";
@@ -61,6 +61,26 @@ export const User_Form: React.FC<{
         update();
     },[]);
 
+    const StyledFormControl = styled(FormControl)({
+        width: 200,
+    });
+
+    const StyledInputContainer = styled(Box)({
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-evenly",
+        height: 180,
+        // background: "#000"
+    });
+
+    const StyledFormContainer = styled(Box)({
+        flex: 1,    
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-evenly",
+        alignItems: "center"
+    });
+
     return (
         <Form
             style={{
@@ -87,15 +107,7 @@ export const User_Form: React.FC<{
             <Divider flexItem />
 
             {/* INPUTS */}
-            <Box
-                sx={{
-                    flex: 1,    
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center"
-                }}
-            >
+            <StyledFormContainer>
                 <Box    
                     sx={{
                         width: 150,
@@ -115,40 +127,33 @@ export const User_Form: React.FC<{
                     </Button>
 
                 </Box>
-                <Box>
-                    {/* box do formulário começa aqui */}
-                    <Box 
-                        sx={{
-                            display: "flex",
-                            flexDirection: "column"
-                        }}
-                    >
-                        <FormControl>
-                            <FormInput
-                                error
-                                name="username"
-                                type="text"
-                                label="Nome de usuário"
-                            />
-                        </FormControl>
+                {/* box do formulário começa aqui */}
+                <StyledInputContainer>
+                    <StyledFormControl>
+                        <FormInput
+                            error
+                            name="username"
+                            type="text"
+                            label="Nome de usuário"
+                        />
+                    </StyledFormControl>
 
-                        <FormControl>
-                            <FormInput
-                                error
-                                name="password"
-                                type="text"
-                                label="Repetir senha"
-                            />
-                        </FormControl>
+                    <StyledFormControl>
+                        <FormInput
+                            error
+                            name="password"
+                            type="text"
+                            label="Repetir senha"
+                        />
+                    </StyledFormControl>
 
-                        <FormControl>
-                            <TesteSelect
-                                name="role"
-                            />
-                        </FormControl>
-                    </Box>
-                </Box>
-            </Box>
+                    <StyledFormControl>
+                        <TesteSelect
+                            name="role"
+                        />
+                    </StyledFormControl>
+                </StyledInputContainer>
+            </StyledFormContainer>
 
             <Divider flexItem />
             

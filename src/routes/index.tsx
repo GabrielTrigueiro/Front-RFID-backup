@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Dashboard, Historic, Login, NotFound, Product_Page, Users } from "../pages";
-import { Register_User } from "../pages/register_user/Register_User";
 import { useSideBarContext } from "../shared/context/SideBarContext";
 import { Layout } from "../shared/layout";
 import { Inbox } from "../pages/inbox";
@@ -45,7 +44,6 @@ export const AppRoutes = () => {
         <BrowserRouter>
             <Routes>
                 <Route path='/login' element={<Login/>}/>
-                <Route path='/cadastro' element={<Register_User/>}/>
                 <Route path='/home' element={<Layout/>}>
                     <Route path='dashboard' element={<Dashboard/>}/>
                     <Route path='produtos' element={<Product_Page/>}/>

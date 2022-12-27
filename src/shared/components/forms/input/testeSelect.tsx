@@ -26,7 +26,7 @@ export const TesteSelect: React.FC<TSelectField> = ({ name, ...rest }) => {
 
     return (
         <>
-            <InputLabel id="demo-simple-select-label">Posição</InputLabel>
+            <InputLabel size={"small"}>Posição</InputLabel>
             <Select
                 {...rest}
 
@@ -36,6 +36,7 @@ export const TesteSelect: React.FC<TSelectField> = ({ name, ...rest }) => {
                 label="posicao"
                 value={value}
                 onChange={e => setValue(e.target.value)}
+                size={"small"}
             >
                 <MenuItem value={admin}>Admin</MenuItem>;
                 <MenuItem value={user}>Usuário</MenuItem>;
