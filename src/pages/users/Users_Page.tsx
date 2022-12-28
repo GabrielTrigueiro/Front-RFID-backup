@@ -1,9 +1,10 @@
 import { Box, Button } from "@mui/material";
 import { useState, useEffect } from "react";
-import { ProductPageSkeleton, Register_User_Modal, SearchInput, UserTable, User_Form } from "../../shared/components";
+import { Notification, ProductPageSkeleton, Register_User_Modal, SearchInput, UserTable, User_Form } from "../../shared/components";
 import { ContentLayout } from "../../shared/layout";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import { ISendUserPagination, IUser, User_Service } from "../../shared/service/api/users";
+import { AxiosError } from "axios";
 
 export const Users = () => {
 
@@ -41,6 +42,17 @@ export const Users = () => {
         ListUser();
     };
 
+    //deletar lista de usuários
+    const deletUser = (idList: string[]) => {
+        User_Service.Delete(idList).then((result => {
+            Notification("Removido com sucesso", "success");
+            setListToDelete([]);
+            update();
+        })).catch(err => { 
+            console.error(err);
+        });
+    };
+
     //gerencia o modal de registro
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
@@ -48,11 +60,12 @@ export const Users = () => {
 
     //excluir?
     const [delet, setDelet] = useState<boolean>(false);
+    const [listToDelete, setListToDelete] =  useState<string[]>([]);
 
     //atualizar a cada alteração nas seguintes vars
     useEffect(() => {
         update();
-    },[value, actualpage, pageSize]);
+    },[value, actualpage, pageSize, listToDelete]);
     
     return (
         <ContentLayout tittle={"Usuários"}>
@@ -60,7 +73,8 @@ export const Users = () => {
             <Box sx={{display: "flex", justifyContent: "space-between"}}>
 
                 {/* excluir */}
-                <Button 
+                <Button
+                    onClick={()=>{deletUser(listToDelete); console.log(listToDelete);}}
                     disabled={delet}
                     variant="contained"
                     sx={{color: "#fff", justifySelf: "flex-start"}}
@@ -81,9 +95,10 @@ export const Users = () => {
             </Box>
             {/* tabela */}
             <Box sx={{height: "100%"}}>
-                
                 {isLoading ? <Box sx={{height: "100%", marginTop: 3}}><ProductPageSkeleton/></Box> :
                     <UserTable
+                        listaDelet={listToDelete}
+                        setListaDelet={setListToDelete}
                         setDelet={setDelet}
                         lista={rows}
                         update={update}

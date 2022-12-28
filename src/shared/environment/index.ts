@@ -11,6 +11,7 @@ export const environment = {
     url_users_Search: URL + "/user/search",
     url_users: URL + "/user/",
     url_users_create: URL + "/user/create",
+    url_users_delete: URL + "/user/delete",
     url_user_info: URL + "/user/info",
 
     url_roles: URL + "/roles",

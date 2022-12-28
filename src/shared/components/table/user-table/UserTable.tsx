@@ -8,6 +8,8 @@ interface IUserTableProps {
     pageSize: number
     update: () => void
     setDelet: (e: boolean) => void
+    listaDelet: string[],
+    setListaDelet: (e: string[]) => void
 }
 
 const Teste = styled(TableContainer)({
@@ -32,24 +34,24 @@ const Teste = styled(TableContainer)({
     },
 });
 
-export const UserTable: React.FC<IUserTableProps> = ({lista, update, setDelet}) => {
+export const UserTable: React.FC<IUserTableProps> = ({lista, update, setDelet, listaDelet, setListaDelet}) => {
 
     //controles de check-box
-    const [isChecked, setIsChecked] = useState<string[]>([]);
+    // const [isChecked, setIsChecked] = useState<string[]>([]);
 
     const handleCheck = (event: React.ChangeEvent<HTMLInputElement>) => {        
-        let updateList = [...isChecked];
+        let updateList = [...listaDelet];
         if (event.target.checked) {
-            updateList = [...isChecked, event.target.value];
+            updateList = [...listaDelet, event.target.value];
         }
         else {
-            updateList.splice(isChecked.indexOf(event.target.value),1);
+            updateList.splice(listaDelet.indexOf(event.target.value),1);
         }
-        setIsChecked(updateList);
+        setListaDelet(updateList);
     };
 
     const verifyCheck = (id: string) => {
-        if (isChecked.includes(id)){
+        if (listaDelet.includes(id)){
             return true;
         }
         else {
@@ -59,13 +61,13 @@ export const UserTable: React.FC<IUserTableProps> = ({lista, update, setDelet}) 
 
     //atualiza o estado do botão de excluir
     useEffect(()=>{
-        if (isChecked.length >= 1) {
+        if (listaDelet.length >= 1) {
             setDelet(false);
         }
         else {
             setDelet(true);
         }
-    },[isChecked]);
+    },[listaDelet]);
 
     return (
         <>
@@ -80,7 +82,7 @@ export const UserTable: React.FC<IUserTableProps> = ({lista, update, setDelet}) 
                     </TableHead>
 
                     <TableBody>
-                        {lista.map((row, index) => (
+                        {lista.map((row) => (
                             <TableRow key={row.id}>
 
                                 {/* Checkbox */}

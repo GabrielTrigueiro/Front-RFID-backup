@@ -111,21 +111,21 @@ const Create = async (dados: newUser_data): Promise<any | Error> => {
         });
 };
 
-const Delete = async (id: string): Promise<void | Error> => {
+const Delete = async (id: string[]): Promise<void | Error> => {
     const token = {
         headers:{
             Authorization: 
           `Bearer ${localStorage.getItem("Acess_Token")?.replace(/"/g,"")}`
         }
     };
-    return await api.delete(environment.url_users + `${id}`, token)
+    return await api.post(environment.url_users_delete, id, token)
         .then(data => {
             if (data instanceof AxiosError){
                 return data.response?.data;
             }
             return data.data;
         })
-        .catch(err => { 
+        .catch(err => {
             console.error(err);
         });
 };
