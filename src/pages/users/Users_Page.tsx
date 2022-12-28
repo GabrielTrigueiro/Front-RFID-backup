@@ -4,7 +4,6 @@ import { Notification, ProductPageSkeleton, Register_User_Modal, SearchInput, Us
 import { ContentLayout } from "../../shared/layout";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import { ISendUserPagination, IUser, User_Service } from "../../shared/service/api/users";
-import { AxiosError } from "axios";
 
 export const Users = () => {
 
@@ -17,6 +16,15 @@ export const Users = () => {
     const [actualpage, setActualPage] = useState<number>(0);
     const [value, setValue] = useState<string>("");
 
+    //gerencia o modal de registro
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
+    //excluir?
+    const [delet, setDelet] = useState<boolean>(false);
+    const [listToDelete, setListToDelete] =  useState<string[]>([]);
+    
     const UserPaginationConf: ISendUserPagination = {
         page: actualpage,
         pageSize: pageSize,
@@ -53,15 +61,6 @@ export const Users = () => {
         });
     };
 
-    //gerencia o modal de registro
-    const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
-
-    //excluir?
-    const [delet, setDelet] = useState<boolean>(false);
-    const [listToDelete, setListToDelete] =  useState<string[]>([]);
-
     //atualizar a cada alteração nas seguintes vars
     useEffect(() => {
         update();
@@ -69,6 +68,7 @@ export const Users = () => {
     
     return (
         <ContentLayout tittle={"Usuários"}>
+
             {/* menu superior */}
             <Box sx={{display: "flex", justifyContent: "space-between"}}>
 
@@ -85,7 +85,7 @@ export const Users = () => {
                 {/* search e cadastrar */}
                 <Box sx={{display: "flex"}}>
                     <Box sx={{ display: "flex", marginRight: 5}}>
-                        <SearchInput change={() => console.log("a")} />
+                        <SearchInput change={(value) => { setValue(value.target.value); }} />
                     </Box> 
                     <Button variant="contained" onClick={handleOpen}>
                         <PersonAddAltIcon sx={{pr:1}}/>
@@ -93,6 +93,7 @@ export const Users = () => {
                     </Button>
                 </Box>
             </Box>
+
             {/* tabela */}
             <Box sx={{height: "100%"}}>
                 {isLoading ? <Box sx={{height: "100%", marginTop: 3}}><ProductPageSkeleton/></Box> :
@@ -106,6 +107,7 @@ export const Users = () => {
                     />
                 }
             </Box>
+
             {/* modal cadastro usuário */}
             <Register_User_Modal
                 outState={open}
