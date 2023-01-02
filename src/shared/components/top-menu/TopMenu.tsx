@@ -9,36 +9,18 @@ import {
     Typography
 } from "@mui/material";
 import { Box } from "@mui/system";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useAuthContext } from "../../context/AuthContext";
 import { User_Service } from "../../service/api";
-
-interface userData {
-    data: {
-        id: string
-        roles: [{
-          authority: string,
-          id: string,
-          name: string
-        }],
-        username: string
-    },
-    errors: [{
-        field: string
-        message: string
-    }],
-    message: string,
-    success: true
-}
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../store/Store";
+import { pegarInfo } from "../../store/Slices/Info";
 
 export const TopMenu = () => {
     const {logout} = useAuthContext();
     const menuId = "primary-search-account-menu";
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const isMenuOpen = Boolean(anchorEl);
-
-    //info do usuário, por enquanto apenas seu nome
-    const [userInfo, setUserInfo] = useState<string>("");
 
     const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
@@ -78,16 +60,22 @@ export const TopMenu = () => {
         </Menu>
     );
 
-    //coletar informaçoes do usuário no primeiro load
-    useEffect(()=>{
-        User_Service.getUserInfo().then((result) => {
-            if (result instanceof Error) {
-                console.log("erro no use effect");
-            } else {
-                setUserInfo(result.data.data.username);
-            }
+    //setando as informaçoes
+    const dispatch = useDispatch();
+
+    const buscarInfo = useCallback(() => {
+        const resposta = User_Service.getUserInfo();
+        resposta.then(res => {
+            dispatch(pegarInfo(res.username));
         });
-    },[]);
+    },[dispatch]);
+
+    const info = useSelector((state: RootState) => state.info);
+
+    useEffect(()=>{
+        buscarInfo();
+        console.log(info);
+    },[buscarInfo]);
 
     return (
         <Box display={"flex"} alignItems={"center"}>
@@ -96,7 +84,7 @@ export const TopMenu = () => {
                     <NotificationsIcon />
                 </Badge>
             </IconButton>
-            <Typography sx={{pl:2}}>Olá, {userInfo}</Typography>
+            <Typography sx={{pl:2}}>Olá, {info}</Typography>
             <IconButton
                 sx={{
                     "&:hover": {

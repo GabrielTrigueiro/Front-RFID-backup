@@ -64,11 +64,10 @@ const getUserInfo = async (): Promise<any | Error> => {
             if(data instanceof AxiosError){
                 return data;
             }
-            return data;
+            return data.data.data;
         })
         .catch(err => {
             console.error(err);
-            console.log("abacate azul");
         });
 };
 

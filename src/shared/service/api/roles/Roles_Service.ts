@@ -21,7 +21,7 @@ const getRoles = async (): Promise<any | Error> => {
             if(data instanceof AxiosError){
                 return data;
             }
-            return  data;
+            return data;
         })
         .catch(err => {
             console.error(err);
