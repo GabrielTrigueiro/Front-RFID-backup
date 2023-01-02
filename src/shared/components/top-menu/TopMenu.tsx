@@ -9,12 +9,10 @@ import {
     Typography
 } from "@mui/material";
 import { Box } from "@mui/system";
-import { useEffect, useState, useCallback } from "react";
+import { useState } from "react";
 import { useAuthContext } from "../../context/AuthContext";
-import { User_Service } from "../../service/api";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../../store/Store";
-import { pegarInfo } from "../../store/Slices/Info";
 
 export const TopMenu = () => {
     const {logout} = useAuthContext();
@@ -60,22 +58,7 @@ export const TopMenu = () => {
         </Menu>
     );
 
-    //setando as informaçoes
-    const dispatch = useDispatch();
-
-    const buscarInfo = useCallback(() => {
-        const resposta = User_Service.getUserInfo();
-        resposta.then(res => {
-            dispatch(pegarInfo(res.username));
-        });
-    },[dispatch]);
-
-    const info = useSelector((state: RootState) => state.info);
-
-    useEffect(()=>{
-        buscarInfo();
-        console.log(info);
-    },[buscarInfo]);
+    const nomeUser = useSelector((state: RootState) => state.info.username);
 
     return (
         <Box display={"flex"} alignItems={"center"}>
@@ -84,7 +67,7 @@ export const TopMenu = () => {
                     <NotificationsIcon />
                 </Badge>
             </IconButton>
-            <Typography sx={{pl:2}}>Olá, {info}</Typography>
+            <Typography sx={{pl:2}}>Olá, {nomeUser}</Typography>
             <IconButton
                 sx={{
                     "&:hover": {
