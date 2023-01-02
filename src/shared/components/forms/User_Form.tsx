@@ -37,7 +37,7 @@ export const User_Form: React.FC<{
             .then((dadosValidados) => {
                 User_Service.Create(dadosValidados).then((result) => {
                     if (result instanceof AxiosError) {
-                        Notification(result.response?.data.message, "error");
+                        Notification(result.message, "error");
                     }
                     else {
                         Notification(result.message, "success");
@@ -91,7 +91,6 @@ export const User_Form: React.FC<{
             ref={formRef}
             onSubmit={(dados) => {
                 const novo = {password: dados.password, username: dados.username, role: [dados.role], roles: [dados.role]};
-                // console.log(novo);
                 saveUser(novo);
             }}
         >
@@ -149,6 +148,7 @@ export const User_Form: React.FC<{
 
                     <StyledFormControl>
                         <TesteSelect
+                            error
                             name="role"
                         />
                     </StyledFormControl>

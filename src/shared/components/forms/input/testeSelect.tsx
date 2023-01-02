@@ -1,10 +1,7 @@
-import { Select, SelectProps, SelectChangeEvent, MenuItem, InputLabel } from "@mui/material";
+import { Select, SelectProps, MenuItem, InputLabel } from "@mui/material";
 import { useField } from "@unform/core";
-import { useCallback, useEffect, useState } from "react";
-import { api } from "../../../service/api";
-import { useDispatch, useSelector } from "react-redux";
-import { adicionarRoles } from "../../../store/Slices/Roles";
-import { Roles_Service } from "../../../service/api/roles/Roles_Service";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { RootState } from "../../../store/Store";
 
 type TSelectField = SelectProps & {
