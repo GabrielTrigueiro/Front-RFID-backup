@@ -1,9 +1,12 @@
 import { Box, Button } from "@mui/material";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Notification, ProductPageSkeleton, Register_User_Modal, SearchInput, UserTable, User_Form } from "../../shared/components";
 import { ContentLayout } from "../../shared/layout";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import { ISendUserPagination, IUser, User_Service } from "../../shared/service/api/users";
+import { useDispatch } from "react-redux";
+import { Roles_Service } from "../../shared/service/api/roles/Roles_Service";
+import { adicionarRoles } from "../../shared/store/Slices/Roles";
 
 export const Users = () => {
 
@@ -61,10 +64,20 @@ export const Users = () => {
         });
     };
 
+    const dispatch = useDispatch();
+
+    const buscarRoles = useCallback(() => {
+        const resposta = Roles_Service.getRoles();
+        resposta.then(res => {
+            dispatch(adicionarRoles(res.data.data));
+        });
+    },[dispatch]);
+
     //atualizar a cada alteração nas seguintes vars
     useEffect(() => {
         update();
-    },[value, actualpage, pageSize, listToDelete]);
+        buscarRoles();
+    },[value, actualpage, pageSize, listToDelete, buscarRoles]);
     
     return (
         <ContentLayout tittle={"Usuários"}>

@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import CadastroUsuario from "./Slices/Usuario";
+import rolesSlice from "./Slices/Roles";
 
 const store = configureStore({
     reducer: {
-        cadastroUsuario: CadastroUsuario,
+        roles: rolesSlice,
     }
 });
 
