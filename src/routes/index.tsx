@@ -3,14 +3,13 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Dashboard, Historic, Login, NotFound, Product_Page, Users } from "../pages";
 import { useSideBarContext } from "../shared/context/SideBarContext";
 import { Layout } from "../shared/layout";
-import { Inbox } from "../pages/inbox";
+import { Caixa } from "../pages/caixa";
 
 export const AppRoutes = () => {
 
     const { setSideBarOption } = useSideBarContext();
 
     useEffect(() => {
-
         setSideBarOption([
             {
                 label: "DashBoard",
@@ -49,9 +48,9 @@ export const AppRoutes = () => {
                     <Route path='produtos' element={<Product_Page/>}/>
                     <Route path='usuarios' element={<Users/>}/>
                     <Route path='historico' element={<Historic/>}/>
-                    <Route path='caixa' element={<Inbox/>}/>
+                    <Route path='caixa' element={<Caixa/>}/>
                 </Route>
-                <Route path='/home/' element={<Navigate to="/login"/>}/>
+                {/* <Route path='/home/' element={<Navigate to="/login"/>}/> */}
                 <Route path='/' element={<Navigate to="/login"/>}/>
                 <Route path='*' element={<NotFound/>}/>
             </Routes>
