@@ -44,7 +44,6 @@ export const BoxProduct: React.FC<TInfoProduct> = ({
             Product_Service.Delete(e.id)
                 .then((result) => {
                     Notification(result.message, "success");
-                    console.log(e.id);
                     update();
                 });
     };

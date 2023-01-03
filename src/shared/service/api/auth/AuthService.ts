@@ -28,7 +28,6 @@ async (username: string, password: string):Promise<any | AxiosError> => {
             return data.data;
         })
         .catch(err => {
-            console.log(err);
             Notification(err.response.data.message, "error");
         });
 };

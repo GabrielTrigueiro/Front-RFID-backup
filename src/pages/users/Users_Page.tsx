@@ -4,9 +4,10 @@ import { Notification, ProductPageSkeleton, Register_User_Modal, SearchInput, Us
 import { ContentLayout } from "../../shared/layout";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import { ISendUserPagination, IUser, User_Service } from "../../shared/service/api/users";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Roles_Service } from "../../shared/service/api/roles/Roles_Service";
 import { adicionarRoles } from "../../shared/store/Slices/Roles";
+import { RootState } from "../../shared/store/Store";
 
 export const Users = () => {
 
@@ -53,12 +54,10 @@ export const Users = () => {
         ListUser();
     };
 
-    //deletar lista de usuários
     const deletUser = (idList: string[]) => {
         User_Service.Delete(idList).then((result => {
             Notification("Removido com sucesso", "success");
             setListToDelete([]);
-            update();
         })).catch(err => { 
             console.error(err);
         });
@@ -73,11 +72,18 @@ export const Users = () => {
         });
     },[dispatch]);
 
-    //atualizar a cada alteração nas seguintes vars
+    const estadoRoles = useSelector((state: RootState) => state.roles.lista);
+
+    const dispararBuscaRoles = () => {
+        if(estadoRoles.length == 0){
+            buscarRoles();
+        }
+    };
+    
     useEffect(() => {
         update();
-        buscarRoles();
-    },[value, actualpage, pageSize, listToDelete, buscarRoles]);
+        dispararBuscaRoles();
+    },[value, actualpage, pageSize, listToDelete]);
     
     return (
         <ContentLayout tittle={"Usuários"}>
@@ -87,7 +93,7 @@ export const Users = () => {
 
                 {/* excluir */}
                 <Button
-                    onClick={()=>{deletUser(listToDelete); console.log(listToDelete);}}
+                    onClick={()=>{deletUser(listToDelete);}}
                     disabled={delet}
                     variant="contained"
                     sx={{color: "#fff", justifySelf: "flex-start"}}

@@ -1,4 +1,4 @@
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, styled } from "@mui/material";
+import { ImageList, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, styled } from "@mui/material";
 import { IUser } from "../../../service/api/users";
 import {Checkbox, FormControlLabel} from "@mui/material";
 import {useEffect, useState} from "react";
@@ -12,11 +12,11 @@ interface IUserTableProps {
     setListaDelet: (e: string[]) => void
 }
 
-const Teste = styled(TableContainer)({
-    overflowY: "scroll",
-    height: "100%",
+const ProductImageListBox = styled(ImageList) ({
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fill, minmax(190px, 1fr))!important",
+    height: "90%",
     width: "100%",
-    justifyContent: "space-between",
     "::-webkit-scrollbar": {
         width: "15px",
     },
@@ -34,10 +34,22 @@ const Teste = styled(TableContainer)({
     },
 });
 
-export const UserTable: React.FC<IUserTableProps> = ({lista, update, setDelet, listaDelet, setListaDelet}) => {
+const MyTableBody = styled(TableBody) ({
+    width: "100%",
+    //backgroundColor: "#322"
+});
 
-    //controles de check-box
-    // const [isChecked, setIsChecked] = useState<string[]>([]);
+const MyTableRow = styled(TableRow) ({
+    width: "100%",
+    display: "flex",
+    justifyContent: "space-between"
+});
+
+const MyTableCell = styled(TableCell) ({
+    flex: 1
+});
+
+export const UserTable: React.FC<IUserTableProps> = ({lista, update, setDelet, listaDelet, setListaDelet}) => {
 
     const handleCheck = (event: React.ChangeEvent<HTMLInputElement>) => {        
         let updateList = [...listaDelet];
@@ -59,7 +71,6 @@ export const UserTable: React.FC<IUserTableProps> = ({lista, update, setDelet, l
         }
     };
 
-    //atualiza o estado do botão de excluir
     useEffect(()=>{
         if (listaDelet.length >= 1) {
             setDelet(false);
@@ -71,41 +82,42 @@ export const UserTable: React.FC<IUserTableProps> = ({lista, update, setDelet, l
 
     return (
         <>
-            <Teste>
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell></TableCell>
-                            <TableCell>Nome</TableCell>
-                            <TableCell>Role</TableCell>
-                        </TableRow>
-                    </TableHead>
-
-                    <TableBody>
-                        {lista.map((row) => (
-                            <TableRow key={row.id}>
-
-                                {/* Checkbox */}
-                                <TableCell>
-                                    <FormControlLabel
-                                        label=""
-                                        control={
-                                            <Checkbox
-                                                value={row.id}
-                                                checked={verifyCheck(row.id)}
-                                                onChange={handleCheck}
-                                            />
-                                        }
-                                    />
-                                </TableCell>
-
-                                <TableCell>{row.username}</TableCell>
-                                <TableCell>{row.roles[0].name == "ROLE_ADMIN" ? "Admin" : "Usuário"}</TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </Teste>
+            <TableHead sx={{width:"100%", display:"flex"}}>
+                <TableRow sx={{width:"100%", display:"flex"}}>
+                    <MyTableCell></MyTableCell>
+                    <MyTableCell>nome</MyTableCell>
+                    <MyTableCell>role</MyTableCell>
+                </TableRow>
+            </TableHead>
+            <ProductImageListBox
+                sx={{
+                    width: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                }}
+            >
+                <MyTableBody>
+                    {lista.map((row) => (
+                        <MyTableRow key={row.id}>
+                            {/* Checkbox */}
+                            <MyTableCell>
+                                <FormControlLabel
+                                    label
+                                    control={
+                                        <Checkbox
+                                            value={row.id}
+                                            checked={verifyCheck(row.id)}
+                                            onChange={handleCheck}
+                                        />
+                                    }
+                                />
+                            </MyTableCell>
+                            <MyTableCell>{row.username}</MyTableCell>
+                            <MyTableCell>{row.roles[0].name == "ROLE_ADMIN" ? "Admin" : "Usuário"}</MyTableCell>
+                        </MyTableRow>
+                    ))}
+                </MyTableBody>
+            </ProductImageListBox>
         </>
     );
 };

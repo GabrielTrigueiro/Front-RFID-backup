@@ -17,7 +17,6 @@ export const Product_Table: React.FC<{
         gridTemplateColumns: "repeat(auto-fill, minmax(190px, 1fr))!important",
         height: "90%",
         width: "100%",
-        // justifyContent: "space-between",
         "::-webkit-scrollbar": {
             width: "15px",
         },
@@ -82,7 +81,7 @@ export const Product_Table: React.FC<{
                     >
                         <MyTableBody>
                             {lista.map((row) => (
-                                <MyTableRow>
+                                <MyTableRow key={row.id}>
                                     <MyTableCell>{row.description}</MyTableCell>
                                     <MyTableCell>{row.quantity}</MyTableCell>
                                     <MyTableCell>{row.info}</MyTableCell>
@@ -91,8 +90,6 @@ export const Product_Table: React.FC<{
                                 </MyTableRow>
                             ))}
                         </MyTableBody>
-                    
-
                     </ProductImageListBox>
                 </>
             }

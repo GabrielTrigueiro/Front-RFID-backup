@@ -18,7 +18,6 @@ export const ContentLayout: React.FC<props> = ({ children, tittle }) => {
         const resposta = User_Service.getUserInfo();
         resposta.then(res => {
             dispatch(pegarInfo(res));
-            console.log(res);
         });
     },[dispatch]);
     
