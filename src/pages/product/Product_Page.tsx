@@ -51,7 +51,7 @@ export const Product_Page = () => {
   
     //gerenciar paginas
     const [pages, setPages] = useState<number>(0);
-    const [size, setSize] = useState<number>(6);
+    const [size, setSize] = useState<number>(10);
     const [pageSize, setPageSize] = useState<number>(size);
     const [actualpage, setActualPage] = useState<number>(0);
     const [selectContent, setSelectContent] = useState("");//não foi colocado esse componente ainda
@@ -143,9 +143,9 @@ export const Product_Page = () => {
                                 label="Items"
                                 onChange={changeSize}
                             >
-                                <MenuItem value={6}>6</MenuItem>
-                                <MenuItem value={12}>12</MenuItem>
+                                <MenuItem value={10}>10</MenuItem>
                                 <MenuItem value={20}>20</MenuItem>
+                                <MenuItem value={50}>50</MenuItem>
                             </Select>
                         </FormControl>
                     </Box>

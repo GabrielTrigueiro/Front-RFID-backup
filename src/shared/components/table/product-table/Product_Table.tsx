@@ -13,11 +13,11 @@ export const Product_Table: React.FC<{
 }> = ({lista, update, pages, actualpage, handleChangeArrow, type}) => {
 
     const ProductImageListBox = styled(ImageList) ({
-        gridTemplateColumns: "repeat(auto-fill, minmax(0px, 200px))!important",
-        overflowY: "scroll",
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fill, minmax(190px, 1fr))!important",
         height: "90%",
         width: "100%",
-        justifyContent: "space-between",
+        // justifyContent: "space-between",
         "::-webkit-scrollbar": {
             width: "15px",
         },
