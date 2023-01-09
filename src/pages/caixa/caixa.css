@@ -1,4 +1,46 @@
 .container-externo{
     background-color: blueviolet;
+    height: 120%;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+.container-interno{
+    background-color: white;
+    border-radius: 10px;
     height: 100%;
+    width: 100%;
+    display: flex;
+}
+.produtos{
+    flex: 4;
+    background-color: aqua;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+}
+.pagamento{
+    flex: 1;
+    background-color: brown ;
+    padding: 5px;
+
+    display: flex;
+    justify-content: center;
+}
+.search{
+    flex: 0.5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: chocolate;
+}
+.ultimoProduto{
+    flex: 1;
+    background-color: chartreuse;
+}
+.carrinho{
+    flex: 4;
+    background-color: cornflowerblue;
 }
